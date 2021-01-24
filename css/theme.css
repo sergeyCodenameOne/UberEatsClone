@@ -1,0 +1,236 @@
+#Constants {
+    includeNativeBool: true; 
+}
+
+ImagesHighRes{
+    background-image:   url(images/dish-placeholder.png),
+                        url(images/rest.jpg),
+                        url(images/round-rectangle.png);
+}
+
+BackButton{
+    color: white;
+    padding: 2mm;
+    margin: 5mm 0 0 1mm;
+}
+
+/******************  rest  ******************/
+
+RestaurantNameHeader{
+    font-family: "native:MainBold";
+    font-size: 5mm;
+    text-align: center;
+    color: #2680eb;
+    background-color: rgba(0,0,0,0);
+    padding: 0;
+    margin: 0;
+}
+
+RestaurantCategory{
+    font-size: 3mm;
+    text-align: center;
+    color: #2680eb;
+    padding: 0;
+    margin: 0;
+}
+
+RestImage{
+    padding: 0;
+    margin: 0;
+}
+
+emptyRestaurantCnt{
+    background-color: #2680eb;
+    padding: 0;
+    margin: 0;
+}
+
+RestDetails{
+    background-color: white;
+    margin: 40mm 2mm 5mm 2mm;
+    padding: 3mm;
+}
+
+RestTimeRatingCnt{
+    background-color: rgba(0,0,0,0);
+    margin: 2mm 0mm 0mm 0mm;;
+
+    padding: 0;
+}
+
+RestaurantRating{
+    font-size: 3mm;
+    color: #2680eb;
+    background-color: rgba(0,0,0,0);
+    font-family: "native:MainRegular";
+    margin: 0 2mm 0 2mm;
+}
+
+RestDeliveryTime{
+    font-size: 3mm;
+    color: #2680eb;
+    background-color: rgba(0,0,0,0);
+    margin: 0 2mm 0 2mm;
+}
+
+MenuContainer{
+    background-color: #2680eb;
+    padding: 0;
+    margin: 0;
+}
+
+/******************  dish  ******************/
+
+DishPreview{
+    background-color: #2680eb;
+    border: 0.5mm solid #7cb2f3;
+    margin: 2mm;
+}
+
+DishPreviewInfo{
+    background-color: rgba(0,0,0,0);
+}
+
+DishPreviewName{
+    background-color: rgba(0,0,0,0);
+    color: white;
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+}
+
+DishPreviewDescription{
+    background-color: rgba(0,0,0,0);
+    color: white;
+    text-align: center;
+    font-family: "native:MainThin";
+    font-size: 2mm;
+}
+
+DishPreviewPrice{
+    background-color: rgba(0,0,0,0);
+    color: white;
+    text-align: center;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+}
+
+Dish{
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+DishEmptyWhite{
+    background-color: white;
+    padding: 0;
+    margin: 0;
+}
+
+DishEmptyBlue{
+    background-color: #134075;
+    padding: 0;
+    margin: 0;
+}
+
+DishName{
+        color: #2b83eb;
+        background-color: rgba(0,0,0,0);
+        text-align: center;
+        font-family: "native:MainBold";
+        font-size: 3mm;
+}
+
+DishDescription{
+    color: #2b83eb;
+    background-color: rgba(0,0,0,0);
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 2mm;
+}
+
+DishPrice{
+    color: #2b83eb;
+    background-color: rgba(0,0,0,0);
+    text-align: center;
+    font-family: "native:MainBold";
+    font-size: 4mm;
+}
+
+DishAddToCart{
+    background-color: #2680eb;
+    margin: 3mm;
+}
+
+DishImage{
+    border-radius: 2mm;
+}
+
+DishBody{
+
+}
+
+DishRemarksCnt{
+    margin: 0mm 2mm 2mm 2mm;
+    padding: 0mm 2mm 2mm 2mm;
+}
+
+DishRemarksHeader{
+    color: #2b83eb;
+    background-color: rgba(0,0,0,0);
+    text-align: left;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+}
+
+DishRemarksTextArea{
+    color: #2b83eb;
+    background-color: rgba(0,0,0,0);
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    border: 0.1mm solid #7cb2f3;
+
+    padding: 2mm;
+}
+
+AddOnsCnt{
+    border-top: 0.3mm solid #bad6f9;
+    border-bottom: 0.3mm solid #bad6f9;
+    margin: 2mm;
+    padding: 2mm;
+}
+
+/******************  dish add-ons  ******************/
+
+AddOnHeader{
+    color: #2b83eb;
+    background-color: rgba(0,0,0,0);
+    text-align: left;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+}
+
+DishAddOn{
+    background-color: #2b83eb;
+    padding: 1mm;
+    margin: 2mm;
+}
+
+DishAddOnName{
+    color: #2b83eb;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+}
+
+DishAddOnPrice{
+    color: #2b83eb;
+    padding: 0;
+    margin: 0;
+
+    text-align: center;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+}

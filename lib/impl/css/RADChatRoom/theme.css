@@ -1,0 +1,108 @@
+ChatBubbleTextOwn {
+    font-family: 'native:MainLight';
+    font-size: 2.5mm;
+    color: white;
+    margin:0;
+    padding:0;
+}
+
+ChatBubbleTextOwnDesktop {
+    cn1-derive: 'ChatBubbleTextOwn';
+    font-size: 3.5mm;
+}
+
+ChatBubbleTextOther {
+    font-family: 'native:MainLight';
+    font-size: 2.5mm;
+    color: black;
+    margin:0;
+    padding:0;
+}
+
+ChatBubbleTextOtherDesktop {
+    cn1-derive: 'ChatBubbleTextOther';
+    font-size: 3.5mm;
+}
+
+ChatBubbleSpanLabelOther {
+    padding: 1mm 1mm 1mm 3.5mm;
+    background-color: rgb(229, 229, 234);
+}
+
+ChatBubbleSpanLabelOwn {
+    padding: 1mm 2.5mm 1mm 1mm;
+    background-color: rgb(21, 126, 245);
+}
+
+ChatBubblePostedBy, ChatBubbleDate {
+    font-family: 'native:MainLight';
+    font-size: 1.5mm;
+    color: #666666;
+}
+
+ChatMessageTextArea {
+    cn1-derive: 'TextArea';
+    border: 1pt cn1-pill-border #cccccc ;
+    font-family: 'native:MainLight';
+    font-size: 2.5mm;
+    padding: 1mm 2mm 1mm 2mm;
+    background-color: transparent;
+    
+}
+
+ChatMessageTextAreaDesktop {
+    cn1-derive: 'ChatMessageTextArea';
+    font-size: 3.5mm;
+}
+
+ChatMessageTextAreaMultiLine {
+    cn1-derive: 'TextArea';
+    border: 1pt solid  #cccccc;
+    border-radius: 2mm;
+    font-family: 'native:MainLight';
+    font-size: 2.5mm;
+    padding: 1mm 2mm 1mm 2mm;
+    background-color: transparent;
+}
+
+ChatMessageTextAreaDesktopMultiLine {
+    cn1-derive: 'ChatMessageTextAreaMultiLine';
+    font-size: 3.5mm;
+}
+
+ChatBubbleBadge {
+    cn1-derive: "Button";
+    font-size: 1.5mm;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    margin:0;
+    padding:0;
+    
+}
+
+ChatBubbleLikedBadge {
+    color: red;
+    border:none;
+    padding:0;
+    margin:0;
+    font-size: 1.5mm;
+    background-color: rgba(0, 0, 0, 0);
+    
+}
+
+
+TypingAnimation {
+    padding:0;
+    margin:0;
+    border:none;
+    background-color: transparent;
+}
+
+TypingAnimationDot {
+    padding:0;
+    margin:0;
+    border:none;
+    background-color:transparent;
+    color:#666666;
+    font-size: 1mm;
+}
