@@ -26,8 +26,11 @@ package com.codename1.demos.ubereatsclone.views;
 import com.codename1.components.MultiButton;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SpanLabel;
+import com.codename1.demos.ubereatsclone.Util;
 import com.codename1.demos.ubereatsclone.interfaces.Dish;
-import com.codename1.l10n.L10NManager;
+import com.codename1.demos.ubereatsclone.models.DishModel;
+import com.codename1.rad.controllers.ActionSupport;
+import com.codename1.rad.controllers.FormController;
 import com.codename1.rad.models.Entity;
 import com.codename1.rad.models.EntityList;
 import com.codename1.rad.models.Property;
@@ -35,28 +38,30 @@ import com.codename1.rad.nodes.ActionNode;
 import com.codename1.rad.nodes.Node;
 import com.codename1.rad.ui.AbstractEntityView;
 import com.codename1.ui.*;
-import com.codename1.ui.events.ActionEvent;
-import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
-import com.codename1.ui.layouts.LayeredLayout;
 
-import static com.codename1.ui.CN.getDisplayHeight;
-import static com.codename1.ui.CN.getDisplayWidth;
+import java.util.HashMap;
+import java.util.Map;
+
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
-public class DishView<T extends Entity> extends AbstractEntityView<T> {
+public class DishView extends AbstractEntityView{
+
     private Node viewNode;
     private Property nameProp, descriptionProp, pictureUrlProp, priceProp, addOnsProp;
+    private int quantity = 1;
+    private Label quantityLabel , totalPriceLabel;
+    private MultiButton addToCart;
+    private Container addToCartCnt;
 
     public static final ActionNode.Category ADD_TO_CART = new ActionNode.Category();
-    public static final ActionNode.Category GO_BACK = new ActionNode.Category();
 
     private static EncodedImage placeHolder = EncodedImage.createFromImage(getGlobalResources().getImage("dish-placeholder.png"), false).
             scaledEncoded(400, 400);//TODO change the placeHolder
 
-    public DishView(T entity, Node viewNode) {
+    public DishView(Entity entity, Node viewNode, Node addOnNode) {
         super(entity);
         setUIID("Dish");
         setLayout(new BorderLayout());
@@ -68,49 +73,49 @@ public class DishView<T extends Entity> extends AbstractEntityView<T> {
         priceProp = entity.findProperty(Dish.price);
         addOnsProp = entity.findProperty(Dish.addOns);
 
-        Image dishImage = entity.createImageToStorage(pictureUrlProp, placeHolder);
 
-        Container emptyWhiteContainer = new Container(new BorderLayout(), "DishEmptyWhite"){
-            @Override
-            public Dimension getPreferredSize() {
-                return new Dimension(getDisplayWidth(), getDisplayHeight() / 8);
-            }
-        };
-
-        Container emptyBlueContainer = new Container(new BorderLayout(), "DishEmptyBlue"){
-            @Override
-            public Dimension getPreferredSize() {
-                return new Dimension(getDisplayWidth(), getDisplayHeight() / 8);
-            }
-        };
-
-        ScaleImageLabel dishImageLabel= new ScaleImageLabel(dishImage);
-
-        Button backButton = new Button(FontImage.MATERIAL_ARROW_BACK_IOS, "BackButton");
+        Button backButton = new Button(FontImage.MATERIAL_KEYBOARD_ARROW_LEFT);
+        backButton.setUIID("DishBackButton");
         backButton.addActionListener(evt -> {
             evt.consume();
-            ActionNode action = viewNode.getInheritedAction(GO_BACK);
-            if (action != null) {
-                ActionEvent ae = action.fireEvent(entity, DishView.this);
-                if (ae.isConsumed()) {
-                    return;
-                }
-            }
+            ActionSupport.dispatchEvent(new FormController.FormBackEvent(backButton));
         });
+        Label headerLabel = new Label("SET FILTER", "DishHeaderLabel");
+        Container headerCnt = BorderLayout.centerAbsolute(headerLabel).add(BorderLayout.WEST, backButton);
+        headerCnt.setUIID("DishHeaderCnt");
 
-        Container dishTopView = new Container(new LayeredLayout());
-        dishTopView.add(BoxLayout.encloseY(emptyBlueContainer, emptyWhiteContainer));
-        dishTopView.add(BorderLayout.centerCenter(dishImageLabel));
-        dishTopView.add(Container.encloseIn(new FlowLayout(Component.LEFT), backButton));
-        add(BorderLayout.NORTH, dishTopView);
+
+        Image dishImage = entity.createImageToStorage(pictureUrlProp, placeHolder);
+        ScaleImageLabel dishImageLabel= new ScaleImageLabel(dishImage);
+        dishImageLabel.setUIID("DishImageLabel");
+
+        add(BorderLayout.NORTH, BoxLayout.encloseY(headerCnt, dishImageLabel));
 
         Label dishName = new Label(entity.getText(nameProp), "DishName");
         SpanLabel dishDescription = new SpanLabel(entity.getText(descriptionProp), "DishDescription");
 
-        Container dishQuantityAndPrice = new Container(new FlowLayout(Component.CENTER));
-        Label dishPrice = new Label(L10NManager.getInstance().formatCurrency(entity.getDouble(priceProp)), "DishPrice");
+        Label dishPrice = new Label(Util.getPriceAsString(entity.getDouble(priceProp)), "DishPrice");
+        Button increaseQuantity = new Button(FontImage.MATERIAL_ADD);
+        increaseQuantity.setUIID("OrderDishIncreaseButton");
+        increaseQuantity.addActionListener(evt->{
+            quantity++;
+            update();
+        });
 
-        dishQuantityAndPrice.addAll(dishPrice); //TODO add quantity
+        Button decreaseQuantity = new Button(FontImage.MATERIAL_REMOVE);
+        decreaseQuantity.setUIID("OrderDishDecreaseButton");
+        decreaseQuantity.addActionListener(evt->{
+            if(quantity > 0){
+                quantity--;
+                update();
+            }
+        });
+        quantityLabel = new Label("1", "OrderDishQuantityLabel");
+        Container quantityContainer = FlowLayout.encloseCenter(decreaseQuantity, quantityLabel, increaseQuantity);
+        quantityContainer.setUIID("DishQuantityContainer");
+
+        Container dishQuantityAndPrice = new Container(new FlowLayout(Component.CENTER));
+        dishQuantityAndPrice.addAll(quantityContainer, dishPrice);
         Container descriptionCnt = BoxLayout.encloseY(dishName, dishDescription, dishQuantityAndPrice);
 
         Container dishRemarksCnt = new Container(new BorderLayout(), "DishRemarksCnt");
@@ -125,30 +130,44 @@ public class DishView<T extends Entity> extends AbstractEntityView<T> {
         if (getEntity().get(addOnsProp) instanceof EntityList) {
             EntityList<Entity> addOnsList = (EntityList) (getEntity().get(addOnsProp));
             for (Entity addOnEntity : addOnsList) {
-                DishAddOnView addOn = new DishAddOnView(addOnEntity);
+                DishAddOnView addOn = new DishAddOnView(addOnEntity, addOnNode);
                 addOns.add(addOn);
             }
         }
         addOnsCnt.add(BorderLayout.NORTH, new Label("Add ons", "AddOnHeader")).
                 add(BorderLayout.CENTER, addOns);
 
-        Container dishBody = new Container(new BorderLayout(), "DishBody");
-        dishBody.add(BorderLayout.NORTH, descriptionCnt);
-        dishBody.add(BorderLayout.CENTER,  addOnsCnt);
-        dishBody.add(BorderLayout.SOUTH, dishRemarksCnt);
-
-
+        Container dishBody = new Container(new BoxLayout(BoxLayout.Y_AXIS), "DishBody");
+        dishBody.add(descriptionCnt);
+        dishBody.add(addOnsCnt);
+        dishBody.add(dishRemarksCnt);
         add(BorderLayout.CENTER, dishBody);
 
-        MultiButton addToCart = new MultiButton("Add To Cart");
-        addToCart.setUIID("DishAddToCart");
+        Button addToCartButton = new Button("Add To Cart", "DishAddToCartText");
+        totalPriceLabel = new Label(Util.getPriceAsString(entity.getDouble(Dish.price)), "DishAddToCartPrice");
 
-        add(BorderLayout.SOUTH, BorderLayout.centerCenter(addToCart));
-
+        addToCartCnt = BorderLayout.centerEastWest(null, totalPriceLabel, addToCartButton);
+        addToCartCnt.setUIID("DishAddToCartCnt");
+        addToCartCnt.setLeadComponent(addToCartButton);
+        addToCartButton.addActionListener(evt -> {
+            evt.consume();
+            ActionNode action = viewNode.getInheritedAction(ADD_TO_CART);
+            if (action != null) {
+                Map extraData = new HashMap<String, Integer>();
+                extraData.put("quantity", quantity);
+                action.fireEvent(entity, DishView.this, extraData);
+                ActionSupport.dispatchEvent(new FormController.FormBackEvent(backButton));
+            }
+        });
+        add(BorderLayout.SOUTH, BorderLayout.center(addToCartCnt));
     }
 
     @Override
     public void update() {
+        quantityLabel.setText(String.valueOf(quantity));
+        totalPriceLabel.setText(Util.getPriceAsString(((DishModel)getEntity()).getTotalPrice(quantity)));
+
+        addToCartCnt.revalidateWithAnimationSafety();
     }
 
     @Override

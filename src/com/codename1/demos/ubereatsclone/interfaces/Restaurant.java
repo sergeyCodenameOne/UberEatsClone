@@ -34,4 +34,15 @@ public interface Restaurant {
     Tag menu = new Tag("menu");
     Tag order = new Tag("order");
     Tag estimatedDeliveryTime = new Tag("estimatedDeliveryTime");
+    Tag deliveryFee = new Tag("deliveryFee");
+    Tag coordinates = new Tag("coordinates");
+
+    public static final int CATEGORY_RICE = 0;
+    public static final int CATEGORY_PIZZA = 1;
+    public static final int CATEGORY_DONUT = 2;
+    public static final int CATEGORY_CHICKEN = 3;
+    public static final int CATEGORY_MEAL = 4;
+    public static final int CATEGORY_STEAK = 5;
+    public static final int CATEGORY_KEBAB = 6;
+    public static final int CATEGORY_ALL = 7;
 }

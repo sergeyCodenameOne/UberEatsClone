@@ -24,42 +24,128 @@
 package com.codename1.demos.ubereatsclone;
 
 
-import com.codename1.demos.ubereatsclone.controllers.RestaurantController;
-import com.codename1.demos.ubereatsclone.models.DishAddOnModel;
-import com.codename1.demos.ubereatsclone.models.DishModel;
-import com.codename1.demos.ubereatsclone.models.RestaurantModel;
+import com.codename1.demos.ubereatsclone.controllers.AccountController;
+import com.codename1.demos.ubereatsclone.controllers.MainWindowController;
+import com.codename1.demos.ubereatsclone.interfaces.Account;
+import com.codename1.demos.ubereatsclone.models.*;
+import com.codename1.demos.ubereatsclone.views.SignInView;
 import com.codename1.rad.controllers.ApplicationController;
 import com.codename1.rad.controllers.ControllerEvent;
 import com.codename1.rad.models.Entity;
+import com.codename1.rad.nodes.ActionNode;
+import com.codename1.rad.nodes.ViewNode;
+import com.codename1.rad.ui.UI;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class UberEatsClone extends ApplicationController {
+
+    public static final ActionNode enterMainWindow = UI.action();
+
     @Override
     public void actionPerformed(ControllerEvent evt) {
         if (evt instanceof StartEvent) {
             evt.consume();
-            new RestaurantController(this, createDemoModel()).getView().show();
+
+            ViewNode viewNode = new ViewNode(
+                    UI.actions(SignInView.COMPLETE_SIGNING_IN, enterMainWindow)
+            );
+
+            Entity account = new AccountModel();
+            new AccountController(this,  account, viewNode).getView().show();
+
+            addActionListener(enterMainWindow, event->{
+                event.consume();
+                new MainWindowController(this, createDemoMainWindowEntity(event.getEntity())).getView().show();
+            });
+//            new MainWindowController(this, createDemoMainWindowEntity(null)).getView().show();
         }
     }
 
-    private Entity createDemoModel(){
-        Entity restaurant = new RestaurantModel("Helena", "https://sergeycodenameone.github.io/rest.jpg", "sea food", 6.7, 30, createDemoMenu());
+    private Entity createDemoMainWindowEntity(Entity accountEntity){
+        Entity account;
+        if (accountEntity == null){
+             account = new AccountModel();
+            account.set(Account.firstName, "Codename");
+            account.set(Account.lastName, "One");
+            account.set(Account.emailAddress, "sergey@gmail.com");
+            account.set(Account.password, "sd12eqwf134qsd");
+            account.set(Account.mobileNumber, "0542468594");
+        }else{
+            account = accountEntity;
+        }
+        List restaurantsList = new ArrayList();
+        for (int i = 0; i < 10; i++){
+            restaurantsList.add(createRestaurantDemoModel());
+        }
+        return new MainWindowModel(account, restaurantsList);
+    }
+
+    private Entity createRestaurantDemoModel(){
+        RestaurantModel restaurant = new RestaurantModel("Sergio's Burgers", "https://sergeycodenameone.github.io/rest.jpg", "sea food", 6.7, 5, 30, createDemoMenu());
         return restaurant;
     }
 
     private List<Entity> createDemoMenu(){
         List<Entity> menu = new ArrayList<>();
 
-        for(int i = 0; i < 6; i++){
-            DishModel dish = new DishModel("salad", "very pretty salad", "https://sergeycodenameone.github.io/dish.jpg", 4.60, createDemoAddOns());
-            menu.add(dish);
-        }
-
+        menu.add(new FoodCategoryModel("Salads", createSaladsMenu()));
+        menu.add(new FoodCategoryModel("Burgers", createBurgersMenu()));
+        menu.add(new FoodCategoryModel("Desserts", createDessertsMenu()));
+        menu.add(new FoodCategoryModel("Drinks", createDrinksMenu()));
         return menu;
     }
+
+    private List<Entity> createBurgersMenu(){
+        List<Entity> dishes = new ArrayList<>();
+        dishes.add(new DishModel("Red Burger", "very pretty salad", "https://sergeycodenameone.github.io/dish.jpg", 4, createDemoAddOns()));
+        dishes.add(new DishModel("Green Burger", "very pretty salad", "https://sergeycodenameone.github.io/dish.jpg", 5, createDemoAddOns()));
+        dishes.add(new DishModel("Blue Burger", "very pretty salad", "https://sergeycodenameone.github.io/dish.jpg", 2, createDemoAddOns()));
+        dishes.add(new DishModel("Big Burger", "very pretty salad", "https://sergeycodenameone.github.io/dish.jpg", 3, createDemoAddOns()));
+        dishes.add(new DishModel("Small Burger", "very pretty salad", "https://sergeycodenameone.github.io/dish.jpg", 4.5, createDemoAddOns()));
+        dishes.add(new DishModel("Vegetarian Burger", "very pretty salad", "https://sergeycodenameone.github.io/dish.jpg", 6.4, createDemoAddOns()));
+
+        return dishes;
+    }
+
+    private List<Entity> createDrinksMenu(){
+        List<Entity> dishes = new ArrayList<>();
+        dishes.add(new DishModel("Cola", "very pretty salad", "https://sergeycodenameone.github.io/dish.jpg", 4.60, createDemoAddOns()));
+        dishes.add(new DishModel("Soda", "very pretty salad", "https://sergeycodenameone.github.io/dish.jpg", 4.60, createDemoAddOns()));
+        dishes.add(new DishModel("Orange Juice", "very pretty salad", "https://sergeycodenameone.github.io/dish.jpg", 4.60, createDemoAddOns()));
+        dishes.add(new DishModel("Apple juice", "very pretty salad", "https://sergeycodenameone.github.io/dish.jpg", 4.60, createDemoAddOns()));
+        dishes.add(new DishModel("Vanilla Milkshake", "very pretty salad", "https://sergeycodenameone.github.io/dish.jpg", 4.60, createDemoAddOns()));
+        dishes.add(new DishModel("Chocolate Milkshake", "very pretty salad", "https://sergeycodenameone.github.io/dish.jpg", 4.60, createDemoAddOns()));
+
+        return dishes;
+    }
+
+    private List<Entity> createDessertsMenu(){
+        List<Entity> dishes = new ArrayList<>();
+        dishes.add(new DishModel("Apple Pie", "very pretty salad", "https://sergeycodenameone.github.io/dish.jpg", 4.60, createDemoAddOns()));
+        dishes.add(new DishModel("Chocolate Cake", "very pretty salad", "https://sergeycodenameone.github.io/dish.jpg", 4.60, createDemoAddOns()));
+        dishes.add(new DishModel("Blue Burger", "very pretty salad", "https://sergeycodenameone.github.io/dish.jpg", 4.60, createDemoAddOns()));
+        dishes.add(new DishModel("Big Burger", "very pretty salad", "https://sergeycodenameone.github.io/dish.jpg", 4.60, createDemoAddOns()));
+        dishes.add(new DishModel("Vanilla Ice Cream", "very pretty salad", "https://sergeycodenameone.github.io/dish.jpg", 4.60, createDemoAddOns()));
+        dishes.add(new DishModel("Chocolate Ice Cream", "very pretty salad", "https://sergeycodenameone.github.io/dish.jpg", 4.60, createDemoAddOns()));
+
+        return dishes;
+    }
+
+    private List<Entity> createSaladsMenu(){
+        List<Entity> dishes = new ArrayList<>();
+        dishes.add(new DishModel("Big Salad", "very pretty salad", "https://sergeycodenameone.github.io/dish.jpg", 4.60, createDemoAddOns()));
+        dishes.add(new DishModel("Small Salad", "very pretty salad", "https://sergeycodenameone.github.io/dish.jpg", 4.60, createDemoAddOns()));
+        dishes.add(new DishModel("Green Salad", "very pretty salad", "https://sergeycodenameone.github.io/dish.jpg", 4.60, createDemoAddOns()));
+        dishes.add(new DishModel("Red Salad", "very pretty salad", "https://sergeycodenameone.github.io/dish.jpg", 4.60, createDemoAddOns()));
+        dishes.add(new DishModel("Blue Salad", "very pretty salad", "https://sergeycodenameone.github.io/dish.jpg", 4.60, createDemoAddOns()));
+        dishes.add(new DishModel("Vegetarian Salad", "very pretty salad", "https://sergeycodenameone.github.io/dish.jpg", 4.60, createDemoAddOns()));
+
+        return dishes;
+    }
+
 
     private List<Entity> createDemoAddOns(){
         List addOns = new ArrayList();

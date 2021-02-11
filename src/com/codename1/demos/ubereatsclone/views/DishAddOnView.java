@@ -24,10 +24,11 @@
 package com.codename1.demos.ubereatsclone.views;
 
 import com.codename1.components.ScaleImageLabel;
+import com.codename1.demos.ubereatsclone.Util;
 import com.codename1.demos.ubereatsclone.interfaces.DishAddOn;
-import com.codename1.l10n.L10NManager;
 import com.codename1.rad.models.Entity;
 import com.codename1.rad.models.Property;
+import com.codename1.rad.nodes.ActionNode;
 import com.codename1.rad.nodes.Node;
 import com.codename1.rad.ui.AbstractEntityView;
 import com.codename1.ui.Button;
@@ -41,20 +42,25 @@ import static com.codename1.ui.util.Resources.getGlobalResources;
 
 public class DishAddOnView<T extends Entity> extends AbstractEntityView<T> {
 
+    public static final ActionNode.Category ADD_ON_CLICKED = new ActionNode.Category();
+
     private Node viewNode;
-    private Property nameProp, pictureUrlProp, priceProp;
-    private boolean isSelected = false;
+    private Property nameProp, pictureUrlProp, priceProp, isSelectedProp;
+    Button nameLabel;
+    Label priceLabel;
 
     private static EncodedImage placeHolder = EncodedImage.createFromImage(getGlobalResources().getImage("dish-placeholder.png"), false);//TODO change the placeHolder
 
-    public DishAddOnView(T entity) {
+    public DishAddOnView(T entity, Node node) {
         super(entity);
+        viewNode = node;
         this.setUIID("DishAddOn");
         setLayout(new BorderLayout());
 
         nameProp = entity.findProperty(DishAddOn.name);
         pictureUrlProp = entity.findProperty(DishAddOn.pictureUrl);
         priceProp = entity.findProperty(DishAddOn.price);
+        isSelectedProp = entity.findProperty(DishAddOn.isSelected);
 
         Image addOnImage = entity.createImageToStorage(pictureUrlProp, placeHolder);
         ScaleImageLabel addOnImageLabel = new ScaleImageLabel(addOnImage){
@@ -64,18 +70,14 @@ public class DishAddOnView<T extends Entity> extends AbstractEntityView<T> {
             }
         };
 
-        Button nameLabel = new Button(entity.getText(nameProp), "DishAddOnName");
-        Label priceLabel = new Label(L10NManager.getInstance().formatCurrency(entity.getDouble(priceProp)), "DishAddOnPrice");
+        nameLabel = new Button(entity.getText(nameProp), "DishAddOnName");
+        priceLabel = new Label(Util.getPriceAsString(entity.getDouble(priceProp)), "DishAddOnPrice");
         nameLabel.addActionListener(evt->{
-            isSelected = !isSelected;
-            if (isSelected){
-                nameLabel.getAllStyles().setFgColor(0xffffff);
-                priceLabel.getAllStyles().setFgColor(0xffffff);
-            }else{
-                nameLabel.getAllStyles().setFgColor(0x2b83eb);
-                priceLabel.getAllStyles().setFgColor(0x2b83eb);
+            evt.consume();
+            ActionNode action = viewNode.getInheritedAction(ADD_ON_CLICKED);
+            if (action != null) {
+                action.fireEvent(entity, DishAddOnView.this);
             }
-            update();
         });
         setLeadComponent(nameLabel);
 
@@ -88,12 +90,16 @@ public class DishAddOnView<T extends Entity> extends AbstractEntityView<T> {
 
     @Override
     public void update() {
+        boolean isSelected = getEntity().getBoolean(isSelectedProp);
         if (isSelected){
-            getStyle().setBgTransparency(255);
+            setUIID("DishAddOnPressed");
+            priceLabel.setUIID("DishAddOnPricePressed");
         }else{
-            getStyle().setBgTransparency(0);
+            setUIID("DishAddOn");
+            priceLabel.setUIID("DishAddOnPrice");
         }
-        revalidate();
+        revalidateWithAnimationSafety();
+
     }
 
     @Override

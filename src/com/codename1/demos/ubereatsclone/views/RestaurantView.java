@@ -24,48 +24,98 @@
 package com.codename1.demos.ubereatsclone.views;
 
 import com.codename1.components.ScaleImageLabel;
-import com.codename1.components.SpanLabel;
+import com.codename1.demos.ubereatsclone.interfaces.FoodCategory;
 import com.codename1.demos.ubereatsclone.interfaces.Restaurant;
+import com.codename1.demos.ubereatsclone.models.AccountModel;
+import com.codename1.demos.ubereatsclone.models.FoodCategoryModel;
+import com.codename1.rad.controllers.ActionSupport;
+import com.codename1.rad.controllers.FormController;
 import com.codename1.rad.models.Entity;
 import com.codename1.rad.models.EntityList;
 import com.codename1.rad.models.Property;
+import com.codename1.rad.nodes.ActionNode;
 import com.codename1.rad.nodes.Node;
 import com.codename1.rad.ui.AbstractEntityView;
 import com.codename1.ui.*;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.*;
 import com.codename1.ui.plaf.Style;
+import com.codename1.ui.plaf.UIManager;
 
-import static com.codename1.ui.CN.getDisplayHeight;
-import static com.codename1.ui.CN.getDisplayWidth;
+import static com.codename1.ui.CN.*;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
-public class RestaurantView<T extends Entity> extends AbstractEntityView<T> {
+public class RestaurantView extends AbstractEntityView{
 
     private Node viewNode;
-    private Property nameProp, pictureUrlProp, categoryProp, ratingProp, menuProp, orderProp, estimatedDeliveryTimeProp;
+    private Property nameProp, pictureUrlProp, categoryProp, ratingProp, menuProp, orderProp, estimatedDeliveryTimeProp, deliveryFeeProp;
     private Image restaurantImage;
     private Container restInfo;
     private static EncodedImage placeHolder = EncodedImage.createFromImage(getGlobalResources().getImage("dish-placeholder.png"), false).
             scaledEncoded(getDisplayWidth(), getDisplayHeight() / 3);//TODO change the placeHolder
 
-    public RestaurantView(T entity, Node node) {
-        super(entity);
+    public static final ActionNode.Category SHOW_ORDER = new ActionNode.Category();
+    public static final ActionNode.Category ADD_TO_FAVORITE = new ActionNode.Category();
+    public static final ActionNode.Category REMOVE_FAVORITE = new ActionNode.Category();
+
+    public RestaurantView(Entity rest, Entity account, Node node, Node mainWindowNode) {
+        super(rest);
         viewNode = node;
         setLayout(new BoxLayout(BoxLayout.Y_AXIS));
         setScrollableY(true);
 
-        nameProp = entity.findProperty(Restaurant.name);
-        pictureUrlProp = entity.findProperty(Restaurant.picture);
-        categoryProp = entity.findProperty(Restaurant.category);
-        ratingProp = entity.findProperty(Restaurant.rating);
-        menuProp = entity.findProperty(Restaurant.menu);
-        orderProp = entity.findProperty(Restaurant.order);
-        estimatedDeliveryTimeProp = entity.findProperty(Restaurant.estimatedDeliveryTime);
+        nameProp = rest.findProperty(Restaurant.name);
+        pictureUrlProp = rest.findProperty(Restaurant.picture);
+        categoryProp = rest.findProperty(Restaurant.category);
+        ratingProp = rest.findProperty(Restaurant.rating);
+        menuProp = rest.findProperty(Restaurant.menu);
+        orderProp = rest.findProperty(Restaurant.order);
+        deliveryFeeProp = rest.findProperty(Restaurant.deliveryFee);
+        estimatedDeliveryTimeProp = rest.findProperty(Restaurant.estimatedDeliveryTime);
 
-        restaurantImage = entity.createImageToStorage(pictureUrlProp, placeHolder);
+        restaurantImage = rest.createImageToStorage(pictureUrlProp, placeHolder);
 
         restInfo = new Container(new LayeredLayout());
+
+        Button backButton = new Button(FontImage.MATERIAL_KEYBOARD_ARROW_LEFT);
+        backButton.setUIID("RestBackButton");
+        backButton.addActionListener(evt -> {
+            evt.consume();
+            ActionSupport.dispatchEvent(new FormController.FormBackEvent(backButton));
+        });
+
+        Button cart = new Button(FontImage.MATERIAL_SHOPPING_CART, "RestaurantActionButton");
+        cart.addActionListener(evt -> {
+            evt.consume();
+            ActionNode action = viewNode.getInheritedAction(SHOW_ORDER);
+            if (action != null) {
+                action.fireEvent(rest, RestaurantView.this);
+            }
+        });
+
+        Style likeStyle = UIManager.getInstance().getComponentStyle("RestaurantActionButton");
+        CheckBox like = CheckBox.createToggle(FontImage.createMaterial(FontImage.MATERIAL_FAVORITE_BORDER, likeStyle));
+        like.setSelected(((AccountModel)account).isFavorite(rest));
+        like.setUIID("RestaurantActionButton");
+        like.setPressedIcon(FontImage.createMaterial(FontImage.MATERIAL_FAVORITE, likeStyle));
+        AccountModel accountModel = (AccountModel) account;
+        accountModel.isFavorite(rest);
+
+        like.addActionListener(evt -> {
+            evt.consume();
+            if(like.isSelected()){
+                ActionNode action = mainWindowNode.getInheritedAction(ADD_TO_FAVORITE);
+                if (action != null) {
+                    action.fireEvent(rest, RestaurantView.this);
+                }
+            }else{
+                ActionNode action = mainWindowNode.getInheritedAction(REMOVE_FAVORITE);
+                if (action != null) {
+                    action.fireEvent(rest, RestaurantView.this);
+                }
+            }
+        });
+
         ScaleImageLabel restaurantImageLabel = new ScaleImageLabel(restaurantImage);
         restaurantImageLabel.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
 
@@ -73,7 +123,7 @@ public class RestaurantView<T extends Entity> extends AbstractEntityView<T> {
         Container emptyCnt = new Container(new BorderLayout()) {
             @Override
             public Dimension getPreferredSize() {
-                return new Dimension(getDisplayWidth(), getDisplayHeight() / 6);
+                return new Dimension(getDisplayWidth(), getDisplayHeight() / 10);
             }
         };
 
@@ -82,43 +132,40 @@ public class RestaurantView<T extends Entity> extends AbstractEntityView<T> {
         imageContainer.add(BorderLayout.SOUTH, emptyCnt);
         restInfo.add(imageContainer);
 
-        Label restName = new Label(entity.getText(nameProp));
+        Label restName = new Label(rest.getText(nameProp));
         restName.setUIID("RestaurantNameHeader");
 
-        Label restCategory = new Label(entity.getText(categoryProp));
+        Label restCategory = new Label(rest.getText(categoryProp));
         restCategory.setUIID("RestaurantCategory");
 
-        SpanLabel restRating = new SpanLabel(entity.getText(ratingProp), "RestaurantRating");
-        restRating.setMaterialIcon(FontImage.MATERIAL_STAR_RATE);
-        restRating.setIconUIID("RestaurantRating");
-        restRating.setIconPosition("North");
-
-        SpanLabel estimatedDeliveryTime = new SpanLabel("" + entity.getInt(estimatedDeliveryTimeProp), "RestDeliveryTime");
-        estimatedDeliveryTime.setMaterialIcon(FontImage.MATERIAL_QUERY_BUILDER);
-        estimatedDeliveryTime.setIconUIID("RestDeliveryTime");
-        estimatedDeliveryTime.setIconPosition("North");
+        Label estimatedDeliveryTimeLabel = new Label(" " + rest.getInt(estimatedDeliveryTimeProp) + " mins", "RestPreviewDeliveryTime");
+        estimatedDeliveryTimeLabel.setIcon(getGlobalResources().getImage("delivery-time-icon.png").scaled(convertToPixels(4), convertToPixels(4)));
+        Label ratingLabel = new Label(" " + rest.getDouble(ratingProp) + "/5", "RestPreviewRating");
+        ratingLabel.setIcon(getGlobalResources().getImage("rating-icon.png").scaled(convertToPixels(4), convertToPixels(4)));
 
         Container restDetails = new Container(new BoxLayout(BoxLayout.Y_AXIS), "RestDetails");
         Container timeRating = new Container(new FlowLayout(Component.CENTER), "RestTimeRatingCnt");
-        timeRating.addAll(restRating, estimatedDeliveryTime);
+        timeRating.addAll(ratingLabel, estimatedDeliveryTimeLabel);
         restDetails.addAll(restName, restCategory, timeRating);
-        restInfo.add(restDetails);
+        restInfo.add(BorderLayout.south(restDetails));
+        restInfo.add(BorderLayout.centerCenterEastWest(null, FlowLayout.encloseRight(like, cart), BorderLayout.north(backButton)));
+        add(restInfo);
 
-        Container menuContainer = new Container();
-        menuContainer.setUIID("MenuContainer");
+        Tabs menuContainer = new Tabs(Component.TOP);
+        menuContainer.getTabsContainer().setUIID("RestTabContainer");
+        menuContainer.setTabUIID("RestTab");
 
         if (getEntity().get(menuProp) instanceof EntityList) {
-            EntityList<Entity> dishList = (EntityList) (getEntity().get(menuProp));
-            int numOdDishes = dishList.size();
-            int rows = (numOdDishes % 2 == 0) ? numOdDishes / 2 : numOdDishes / 2 + 1;
-            menuContainer.setLayout(new GridLayout(rows, 2));
-            for (Entity dishEntity : dishList) {
-                DishPreview dish = new DishPreview(dishEntity, viewNode);
-                menuContainer.add(dish);
+            EntityList<Entity> categoryList = (EntityList) (getEntity().get(menuProp));
+            for (Entity category : categoryList) {
+                FoodCategoryModel fc = ((FoodCategoryModel) category);
+                if (fc.get(FoodCategory.dishes) instanceof EntityList){
+                    EntityList dishesList = (EntityList)fc.get(FoodCategory.dishes);
+                    menuContainer.addTab(fc.getText(FoodCategory.name), createCategoryView(dishesList));
+                }
             }
         }
-
-        addAll(restInfo, menuContainer);
+        add(menuContainer);
     }
 
     @Override
@@ -136,5 +183,17 @@ public class RestaurantView<T extends Entity> extends AbstractEntityView<T> {
         return null;
     }
 
+    private Component createCategoryView(EntityList<Entity> dishes) {
+        Container dishesContainer = new Container();
+        dishesContainer.setUIID("MenuContainer");
 
+        int numOdDishes = dishes.size();
+        int rows = (numOdDishes % 2 == 0) ? numOdDishes / 2 : numOdDishes / 2 + 1;
+        dishesContainer.setLayout(new GridLayout(rows, 2));
+        for (Entity dishEntity : dishes) {
+            DishPreview dish = new DishPreview(dishEntity, viewNode);
+            dishesContainer.add(dish);
+        }
+        return dishesContainer;
+    }
 }

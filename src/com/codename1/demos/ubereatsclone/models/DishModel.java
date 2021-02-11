@@ -24,6 +24,7 @@
 package com.codename1.demos.ubereatsclone.models;
 
 import com.codename1.demos.ubereatsclone.interfaces.Dish;
+import com.codename1.demos.ubereatsclone.interfaces.DishAddOn;
 import com.codename1.rad.models.*;
 
 import java.util.List;
@@ -58,5 +59,22 @@ public class DishModel extends Entity{
             addOnsList.add(addOn);
         }
         set(this.addOns, addOnsList);
+    }
+
+    public double getTotalPrice(){
+        return getTotalPrice(1);
+    }
+
+    public double getTotalPrice(int quantity){
+        double totalPrice = getDouble(Dish.price);
+        if (get(Dish.addOns) instanceof EntityList) {
+            EntityList<Entity> addOnsList = (EntityList)(get(Dish.addOns));
+            for (Entity addOnEntity : addOnsList) {
+                if (addOnEntity.getBoolean(DishAddOn.isSelected)) {
+                    totalPrice += addOnEntity.getDouble(DishAddOn.price);
+                }
+            }
+        }
+        return totalPrice * quantity;
     }
 }

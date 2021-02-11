@@ -29,4 +29,5 @@ public interface DishAddOn {
     Tag name = new Tag("name");
     Tag pictureUrl = new Tag("pictureUrl");
     Tag price = new Tag("price");
+    Tag isSelected = new Tag("isSelected");
 }

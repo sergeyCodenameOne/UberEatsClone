@@ -24,19 +24,19 @@
 package com.codename1.demos.ubereatsclone.models;
 
 import com.codename1.demos.ubereatsclone.interfaces.DishAddOn;
-import com.codename1.rad.models.DoubleProperty;
-import com.codename1.rad.models.Entity;
-import com.codename1.rad.models.EntityType;
-import com.codename1.rad.models.StringProperty;
+import com.codename1.rad.models.*;
 
 public class DishAddOnModel extends Entity {
     public static StringProperty name, pictureUrl;
     public static DoubleProperty price;
+    public static BooleanProperty isSelected;
 
     public static final EntityType TYPE = new EntityType(){{
         name = string(tags(DishAddOn.name));
         pictureUrl = string(tags(DishAddOn.pictureUrl));
         price = Double(tags(DishAddOn.price));
+        isSelected = Boolean(tags(DishAddOn.isSelected));
+
     }};
 
     {
@@ -47,6 +47,14 @@ public class DishAddOnModel extends Entity {
         set(this.name, name);
         set(this.pictureUrl, pictureUrl);
         set(this.price, price);
+        set(isSelected, false);
     }
+
+    public DishAddOnModel(Entity eddOnEntity){
+        set(this.name, eddOnEntity.getText(DishAddOn.name));
+        set(this.pictureUrl, eddOnEntity.getText(DishAddOn.pictureUrl));
+        set(this.price, eddOnEntity.getDouble(DishAddOn.price));
+    }
+
 
 }

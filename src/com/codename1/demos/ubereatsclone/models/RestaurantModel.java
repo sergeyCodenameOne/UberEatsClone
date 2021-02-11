@@ -23,6 +23,7 @@
 
 package com.codename1.demos.ubereatsclone.models;
 
+import com.codename1.demos.ubereatsclone.interfaces.FoodCategory;
 import com.codename1.demos.ubereatsclone.interfaces.Restaurant;
 import com.codename1.rad.models.*;
 
@@ -32,7 +33,9 @@ public class RestaurantModel extends Entity{
     public static StringProperty name;
     public static StringProperty pictureUrl;
     public static StringProperty category;
+    public static StringProperty coordinates;
     public static DoubleProperty rating;
+    public static DoubleProperty deliveryFee;
     public static IntProperty estimatedDeliveryTime;
     public static ListProperty menu;
     public static ListProperty order;
@@ -46,6 +49,8 @@ public class RestaurantModel extends Entity{
         category = string(tags(Restaurant.category));
         rating = Double(tags(Restaurant.rating));
         estimatedDeliveryTime = Integer(tags(Restaurant.estimatedDeliveryTime));
+        deliveryFee = Double(tags(Restaurant.deliveryFee));
+        coordinates = string(tags(Restaurant.coordinates));
         menu = list(RestaurantMenu.class, tags(Restaurant.menu));
         order = list(RestaurantOrder.class, tags(Restaurant.order));
     }};
@@ -54,18 +59,19 @@ public class RestaurantModel extends Entity{
         setEntityType(TYPE);
     }
 
-    public RestaurantModel(String name, String pictureUrl, String category, double rating, int estimatedDeliveryTime, List<Entity> menu) {
+    public RestaurantModel(String name, String pictureUrl, String category, double rating, double deliveryFee, int estimatedDeliveryTime, List<Entity> menu) {
         set(this.name, name);
         set(this.pictureUrl, pictureUrl);
         set(this.category, category);
         set(this.rating, rating);
         set(this.order, new RestaurantOrder());
         set(this.estimatedDeliveryTime, estimatedDeliveryTime);
-        RestaurantMenu dishes = new RestaurantMenu();
-        for (Entity dish : menu){
-            dishes.add(dish);
+        set(this.deliveryFee, deliveryFee);
+        RestaurantMenu categories = new RestaurantMenu();
+        for (Entity menuCategory : menu){
+            categories.add(menuCategory);
         }
-        set(this.menu, dishes);
+        set(this.menu, categories);
     }
 
     public Entity addToOrder(Entity dish){
@@ -76,5 +82,37 @@ public class RestaurantModel extends Entity{
 
     public RestaurantOrder getOrder(){
         return (RestaurantOrder)get(Restaurant.order);
+    }
+
+    public double getTotalPrice(){
+        return getTotalItemPrice() + getDouble(Restaurant.deliveryFee);
+    }
+
+    public double getTotalItemPrice(){
+        double totalPrice = 0;
+        if (get(Restaurant.order) instanceof EntityList) {
+            EntityList<Entity> dishList = (EntityList)(get(Restaurant.order));
+            for (Entity dishEntity : dishList) {
+                totalPrice += ((OrderDishModel)dishEntity).getTotalPrice();
+            }
+        }
+        return totalPrice;
+    }
+
+    public int getDishesCount(){
+        int totalDishes = 0;
+
+        if (get(Restaurant.menu) instanceof EntityList){
+            EntityList<Entity> categories = (EntityList<Entity>) get(Restaurant.menu);
+            for(Entity category : categories){
+                if(category.get(FoodCategory.dishes) instanceof EntityList){
+                    EntityList<Entity> dishes = (EntityList<Entity>) category.get(FoodCategory.dishes);
+                    for (Entity dish : dishes){
+                        totalDishes++;
+                    }
+                }
+            }
+        }
+        return totalDishes;
     }
 }

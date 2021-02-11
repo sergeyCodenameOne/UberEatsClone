@@ -23,14 +23,57 @@
 
 package com.codename1.demos.ubereatsclone.views;
 
+import com.codename1.demos.ubereatsclone.interfaces.MainWindow;
 import com.codename1.rad.models.Entity;
 import com.codename1.rad.nodes.Node;
 import com.codename1.rad.ui.AbstractEntityView;
+import com.codename1.ui.Component;
+import com.codename1.ui.Label;
+import com.codename1.ui.Tabs;
+import com.codename1.ui.layouts.BorderLayout;
 
-public class MainWindowView<T extends Entity> extends AbstractEntityView<T> {
+import static com.codename1.ui.CN.convertToPixels;
+import static com.codename1.ui.util.Resources.getGlobalResources;
 
-    public MainWindowView(T entity) {
-        super(entity);
+public class MainWindowView extends AbstractEntityView {
+
+    FavoriteRestaurantsView favoriteView;
+    private static final int TABS_ICON_SIZE = convertToPixels(5);
+    private static final int TABS_ICON_SELECTED_SIZE = convertToPixels(9);
+
+    public MainWindowView(Entity mainWindowEntity, Node profileNode, Node homeViewNode) {
+        super(mainWindowEntity);
+        setLayout(new BorderLayout());
+        setUIID("MainWindow");
+        Tabs mainWindowContainer = new Tabs();
+        mainWindowContainer.setTabPlacement(Component.BOTTOM);
+        mainWindowContainer.getTabsContainer().setUIID("MainWindowTabsContainer");
+        mainWindowContainer.setUIID("MainWindowTabsCnt");
+        mainWindowContainer.setTabUIID("MainWindowTab");
+        mainWindowContainer.getTabsContainer().setSafeArea(false);
+
+        mainWindowContainer.addTab("HOME",
+                                    getGlobalResources().getImage("main-window-favorite.png").scaled(TABS_ICON_SIZE, TABS_ICON_SIZE),
+                                    getGlobalResources().getImage("main-window-favorite-selected.png").scaled(TABS_ICON_SELECTED_SIZE, TABS_ICON_SELECTED_SIZE),
+                                    new HomeView(mainWindowEntity, homeViewNode));
+
+        favoriteView = new FavoriteRestaurantsView((Entity)mainWindowEntity.get(MainWindow.profile), homeViewNode);
+        mainWindowContainer.addTab("FAVORITE",
+                                    getGlobalResources().getImage("main-window-home.png").scaled(TABS_ICON_SIZE, TABS_ICON_SIZE),
+                                    getGlobalResources().getImage("main-window-home-selected.png").scaled(TABS_ICON_SELECTED_SIZE, TABS_ICON_SELECTED_SIZE),
+                                    favoriteView);
+
+        mainWindowContainer.addTab("ORDERS",
+                                    getGlobalResources().getImage("main-window-orders.png").scaled(TABS_ICON_SIZE, TABS_ICON_SIZE),
+                                    getGlobalResources().getImage("main-window-orders-selected.png").scaled(TABS_ICON_SELECTED_SIZE, TABS_ICON_SELECTED_SIZE),
+                                    new Label("ORDERS"));
+
+        mainWindowContainer.addTab("PROFILE",
+                                    getGlobalResources().getImage("main-window-profile.png").scaled(TABS_ICON_SIZE, TABS_ICON_SIZE),
+                                    getGlobalResources().getImage("main-window-profile-selected.png").scaled(TABS_ICON_SELECTED_SIZE, TABS_ICON_SELECTED_SIZE),
+                                    new ProfileView(mainWindowEntity.getEntity(MainWindow.profile), profileNode));
+
+        add(BorderLayout.CENTER, mainWindowContainer);
     }
 
     @Override
@@ -46,5 +89,13 @@ public class MainWindowView<T extends Entity> extends AbstractEntityView<T> {
     @Override
     public Node getViewNode() {
         return null;
+    }
+
+    public void addFavorite(Entity rest){
+        favoriteView.addFavorite(rest);
+    }
+
+    public void removeFavorite(Entity rest){
+        favoriteView.removeFavorite(rest);
     }
 }

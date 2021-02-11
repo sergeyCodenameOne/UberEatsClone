@@ -27,7 +27,7 @@ import com.codename1.rad.models.Tag;
 
 public interface Dish {
     Tag name = new Tag("name");
-    Tag description= new Tag("description");
+    Tag description = new Tag("description");
     Tag price = new Tag("price");
     Tag pictureUrl = new Tag("pictureUrl");
     Tag addOns = new Tag("addOns");
