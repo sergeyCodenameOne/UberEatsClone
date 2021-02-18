@@ -1,3 +1,26 @@
+/*
+ * Copyright (c) 2012, Codename One and/or its affiliates. All rights reserved.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation.  Codename One designates this
+ * particular file as subject to the "Classpath" exception as provided
+ * by Oracle in the LICENSE file that accompanied this code.
+ *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ *
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * Please contact Codename One through http://www.codenameone.com/ if you
+ * need additional information or have any questions.
+ */
+
 package com.codename1.demos.ubereatsclone.views;
 
 import com.codename1.demos.ubereatsclone.interfaces.Address;
@@ -26,7 +49,9 @@ public class NewAddressView extends AbstractEntityView {
 
     public NewAddressView(AddressModel address, Node viewNode) {
         super(address);
-        setLayout(new BorderLayout());
+        setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+        setScrollableY(true);
+        Container wrapper = new Container(new BorderLayout());
         setUIID("NewAddress");
 
         cityProp = address.findProperty(Address.city);
@@ -43,7 +68,7 @@ public class NewAddressView extends AbstractEntityView {
         Label headerLabel = new Label("ADD ADDRESS", "EditAddressesHeaderLabel");
         Container headerCnt = BorderLayout.center(headerLabel).add(BorderLayout.WEST, backButton);
         headerCnt.setUIID("EditAddressesHeaderCnt");
-        add(BorderLayout.NORTH, headerCnt);
+        wrapper.add(BorderLayout.NORTH, headerCnt);
 
         TextField city = new TextField("", "City", 20, TextArea.ANY);
         city.setUIID("AddressField");
@@ -82,7 +107,7 @@ public class NewAddressView extends AbstractEntityView {
         defaultAddress.setUIID("DefaultAddressCheckBox");
         bg.setSelected(0);
 
-        add(BorderLayout.CENTER, BoxLayout.encloseY(FlowLayout.encloseCenter(home, work, other), city, street, freeText, defaultAddress));
+        wrapper.add(BorderLayout.CENTER, BoxLayout.encloseY(FlowLayout.encloseCenter(home, work, other), city, street, freeText, defaultAddress));
 
         Button saveAddress = new Button("SAVE ADDRESS", "SaveAddressConfirmButton");
         validator.addSubmitButtons(saveAddress);
@@ -114,7 +139,8 @@ public class NewAddressView extends AbstractEntityView {
             }
         });
 
-        add(BorderLayout.SOUTH, saveAddress);
+        wrapper.add(BorderLayout.SOUTH, saveAddress);
+        add(wrapper);
     }
 
 

@@ -29,9 +29,11 @@ import com.codename1.demos.ubereatsclone.interfaces.DishOrder;
 import com.codename1.demos.ubereatsclone.models.OrderDishModel;
 import com.codename1.rad.models.Entity;
 import com.codename1.rad.models.Property;
+import com.codename1.rad.models.PropertySelector;
 import com.codename1.rad.nodes.ActionNode;
 import com.codename1.rad.nodes.Node;
 import com.codename1.rad.ui.AbstractEntityView;
+import com.codename1.rad.ui.image.RoundRectImageRenderer;
 import com.codename1.ui.*;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
@@ -45,7 +47,7 @@ public class DishOrderPreview<T extends Entity> extends AbstractEntityView<T> {
     Property nameProp, quantityProp, pictureProp, priceProp, addOnsProp;
     Label quantityLabel, dishPrice;
 
-    private static EncodedImage placeHolder = EncodedImage.createFromImage(getGlobalResources().getImage("dish-placeholder.png"), false);
+    private static EncodedImage placeHolder = EncodedImage.createFromImage(getGlobalResources().getImage("placeholder.png"), false);
 
     public static final ActionNode.Category INCREASE_QUANTITY = new ActionNode.Category();
     public static final ActionNode.Category DECREASE_QUANTITY = new ActionNode.Category();
@@ -62,7 +64,10 @@ public class DishOrderPreview<T extends Entity> extends AbstractEntityView<T> {
         priceProp = entity.findProperty(DishOrder.price);
         addOnsProp = entity.findProperty(DishOrder.addOns);
 
-        Image dishImage = entity.createImageToStorage(pictureProp, placeHolder);
+        PropertySelector imagePropertySelector = new PropertySelector(entity, pictureProp);
+        RoundRectImageRenderer renderer = new RoundRectImageRenderer(200, 200, 2);
+
+        Image dishImage = renderer.createImage(imagePropertySelector);
         ScaleImageLabel dishImageLabel = new ScaleImageLabel(dishImage){
             @Override
             public Dimension getPreferredSize() {

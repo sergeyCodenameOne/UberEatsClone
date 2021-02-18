@@ -1,3 +1,26 @@
+/*
+ * Copyright (c) 2012, Codename One and/or its affiliates. All rights reserved.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation.  Codename One designates this
+ * particular file as subject to the "Classpath" exception as provided
+ * by Oracle in the LICENSE file that accompanied this code.
+ *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ *
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * Please contact Codename One through http://www.codenameone.com/ if you
+ * need additional information or have any questions.
+ */
+
 package com.codename1.demos.ubereatsclone.views;
 
 import com.codename1.demos.ubereatsclone.interfaces.Account;
@@ -24,7 +47,9 @@ public class EditProfileView extends AbstractEntityView {
     public EditProfileView(Entity entity, Node viewNode) {
         super(entity);
         this.viewNode = viewNode;
-        setLayout(new BorderLayout());
+        setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+        setScrollableY(true);
+        Container wrapper = new Container(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER_ABSOLUTE));
         setUIID("EditProfile");
 
         firstNameProp = entity.findProperty(Account.firstName);
@@ -42,7 +67,7 @@ public class EditProfileView extends AbstractEntityView {
         Label headerLabel = new Label("EDIT PROFILE", "EditProfileHeaderLabel");
         Container headerCnt = BorderLayout.center(headerLabel).add(BorderLayout.WEST, backButton);
         headerCnt.setUIID("EditProfileHeaderCnt");
-        add(BorderLayout.NORTH, headerCnt);
+        wrapper.add(BorderLayout.NORTH, headerCnt);
 
         TextField firstName = new TextField("", "First Name", 20, TextArea.ANY);
         firstName.setUIID("EditProfileField");
@@ -63,7 +88,7 @@ public class EditProfileView extends AbstractEntityView {
         TextField phoneNumber = new TextField("", "Mobile Number", 20, TextArea.PHONENUMBER);
         phoneNumber.setUIID("EditProfileField");
         phoneNumber.getHintLabel().setUIID("SignUpFieldHint");
-        add(BorderLayout.CENTER, BoxLayout.encloseY(firstName, lastName, emailAddress, password, phoneNumber));
+        wrapper.add(BorderLayout.CENTER, BoxLayout.encloseY(firstName, lastName, emailAddress, password, phoneNumber));
 
         Validator validator = new Validator();
         validator.setValidationFailedEmblem(FontImage.createMaterial(FontImage.MATERIAL_ERROR, UIManager.getInstance().getComponentStyle("TextErrorIcon")));
@@ -85,8 +110,9 @@ public class EditProfileView extends AbstractEntityView {
             entity.set(Account.mobileNumber, phoneNumber.getText());
             ActionSupport.dispatchEvent(new FormController.FormBackEvent(saveButton));
         });
-        add(BorderLayout.SOUTH, BoxLayout.encloseY(saveButton));
+        wrapper.add(BorderLayout.SOUTH, BoxLayout.encloseY(saveButton));
 
+        add(wrapper);
     }
 
     @Override

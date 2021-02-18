@@ -34,4 +34,6 @@ public interface Account {
     Tag addresses = new Tag("addresses");
     Tag creditCards = new Tag("creditCards");
     Tag favoriteRestaurants = new Tag("favoriteRestaurants");
+    Tag completedOrders = new Tag("completedOrders");
+
 }

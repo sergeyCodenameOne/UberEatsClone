@@ -47,14 +47,17 @@ public class SignInView<T extends Entity> extends AbstractEntityView<T> {
     public SignInView(T entity, Node applicationControllerViewNode, Node accountViewNode) {
         super(entity);
         setUIID("SignInCnt");
-        setLayout(new BorderLayout());
 
+        Container wrapper = new Container(new BorderLayout());
+        setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+        setScrollVisible(false);
+        setScrollableY(true);
         Label signInHeader = new Label("Welcome Back!", "SignInHeader");
         Image grubLogo = getGlobalResources().getImage("grub-logo.png");
         ScaleImageLabel logoLabel = new ScaleImageLabel(grubLogo);
         Container signInTopView = BoxLayout.encloseY(logoLabel, signInHeader);
         signInTopView.setUIID("SignInTopView");
-        add(BorderLayout.NORTH, signInTopView);
+        wrapper.add(BorderLayout.NORTH, signInTopView);
 
         TextField emailAddress = new TextField("", "Email Address", 20, TextArea.EMAILADDR);
         emailAddress.setUIID("SignInField");
@@ -68,7 +71,7 @@ public class SignInView<T extends Entity> extends AbstractEntityView<T> {
         validator.addConstraint(emailAddress, RegexConstraint.validEmail());
         validator.addConstraint(password, new LengthConstraint(8));
 
-        add(BorderLayout.CENTER, BoxLayout.encloseY(emailAddress, password));
+        wrapper.add(BorderLayout.CENTER, BoxLayout.encloseY(emailAddress, password));
 
         Button confirmSignIn = new Button("Sign In", "SignInConfirmButton");
         validator.addSubmitButtons(confirmSignIn);
@@ -115,12 +118,9 @@ public class SignInView<T extends Entity> extends AbstractEntityView<T> {
                 forgotPassword
         );
         signInOptionsCnt.setUIID("SignOptionsCnt");
+        wrapper.add(BorderLayout.SOUTH, signInOptionsCnt);
 
-
-
-        add(BorderLayout.SOUTH, signInOptionsCnt);
-
-
+        add(wrapper);
     }
 
     @Override

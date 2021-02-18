@@ -23,8 +23,14 @@
 
 package com.codename1.demos.ubereatsclone.views;
 
+import com.codename1.components.MultiButton;
 import com.codename1.demos.ubereatsclone.Util;
+import com.codename1.demos.ubereatsclone.interfaces.Address;
+import com.codename1.demos.ubereatsclone.interfaces.PaymentMethod;
 import com.codename1.demos.ubereatsclone.interfaces.Restaurant;
+import com.codename1.demos.ubereatsclone.models.AccountModel;
+import com.codename1.demos.ubereatsclone.models.CompletedOrderModel;
+import com.codename1.demos.ubereatsclone.models.PaymentMethodModel;
 import com.codename1.demos.ubereatsclone.models.RestaurantModel;
 import com.codename1.l10n.L10NManager;
 import com.codename1.rad.controllers.ActionSupport;
@@ -32,17 +38,20 @@ import com.codename1.rad.controllers.FormController;
 import com.codename1.rad.models.Entity;
 import com.codename1.rad.models.EntityList;
 import com.codename1.rad.models.Property;
+import com.codename1.rad.nodes.ActionNode;
 import com.codename1.rad.nodes.Node;
 import com.codename1.rad.ui.AbstractEntityView;
-import com.codename1.ui.Button;
-import com.codename1.ui.Container;
-import com.codename1.ui.FontImage;
-import com.codename1.ui.Label;
+import com.codename1.ui.*;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.plaf.UIManager;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+
+import static com.codename1.ui.CN.convertToPixels;
+import static com.codename1.ui.util.Resources.getGlobalResources;
 
 public class OrderView extends AbstractEntityView {
 
@@ -51,10 +60,18 @@ public class OrderView extends AbstractEntityView {
     List dishes = new ArrayList();
     Label totalPriceLabel, itemTotalCostLabel;
     Container totalPriceCnt, itemTotalCostCnt;
+    AccountModel account;
+    MultiButton deliverToButton;
+    PaymentMethodModel paymentMethod;
+    PaymentMethodView paymentView;
 
+    public static final ActionNode.Category COMPLETE_ORDER = new ActionNode.Category();
+    public static final ActionNode.Category CHANGE_DELIVERY_ADDRESS = new ActionNode.Category();
+    public static final ActionNode.Category CHANGE_DELIVERY_PAYMENT = new ActionNode.Category();
 
-    public OrderView(Entity restEntity, Entity profileEntity, Node viewNode) {
+    public OrderView(Entity restEntity, Entity profileEntity, Node viewNode, Node mainWindowNode) {
         super(restEntity);
+        account = (AccountModel) profileEntity;
         setLayout(BoxLayout.y());
         setUIID("OrderCnt");
         setScrollableY(true);
@@ -81,6 +98,46 @@ public class OrderView extends AbstractEntityView {
                 add(dish);
             }
         }
+        MultiButton addPromoCodeButton = new MultiButton("ADD PROMO CODE");
+        addPromoCodeButton.setUIID("AddPromoCodeButton");
+        addPromoCodeButton.setUIIDLine1("AddPromoCodeButtonText");
+        Image promCodeImage = getGlobalResources().getImage("ticket-icon.png").scaled(convertToPixels(4), convertToPixels(4));
+        addPromoCodeButton.setIcon(promCodeImage);
+        Image gotoIcon = FontImage.createMaterial(FontImage.MATERIAL_KEYBOARD_ARROW_RIGHT, UIManager.getInstance().getComponentStyle("GoToIcon"));
+        addPromoCodeButton.setEmblem(gotoIcon);
+        addPromoCodeButton.setEmblemPosition("East");
+        add(addPromoCodeButton);
+
+        EntityList<Entity> cards = (EntityList<Entity>) account.getCreditCards();
+        if (cards.size() == 0){
+            paymentMethod = new PaymentMethodModel(PaymentMethod.CASH, null);
+        }else{
+            paymentMethod = new PaymentMethodModel(PaymentMethod.CREDIT_CARD, cards.get(0));
+        }
+
+        paymentView = new PaymentMethodView(paymentMethod, viewNode);
+        add(paymentView);
+
+        deliverToButton = new MultiButton("DELIVER TO");
+        deliverToButton.setUIID("ManageAddressButton");
+        deliverToButton.setUIIDLine1("ManageAddressButtonLine1");
+        deliverToButton.setUIIDLine2("ManageAddressButtonLine2");
+        Image mapPinIcon = getGlobalResources().getImage("map-pin-icon.png").scaled(convertToPixels(4), convertToPixels(4));
+        deliverToButton.setIcon(mapPinIcon);
+        deliverToButton.setEmblem(gotoIcon);
+        deliverToButton.setTextLine2("");
+        Entity address = ((AccountModel)profileEntity).getDefaultAddress();
+        if (address != null){
+            deliverToButton.setTextLine2(address.getText(Address.city) + ", " + address.getText(Address.street));
+        }
+        deliverToButton.addActionListener(evt->{
+            evt.consume();
+            ActionNode action = viewNode.getInheritedAction(CHANGE_DELIVERY_ADDRESS);
+            if (action != null) {
+                action.fireEvent(null, OrderView.this);
+            }
+        });
+        add(deliverToButton);
 
         Label deliveryFeeHeaderLabel = new Label("Delivery Fee", "OrderDeliveryFeeHeader");
         Label deliveryFeeLabel = new Label(restEntity.getDouble(Restaurant.deliveryFee) + " " + L10NManager.getInstance().getCurrencySymbol(), "OrderDeliveryFee");
@@ -98,6 +155,17 @@ public class OrderView extends AbstractEntityView {
         totalPriceCnt.setUIID("TotalCostCnt");
 
         Button confirmOrder = new Button("Confirm Order", "OrderConfirmButton");
+        confirmOrder.addActionListener(evt->{
+            evt.consume();
+            ActionNode action = mainWindowNode.getInheritedAction(COMPLETE_ORDER);
+            if (action != null) {
+                int year = Calendar.getInstance().get(Calendar.YEAR);
+                int month = Calendar.getInstance().get(Calendar.MONTH);
+                int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+                String date = month + "." + day + "." + year;
+                action.fireEvent(new CompletedOrderModel(restEntity, (EntityList)restEntity.get(Restaurant.order), date, Address.HOME), OrderView.this);
+            }
+        });
 
         Container summaryCnt = new Container(new BorderLayout(), "OrderSummaryCnt");
         summaryCnt.add(BorderLayout.NORTH, BoxLayout.encloseY(deliveryFeeCnt, itemTotalCostCnt));
@@ -112,8 +180,14 @@ public class OrderView extends AbstractEntityView {
     public void update() {
         itemTotalCostLabel.setText(Util.getPriceAsString(((RestaurantModel)getEntity()).getTotalItemPrice()));
         totalPriceLabel.setText(Util.getPriceAsString(((RestaurantModel)getEntity()).getTotalPrice()));
-        totalPriceCnt.revalidateWithAnimationSafety();
         itemTotalCostCnt.revalidateWithAnimationSafety();
+        Entity address = account.getDefaultAddress();
+        if (address != null){
+            deliverToButton.setTextLine2(address.getText(Address.city) + ", " + address.getText(Address.street));
+        }
+        deliverToButton.revalidateWithAnimationSafety();
+        paymentView.update();
+        revalidateWithAnimationSafety();
     }
 
     @Override
@@ -125,4 +199,11 @@ public class OrderView extends AbstractEntityView {
     public Node getViewNode() {
         return viewNode;
     }
+
+    public void setCreditCard(Entity card){
+        paymentMethod.set(PaymentMethod.method, PaymentMethod.CREDIT_CARD);
+        paymentMethod.set(PaymentMethod.creditCard, card);
+        paymentView.update();
+    }
+
 }

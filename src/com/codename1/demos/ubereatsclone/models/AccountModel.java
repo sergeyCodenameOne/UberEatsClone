@@ -31,11 +31,12 @@ import java.util.List;
 
 public class AccountModel extends Entity {
     public static StringProperty firstName, lastName, emailAddress, password, mobileNumber;
-    public static ListProperty addresses, creditCards, favoriteRestaurants;
+    public static ListProperty addresses, creditCards, favoriteRestaurants, completedOrders;
 
     public static class Addresses extends EntityList {}
     public static class CreditCards extends EntityList {}
     public static class FavoriteRestaurants extends EntityList {}
+    public static class CompletedOrders extends EntityList {}
 
     public static final EntityType TYPE = new EntityType(){{
         firstName = string(tags(Account.firstName));
@@ -47,6 +48,7 @@ public class AccountModel extends Entity {
         addresses = list(Addresses.class, tags(Account.addresses));
         creditCards = list(CreditCards.class, tags(Account.creditCards));
         favoriteRestaurants = list(FavoriteRestaurants.class, tags(Account.favoriteRestaurants));
+        completedOrders = list(CompletedOrders.class, tags(Account.completedOrders));
     }};
 
     {
@@ -54,10 +56,18 @@ public class AccountModel extends Entity {
     }
 
     public AccountModel(){
-        this("", "", "", "", "", null, null);
+        this("", "", "", "", "", null, null, null);
     }
 
-    public AccountModel(String firstName, String lastName, String emailAddress, String password, String mobileNumber, List<Entity> addresses, List<Entity> creditCards){
+    public AccountModel(String firstName,
+                        String lastName,
+                        String emailAddress,
+                        String password,
+                        String mobileNumber,
+                        List<Entity> addresses,
+                        List<Entity> creditCards,
+                        List<Entity> completedOrders){
+
         set(this.firstName, firstName);
         set(this.lastName, lastName);
         set(this.emailAddress, emailAddress);
@@ -80,6 +90,14 @@ public class AccountModel extends Entity {
         }
         set(this.creditCards, creditCardsList);
 
+        CompletedOrders completedOrdersList = new CompletedOrders();
+        if (completedOrders != null){
+            for (Entity completeOrder : completedOrders){
+                completedOrdersList.add(completeOrder);
+            }
+        }
+        set(this.completedOrders, completedOrdersList);
+
         FavoriteRestaurants favoriteRestaurantsList = new FavoriteRestaurants();
         set(this.favoriteRestaurants, favoriteRestaurantsList);
     }
@@ -90,6 +108,10 @@ public class AccountModel extends Entity {
 
     public EntityList getAddresses(){
         return (CreditCards)get(Account.addresses);
+    }
+
+    public EntityList getCompletedOrders(){
+        return (CompletedOrders)get(Account.completedOrders);
     }
 
     public void addCreditCard(Entity creditCard){

@@ -1,8 +1,30 @@
+/*
+ * Copyright (c) 2012, Codename One and/or its affiliates. All rights reserved.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation.  Codename One designates this
+ * particular file as subject to the "Classpath" exception as provided
+ * by Oracle in the LICENSE file that accompanied this code.
+ *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ *
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * Please contact Codename One through http://www.codenameone.com/ if you
+ * need additional information or have any questions.
+ */
+
 package com.codename1.demos.ubereatsclone.views;
 
 import com.codename1.components.MultiButton;
 import com.codename1.components.ScaleImageLabel;
-import com.codename1.demos.ubereatsclone.Util;
 import com.codename1.demos.ubereatsclone.interfaces.Account;
 import com.codename1.rad.models.Entity;
 import com.codename1.rad.models.Property;
@@ -22,6 +44,7 @@ import com.codename1.ui.plaf.UIManager;
 
 import static com.codename1.ui.CN.convertToPixels;
 import static com.codename1.ui.CN.getDisplayHeight;
+import static com.codename1.ui.util.Resources.getGlobalResources;
 
 public class ProfileView<T extends Entity> extends AbstractEntityView<T> {
 
@@ -34,9 +57,9 @@ public class ProfileView<T extends Entity> extends AbstractEntityView<T> {
     public static final ActionNode.Category LOG_OUT = new ActionNode.Category();
     public static final ActionNode.Category UPDATE_VIEW = new ActionNode.Category();
 
-    public ProfileView(T account, Node viewNode) {
+    public ProfileView(T account, Node mainWindowNode, Node appNode) {
         super(account);
-        this.viewNode = viewNode;
+        this.viewNode = mainWindowNode;
         setLayout(new BorderLayout());
         setUIID("ProfileCnt");
 
@@ -54,12 +77,7 @@ public class ProfileView<T extends Entity> extends AbstractEntityView<T> {
         Label mobileNumberLabel  = new Label(account.getText(phoneNumberProp), "ProfilePhoneLabel");
         Image phoneImage= FontImage.createMaterial(FontImage.MATERIAL_STAY_CURRENT_PORTRAIT, buttonEmblemStyle);
         mobileNumberLabel.setIcon(phoneImage);
-
-        Image profileImage = FontImage.createMaterial(FontImage.MATERIAL_SENTIMENT_SATISFIED_ALT, UIManager.getInstance().getComponentStyle("ProfileImage")).
-                toEncodedImage().
-                fill(convertToPixels(8), convertToPixels(8));
-        profileImage = profileImage.applyMask(Util.createRoundMask(profileImage.getWidth()));
-        ScaleImageLabel profileImageLabel = new ScaleImageLabel(profileImage);
+        ScaleImageLabel profileImageLabel = new ScaleImageLabel(getGlobalResources().getImage("account-place-holder.png").fill(convertToPixels(8), convertToPixels(8)));
         profileImageLabel.setUIID("ProfileImageLabel");
 
         Container profileCnt = new Container(new BorderLayout());
@@ -123,6 +141,13 @@ public class ProfileView<T extends Entity> extends AbstractEntityView<T> {
         logoutButton.setUIID("ProfileActionButton");
         logoutButton.setUIIDLine1("ProfileActionButtonText");
         logoutButton.setIconPosition("East");
+        logoutButton.addActionListener(evt->{
+            evt.consume();
+            ActionNode action = appNode.getInheritedAction(LOG_OUT);
+            if (action != null){
+                action.fireEvent(account, ProfileView.this);
+            }
+        });
 
         Container profileActions = new Container(new BoxLayout(BoxLayout.Y_AXIS)){
             @Override

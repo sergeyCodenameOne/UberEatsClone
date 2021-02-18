@@ -38,6 +38,7 @@ public class SignUpController extends FormController {
         Form signUoForm = new Form(new BorderLayout());
         setView(signUoForm);
         signUoForm.getToolbar().hideToolbar();
+        signUoForm.setFormBottomPaddingEditingMode(true);
 
 
         signUoForm.add(BorderLayout.CENTER, new SignUpView(account, applicationControllerViewNode, accountViewNode));

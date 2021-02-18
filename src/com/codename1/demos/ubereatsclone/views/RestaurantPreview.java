@@ -1,3 +1,26 @@
+/*
+ * Copyright (c) 2012, Codename One and/or its affiliates. All rights reserved.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation.  Codename One designates this
+ * particular file as subject to the "Classpath" exception as provided
+ * by Oracle in the LICENSE file that accompanied this code.
+ *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ *
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * Please contact Codename One through http://www.codenameone.com/ if you
+ * need additional information or have any questions.
+ */
+
 package com.codename1.demos.ubereatsclone.views;
 
 import com.codename1.components.ScaleImageButton;
@@ -20,10 +43,10 @@ import static com.codename1.ui.util.Resources.getGlobalResources;
 
 public class RestaurantPreview extends AbstractEntityView {
 
-    Property nameProp, categoryProp, ratingProp, deliveryTimeProp, pictureProp;
+    Property nameProp, categoryProp, ratingProp, deliveryTimeProp, pictureProp, distanceProp;
     Node viewNode;
 
-    private static EncodedImage placeHolder = EncodedImage.createFromImage(getGlobalResources().getImage("dish-placeholder.png"), false);
+    private static EncodedImage placeHolder = EncodedImage.createFromImage(getGlobalResources().getImage("placeholder.png"), false);
 
     public RestaurantPreview(Entity entity, Node viewNode){
         super(entity);
@@ -35,15 +58,23 @@ public class RestaurantPreview extends AbstractEntityView {
         categoryProp = entity.findProperty(Restaurant.category);
         ratingProp = entity.findProperty(Restaurant.rating);
         deliveryTimeProp = entity.findProperty(Restaurant.estimatedDeliveryTime);
+        distanceProp = entity.findProperty(Restaurant.distance);
+
         pictureProp = entity.findProperty(Restaurant.picture);
 
+//        URLImage.ImageAdapter adapter = URLImage.createMaskAdapter(Util.createHalfRoundRectangleMask(placeHolder.getWidth(), placeHolder.getHeight()));
         Image restImage = entity.createImageToStorage(pictureProp, placeHolder);
+//        restImage = restImage.applyMask(Util.createHalfRoundRectangleMask(placeHolder.getWidth(), placeHolder.getHeight()));
+
+
         ScaleImageButton restImageButton = new ScaleImageButton(restImage){
-            @Override
-            public Dimension getPreferredSize() {
+                @Override
+                public Dimension getPreferredSize() {
                 return new Dimension((int)(Display.getInstance().getDisplayWidth() / 1.5), Display.getInstance().getDisplayWidth() / 3);
             }
         };
+
+        restImageButton.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
 
         restImageButton.addActionListener(evt -> {
             evt.consume();
@@ -54,24 +85,28 @@ public class RestaurantPreview extends AbstractEntityView {
         });
 
         setLeadComponent(restImageButton);
-        restImageButton.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
 
         Label restNameLabel = new Label(entity.getText(nameProp), "RestPreviewNameLabel");
         Label restCategoryLabel = new Label(entity.getText(categoryProp), "RestPreviewCategoryLabel");
 
         Container restTopView = new Container(new LayeredLayout());
         restTopView.add(restImageButton);
+
         Container nameAndCategoryCnt = new Container(new BorderLayout());
         nameAndCategoryCnt.setUIID("RestaurantPreviewDetailsCnt");
-        nameAndCategoryCnt.add(BorderLayout.SOUTH, BoxLayout.encloseY(restNameLabel, restCategoryLabel));
+        Container restDetails = BoxLayout.encloseY(restNameLabel, restCategoryLabel);
+        nameAndCategoryCnt.add(BorderLayout.SOUTH, restDetails);
+        nameAndCategoryCnt.setUIID("BottomShadowContainer");
         restTopView.add(nameAndCategoryCnt);
 
         Label estimatedDeliveryTimeLabel = new Label(" " + entity.getInt(deliveryTimeProp) + " mins", "RestPreviewDeliveryTime");
         estimatedDeliveryTimeLabel.setIcon(getGlobalResources().getImage("delivery-time-icon.png").scaled(convertToPixels(4), convertToPixels(4)));
         Label ratingLabel = new Label(" " + entity.getDouble(ratingProp) + "/5", "RestPreviewRating");
         ratingLabel.setIcon(getGlobalResources().getImage("rating-icon.png").scaled(convertToPixels(4), convertToPixels(4)));
+        Label distanceLabel = new Label(" " + entity.getDouble(distanceProp) + "km", "RestPreviewDistance");
+        distanceLabel.setIcon(getGlobalResources().getImage("distance-icon.png").scaled(convertToPixels(4), convertToPixels(4)));
 
-        add(BorderLayout.SOUTH, FlowLayout.encloseCenter(estimatedDeliveryTimeLabel, ratingLabel));
+        add(BorderLayout.SOUTH, FlowLayout.encloseCenter(estimatedDeliveryTimeLabel, ratingLabel, distanceLabel));
         add(BorderLayout.CENTER, restTopView);
 
     }

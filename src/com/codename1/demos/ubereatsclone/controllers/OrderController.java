@@ -24,9 +24,9 @@
 package com.codename1.demos.ubereatsclone.controllers;
 
 import com.codename1.demos.ubereatsclone.interfaces.Restaurant;
+import com.codename1.demos.ubereatsclone.models.AccountModel;
 import com.codename1.demos.ubereatsclone.models.OrderDishModel;
-import com.codename1.demos.ubereatsclone.views.DishOrderPreview;
-import com.codename1.demos.ubereatsclone.views.OrderView;
+import com.codename1.demos.ubereatsclone.views.*;
 import com.codename1.rad.controllers.Controller;
 import com.codename1.rad.controllers.FormController;
 import com.codename1.rad.models.Entity;
@@ -41,20 +41,32 @@ public class OrderController extends FormController {
 
     public static final ActionNode increaseQuantity = UI.action();
     public static final ActionNode decreaseQuantity = UI.action();
+    public static final ActionNode manegePayment = UI.action();
+    public static final ActionNode manegeAddress = UI.action();
+
+    public static final ActionNode setCard = UI.action();
+    public static final ActionNode updatePaymentView = UI.action();
+
+
 
     OrderView orderView;
-    public OrderController(Controller parent, Entity restEntity, Entity profileEntity) {
+    public OrderController(Controller parent, Entity restEntity, Entity profileEntity, Node mainWindowNode) {
         super(parent);
 
         Node viewNode = new ViewNode (
                 UI.actions(DishOrderPreview.INCREASE_QUANTITY, increaseQuantity),
+                UI.actions(OrderView.CHANGE_DELIVERY_PAYMENT, manegePayment),
+                UI.actions(OrderView.CHANGE_DELIVERY_ADDRESS, manegeAddress),
+                UI.actions(PaymentMethodView.EDIT_PAYMENT, manegePayment),
+                UI.actions(CreditCardView.SET_CARD_TO_PAY, setCard),
+                UI.actions(EditPaymentView.UPDATE_PAYMENT_VIEW, updatePaymentView),
                 UI.actions(DishOrderPreview.DECREASE_QUANTITY, decreaseQuantity)
         );
 
         Form orderForm = new Form(restEntity.getText(Restaurant.name), new BorderLayout());
         orderForm.getToolbar().hideToolbar();
 
-        orderView = new OrderView(restEntity, profileEntity, viewNode);
+        orderView = new OrderView(restEntity, profileEntity, viewNode, mainWindowNode);
         orderForm.add(BorderLayout.CENTER, orderView);
         setView(orderForm);
 
@@ -81,5 +93,32 @@ public class OrderController extends FormController {
             }
             orderView.update();
         });
+
+        addActionListener(manegeAddress, evt -> {
+            evt.consume();
+            new EditAddressesController(this, (AccountModel)profileEntity).getView().show();
+        });
+
+        addActionListener(manegePayment, evt -> {
+            evt.consume();
+            new EditPaymentController(this, evt.getEntity(), profileEntity, viewNode).getView().show();
+        });
+
+        addActionListener(setCard, evt -> {
+            evt.consume();
+            Entity card = evt.getEntity();
+            orderView.setCreditCard(card);
+            getView().showBack();
+        });
+
+        addActionListener(updatePaymentView, evt -> {
+            evt.consume();
+            orderView.update();
+            getView().showBack();
+        });
+    }
+
+    public void updateOrderView(){
+        orderView.update();
     }
 }

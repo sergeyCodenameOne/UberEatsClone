@@ -28,19 +28,20 @@ import com.codename1.demos.ubereatsclone.Util;
 import com.codename1.demos.ubereatsclone.interfaces.DishAddOn;
 import com.codename1.rad.models.Entity;
 import com.codename1.rad.models.Property;
+import com.codename1.rad.models.PropertySelector;
 import com.codename1.rad.nodes.ActionNode;
 import com.codename1.rad.nodes.Node;
 import com.codename1.rad.ui.AbstractEntityView;
+import com.codename1.rad.ui.image.RoundRectImageRenderer;
 import com.codename1.ui.Button;
 import com.codename1.ui.EncodedImage;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
-import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
 
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
-public class DishAddOnView<T extends Entity> extends AbstractEntityView<T> {
+public class DishAddOnView extends AbstractEntityView {
 
     public static final ActionNode.Category ADD_ON_CLICKED = new ActionNode.Category();
 
@@ -49,9 +50,9 @@ public class DishAddOnView<T extends Entity> extends AbstractEntityView<T> {
     Button nameLabel;
     Label priceLabel;
 
-    private static EncodedImage placeHolder = EncodedImage.createFromImage(getGlobalResources().getImage("dish-placeholder.png"), false);//TODO change the placeHolder
+    private static EncodedImage placeHolder = EncodedImage.createFromImage(getGlobalResources().getImage("placeholder.png"), false);
 
-    public DishAddOnView(T entity, Node node) {
+    public DishAddOnView(Entity entity, Node node) {
         super(entity);
         viewNode = node;
         this.setUIID("DishAddOn");
@@ -62,13 +63,12 @@ public class DishAddOnView<T extends Entity> extends AbstractEntityView<T> {
         priceProp = entity.findProperty(DishAddOn.price);
         isSelectedProp = entity.findProperty(DishAddOn.isSelected);
 
-        Image addOnImage = entity.createImageToStorage(pictureUrlProp, placeHolder);
-        ScaleImageLabel addOnImageLabel = new ScaleImageLabel(addOnImage){
-            @Override
-            public Dimension getPreferredSize() {
-                return new Dimension(200, 200);
-            }
-        };
+
+        PropertySelector imagePropertySelector = new PropertySelector(entity, pictureUrlProp);
+        RoundRectImageRenderer renderer = new RoundRectImageRenderer(200, 200, 2);
+
+        Image addOnImage = renderer.createImage(imagePropertySelector);
+        ScaleImageLabel addOnImageLabel = new ScaleImageLabel(addOnImage);
 
         nameLabel = new Button(entity.getText(nameProp), "DishAddOnName");
         priceLabel = new Label(Util.getPriceAsString(entity.getDouble(priceProp)), "DishAddOnPrice");
