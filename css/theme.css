@@ -192,7 +192,7 @@ RestTab.pressed{
 
 MainWindowTabsContainer{
     border: none;
-    background-color: rgba(0,0,0,0);
+    background-color: white;
 /*    background-image: url("images/main-window-tabs-container-background.png");
     cn1-background-type: cn1-image-scaled;*/
     padding: 0;
