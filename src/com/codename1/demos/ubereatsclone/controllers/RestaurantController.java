@@ -67,7 +67,7 @@ public class RestaurantController extends FormController {
 
         addActionListener(showOrder, evt->{
             evt.consume();
-            new OrderController(this, restEntity, null).getView().show();
+            new OrderController(this, restEntity, account, mainWindowNode).getView().show();
         });
 
         addActionListener(addToCart, evt -> {

@@ -1,3 +1,26 @@
+/*
+ * Copyright (c) 2012, Codename One and/or its affiliates. All rights reserved.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation.  Codename One designates this
+ * particular file as subject to the "Classpath" exception as provided
+ * by Oracle in the LICENSE file that accompanied this code.
+ *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ *
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * Please contact Codename One through http://www.codenameone.com/ if you
+ * need additional information or have any questions.
+ */
+
 package com.codename1.demos.ubereatsclone.views;
 
 import com.codename1.components.ScaleImageButton;
@@ -8,9 +31,11 @@ import com.codename1.demos.ubereatsclone.interfaces.Restaurant;
 import com.codename1.demos.ubereatsclone.models.RestaurantModel;
 import com.codename1.rad.models.Entity;
 import com.codename1.rad.models.EntityList;
+import com.codename1.rad.models.PropertySelector;
 import com.codename1.rad.nodes.ActionNode;
 import com.codename1.rad.nodes.Node;
 import com.codename1.rad.ui.AbstractEntityView;
+import com.codename1.rad.ui.image.RoundRectImageRenderer;
 import com.codename1.ui.*;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
@@ -22,7 +47,7 @@ import static com.codename1.ui.util.Resources.getGlobalResources;
 
 public class FavoriteRestView extends AbstractEntityView {
 
-    private static EncodedImage placeHolder = EncodedImage.createFromImage(getGlobalResources().getImage("dish-placeholder.png"), false);
+    private static EncodedImage placeHolder = EncodedImage.createFromImage(getGlobalResources().getImage("placeholder.png"), false);
 
     public FavoriteRestView(RestaurantModel rest, Node viewNode) {
         super(rest);
@@ -62,9 +87,14 @@ public class FavoriteRestView extends AbstractEntityView {
             if (categories.get(0).get(FoodCategory.dishes) instanceof EntityList){
                 dishes = (EntityList) categories.get(0).get(FoodCategory.dishes);
 
-                firstDish = dishes.get(0).createImageToStorage(Dish.pictureUrl, placeHolder);
-                secondDish = dishes.get(1).createImageToStorage(Dish.pictureUrl, placeHolder);
-                thirdDish = dishes.get(2).createImageToStorage(Dish.pictureUrl, placeHolder);
+                PropertySelector firstImageSelect = new PropertySelector(dishes.get(0), Dish.pictureUrl);
+                PropertySelector secondImageSelect = new PropertySelector(dishes.get(1), Dish.pictureUrl);
+                PropertySelector thirdImageSelect = new PropertySelector(dishes.get(2), Dish.pictureUrl);
+                RoundRectImageRenderer renderer = new RoundRectImageRenderer(200, 200, 2);
+
+                firstDish = renderer.createImage(firstImageSelect);
+                secondDish = renderer.createImage(secondImageSelect);
+                thirdDish = renderer.createImage(thirdImageSelect);
 
                 ScaleImageLabel firstDishImageLabel = new ScaleImageLabel(firstDish);
                 ScaleImageLabel secondDishImageLabel = new ScaleImageLabel(secondDish);

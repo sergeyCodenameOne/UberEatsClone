@@ -34,9 +34,11 @@ import com.codename1.rad.controllers.FormController;
 import com.codename1.rad.models.Entity;
 import com.codename1.rad.models.EntityList;
 import com.codename1.rad.models.Property;
+import com.codename1.rad.models.PropertySelector;
 import com.codename1.rad.nodes.ActionNode;
 import com.codename1.rad.nodes.Node;
 import com.codename1.rad.ui.AbstractEntityView;
+import com.codename1.rad.ui.image.RoundRectImageRenderer;
 import com.codename1.ui.*;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
@@ -58,9 +60,7 @@ public class DishView extends AbstractEntityView{
 
     public static final ActionNode.Category ADD_TO_CART = new ActionNode.Category();
 
-    private static EncodedImage placeHolder = EncodedImage.createFromImage(getGlobalResources().getImage("dish-placeholder.png"), false).
-            scaledEncoded(400, 400);//TODO change the placeHolder
-
+    private static EncodedImage placeHolder = EncodedImage.createFromImage(getGlobalResources().getImage("placeholder.png"), false);
     public DishView(Entity entity, Node viewNode, Node addOnNode) {
         super(entity);
         setUIID("Dish");
@@ -73,19 +73,21 @@ public class DishView extends AbstractEntityView{
         priceProp = entity.findProperty(Dish.price);
         addOnsProp = entity.findProperty(Dish.addOns);
 
-
         Button backButton = new Button(FontImage.MATERIAL_KEYBOARD_ARROW_LEFT);
         backButton.setUIID("DishBackButton");
         backButton.addActionListener(evt -> {
             evt.consume();
             ActionSupport.dispatchEvent(new FormController.FormBackEvent(backButton));
         });
-        Label headerLabel = new Label("SET FILTER", "DishHeaderLabel");
+        Label headerLabel = new Label("ADD TO ORDER", "DishHeaderLabel");
         Container headerCnt = BorderLayout.centerAbsolute(headerLabel).add(BorderLayout.WEST, backButton);
         headerCnt.setUIID("DishHeaderCnt");
 
 
-        Image dishImage = entity.createImageToStorage(pictureUrlProp, placeHolder);
+        PropertySelector imagePropertySelector = new PropertySelector(entity, pictureUrlProp);
+        RoundRectImageRenderer renderer = new RoundRectImageRenderer(400, 400, 2);
+
+        Image dishImage = renderer.createImage(imagePropertySelector);
         ScaleImageLabel dishImageLabel= new ScaleImageLabel(dishImage);
         dishImageLabel.setUIID("DishImageLabel");
 

@@ -23,15 +23,15 @@
 
 package com.codename1.demos.ubereatsclone.controllers;
 
+import com.codename1.demos.ubereatsclone.interfaces.CompletedOrder;
 import com.codename1.demos.ubereatsclone.interfaces.MainWindow;
 import com.codename1.demos.ubereatsclone.models.AccountModel;
-import com.codename1.demos.ubereatsclone.views.HomeView;
-import com.codename1.demos.ubereatsclone.views.MainWindowView;
-import com.codename1.demos.ubereatsclone.views.ProfileView;
-import com.codename1.demos.ubereatsclone.views.RestaurantView;
+import com.codename1.demos.ubereatsclone.models.RestaurantModel;
+import com.codename1.demos.ubereatsclone.views.*;
 import com.codename1.rad.controllers.Controller;
 import com.codename1.rad.controllers.FormController;
 import com.codename1.rad.models.Entity;
+import com.codename1.rad.models.EntityList;
 import com.codename1.rad.nodes.ActionNode;
 import com.codename1.rad.nodes.Node;
 import com.codename1.rad.nodes.ViewNode;
@@ -59,14 +59,18 @@ public class MainWindowController extends FormController {
     public static final ActionNode addFavorite = UI.action();
     public static final ActionNode removeFavorite = UI.action();
 
-    public MainWindowController(Controller parent, Entity appEntity) {
+    public static final ActionNode addCompletedOrder = UI.action();
+    public static final ActionNode orderAgain = UI.action();
+
+
+    public MainWindowController(Controller parent, Entity appEntity, Node appNode) {
         super(parent);
         Form mainWindowForm = new Form(new BorderLayout());
         mainWindowForm.getToolbar().hideToolbar();
         Node profileNode = createProfileNode();
         Node homeNode = createHomeNode();
 
-        mainWindowView = new MainWindowView(appEntity, profileNode, homeNode);
+        mainWindowView = new MainWindowView(appEntity, profileNode, homeNode, appNode);
         mainWindowForm.add(BorderLayout.CENTER, mainWindowView);
 
         setView(mainWindowForm);
@@ -121,6 +125,34 @@ public class MainWindowController extends FormController {
             }
             mainWindowView.removeFavorite(evt.getEntity());
         });
+
+        addActionListener(addCompletedOrder, evt -> {
+            evt.consume();
+            Entity completedOrder = evt.getEntity();
+            Entity rest = completedOrder.getEntity(CompletedOrder.restaurant);
+            if (rest instanceof RestaurantModel){
+                ((RestaurantModel) rest).clearOrder();
+            }
+            mainWindowView.addCompletedOrder(completedOrder);
+            mainWindowView.moveToOrders();
+            this.getView().showBack();
+        });
+
+        addActionListener(orderAgain, evt -> {
+            evt.consume();
+            Entity completedOrder = evt.getEntity();
+            RestaurantModel rest = (RestaurantModel) completedOrder.getEntity(CompletedOrder.restaurant);
+            if (completedOrder.get(CompletedOrder.order) instanceof EntityList){
+                EntityList<Entity> dishesList = (EntityList<Entity>) completedOrder.get(CompletedOrder.order);
+                for (Entity dish : dishesList){
+                    rest.addToOrder(dish);
+                }
+            }
+            new RestaurantController(this, rest, appEntity.getEntity(MainWindow.profile), homeNode).getView().show();
+
+        });
+
+
     }
 
     private Node createProfileNode(){
@@ -141,9 +173,16 @@ public class MainWindowController extends FormController {
                 UI.actions(HomeView.ENTER_FILTER, enterFilter),
                 UI.actions(HomeView.ENTER_SEARCH, enterSearch),
                 UI.actions(RestaurantView.ADD_TO_FAVORITE, addFavorite),
-                UI.actions(RestaurantView.REMOVE_FAVORITE, removeFavorite)
+                UI.actions(RestaurantView.REMOVE_FAVORITE, removeFavorite),
+                UI.actions(OrderView.COMPLETE_ORDER, addCompletedOrder),
+                UI.actions(CompletedOrderView.ORDER_AGAIN, orderAgain)
+
         );
     }
 
+    public void updateDefaultAddressView(){
+        System.out.println("reached");
+        mainWindowView.updateDefaultAddressView();
+    }
 
 }

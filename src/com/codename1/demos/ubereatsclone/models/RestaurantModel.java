@@ -28,12 +28,14 @@ import com.codename1.demos.ubereatsclone.interfaces.Restaurant;
 import com.codename1.rad.models.*;
 
 import java.util.List;
+import java.util.Random;
 
 public class RestaurantModel extends Entity{
     public static StringProperty name;
     public static StringProperty pictureUrl;
+    public static StringProperty iconUrl;
     public static StringProperty category;
-    public static StringProperty coordinates;
+    public static IntProperty distance;
     public static DoubleProperty rating;
     public static DoubleProperty deliveryFee;
     public static IntProperty estimatedDeliveryTime;
@@ -46,11 +48,12 @@ public class RestaurantModel extends Entity{
     private static final EntityType TYPE = new EntityType() {{
         name = string(tags(Restaurant.name));
         pictureUrl = string(tags(Restaurant.picture));
+        iconUrl = string(tags(Restaurant.icon));
         category = string(tags(Restaurant.category));
         rating = Double(tags(Restaurant.rating));
         estimatedDeliveryTime = Integer(tags(Restaurant.estimatedDeliveryTime));
         deliveryFee = Double(tags(Restaurant.deliveryFee));
-        coordinates = string(tags(Restaurant.coordinates));
+        distance = Integer(tags(Restaurant.distance));
         menu = list(RestaurantMenu.class, tags(Restaurant.menu));
         order = list(RestaurantOrder.class, tags(Restaurant.order));
     }};
@@ -59,7 +62,7 @@ public class RestaurantModel extends Entity{
         setEntityType(TYPE);
     }
 
-    public RestaurantModel(String name, String pictureUrl, String category, double rating, double deliveryFee, int estimatedDeliveryTime, List<Entity> menu) {
+    public RestaurantModel(String name, String pictureUrl, String category, double rating, double deliveryFee, String icon, int estimatedDeliveryTime, List<Entity> menu) {
         set(this.name, name);
         set(this.pictureUrl, pictureUrl);
         set(this.category, category);
@@ -67,6 +70,15 @@ public class RestaurantModel extends Entity{
         set(this.order, new RestaurantOrder());
         set(this.estimatedDeliveryTime, estimatedDeliveryTime);
         set(this.deliveryFee, deliveryFee);
+        set(this.iconUrl, icon);
+
+        Random random = new Random();
+        int randomDistance = random.nextInt();
+        if (randomDistance < 0){
+            randomDistance = randomDistance * (-1);
+        }
+        randomDistance = randomDistance % 20;
+        set(this.distance, randomDistance);
         RestaurantMenu categories = new RestaurantMenu();
         for (Entity menuCategory : menu){
             categories.add(menuCategory);
@@ -107,12 +119,14 @@ public class RestaurantModel extends Entity{
             for(Entity category : categories){
                 if(category.get(FoodCategory.dishes) instanceof EntityList){
                     EntityList<Entity> dishes = (EntityList<Entity>) category.get(FoodCategory.dishes);
-                    for (Entity dish : dishes){
-                        totalDishes++;
-                    }
+                    totalDishes += dishes.size();
                 }
             }
         }
         return totalDishes;
+    }
+
+    public void clearOrder(){
+        ((RestaurantOrder)get(Restaurant.order)).clear();
     }
 }

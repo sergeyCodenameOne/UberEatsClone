@@ -29,13 +29,14 @@ import com.codename1.demos.ubereatsclone.Util;
 import com.codename1.demos.ubereatsclone.interfaces.Dish;
 import com.codename1.rad.models.Entity;
 import com.codename1.rad.models.Property;
+import com.codename1.rad.models.PropertySelector;
 import com.codename1.rad.nodes.ActionNode;
 import com.codename1.rad.nodes.Node;
 import com.codename1.rad.ui.AbstractEntityView;
+import com.codename1.rad.ui.image.RoundRectImageRenderer;
 import com.codename1.ui.Button;
 import com.codename1.ui.EncodedImage;
 import com.codename1.ui.Image;
-import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
 
 import static com.codename1.ui.ComponentSelector.$;
@@ -48,7 +49,7 @@ public class DishPreview<T extends Entity> extends AbstractEntityView<T> {
 
     public static final ActionNode.Category DISH_CLICKED = new ActionNode.Category();
 
-    private static EncodedImage placeHolder = EncodedImage.createFromImage(getGlobalResources().getImage("dish-placeholder.png"), false);//TODO change the placeHolder
+    private static EncodedImage placeHolder = EncodedImage.createFromImage(getGlobalResources().getImage("placeholder.png"), false);
 
     public DishPreview(T entity, Node viewNode) {
         super(entity);
@@ -61,13 +62,12 @@ public class DishPreview<T extends Entity> extends AbstractEntityView<T> {
         pictureUrlProp = entity.findProperty(Dish.pictureUrl);
         priceProp = entity.findProperty(Dish.price);
 
-        Image dishImage = entity.createImageToStorage(pictureUrlProp, placeHolder);
-        ScaleImageLabel dishImageLabel = new ScaleImageLabel(dishImage){
-            @Override
-            public Dimension getPreferredSize() {
-                return new Dimension(300, 300);
-            }
-        };
+
+        PropertySelector imagePropertySelector = new PropertySelector(entity, pictureUrlProp);
+        RoundRectImageRenderer renderer = new RoundRectImageRenderer(300, 300, 2);
+
+        Image dishImage = renderer.createImage(imagePropertySelector);
+        ScaleImageLabel dishImageLabel = new ScaleImageLabel(dishImage);
 
         Button lead = new Button();
         lead.setVisible(false);
