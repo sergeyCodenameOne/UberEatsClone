@@ -1,9 +1,34 @@
+/*
+ * Copyright (c) 2012, Codename One and/or its affiliates. All rights reserved.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation.  Codename One designates this
+ * particular file as subject to the "Classpath" exception as provided
+ * by Oracle in the LICENSE file that accompanied this code.
+ *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ *
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * Please contact Codename One through http://www.codenameone.com/ if you
+ * need additional information or have any questions.
+ */
+
 package com.codename1.demos.ubereatsclone.views;
 
 import com.codename1.components.ScaleImageLabel;
+import com.codename1.demos.ubereatsclone.interfaces.Address;
 import com.codename1.demos.ubereatsclone.interfaces.Filter;
 import com.codename1.demos.ubereatsclone.interfaces.MainWindow;
 import com.codename1.demos.ubereatsclone.interfaces.Restaurant;
+import com.codename1.demos.ubereatsclone.models.AccountModel;
 import com.codename1.demos.ubereatsclone.models.FilterModel;
 import com.codename1.rad.models.Entity;
 import com.codename1.rad.models.EntityList;
@@ -28,6 +53,8 @@ public class HomeView extends AbstractEntityView {
     Node viewNode;
     Property restaurantsProp, accountProp, filterProp;
     Entity appEntity;
+    Container deliverToCnt;
+    Label deliverToLabel;
 
     public static final ActionNode.Category POPULAR_EXPLORE = new ActionNode.Category();
     public static final ActionNode.Category RECOMMENDED_EXPLORE = new ActionNode.Category();
@@ -42,6 +69,7 @@ public class HomeView extends AbstractEntityView {
         setUIID("HomeView");
         setLayout(new BoxLayout(BoxLayout.Y_AXIS));
         setScrollableY(true);
+        setScrollVisible(false);
 
         restaurantsProp = appEntity.findProperty(MainWindow.restaurants);
         accountProp = appEntity.findProperty(MainWindow.profile);
@@ -55,13 +83,17 @@ public class HomeView extends AbstractEntityView {
         };
         topViewImage.setUIID("HomeTopViewImage");
         Image homeTopViewImage;
+        String welcomeText;
         int currHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         if (currHour >= 0 && currHour <= 12){
             homeTopViewImage = getGlobalResources().getImage("morning.png");
+            welcomeText = "Good Morning";
         }else if(currHour < 18){
             homeTopViewImage = getGlobalResources().getImage("afternoon.png");
+            welcomeText = "Good Afternoon";
         }else{
             homeTopViewImage = getGlobalResources().getImage("evening.png");
+            welcomeText = "Good Evening";
         }
         ScaleImageLabel topViewLabel = new ScaleImageLabel(homeTopViewImage){
             @Override
@@ -81,7 +113,6 @@ public class HomeView extends AbstractEntityView {
             }
         };
         emptyGreyContainer.setUIID("EmptyGreyContainer");
-
 
         Container topView = new Container(new LayeredLayout());
         topView.add(BoxLayout.encloseY(topViewImage, emptyGreyContainer));
@@ -130,6 +161,24 @@ public class HomeView extends AbstractEntityView {
         searchCnt.setUIID("HomeSearchCnt");
         topViewLabelsLayer.add(BorderLayout.SOUTH, searchCnt);
         topView.add(topViewLabelsLayer);
+
+        AccountModel accountModel = (AccountModel) appEntity.getEntity(accountProp);
+        deliverToLabel = new Label("", "HomeDeliverToLabel");
+        deliverToCnt = BoxLayout.encloseY(new Button("DELIVER TO", "HomeDeliverToHeaderButton"), deliverToLabel);
+        deliverToCnt.setUIID("HomeDeliverToCnt");
+        deliverToCnt.setVisible(false);
+        Entity defaultAddress = accountModel.getDefaultAddress();
+        if (defaultAddress != null){
+            String city = defaultAddress.getText(Address.city);
+            String street = defaultAddress.getText(Address.street);
+            deliverToLabel.setText(city + ", " + street);
+            deliverToCnt.setVisible(true);
+        }
+
+        Container topViewLabelsCnt = BorderLayout.north(BoxLayout.encloseY(deliverToCnt, new Label(welcomeText, "HomeWelcomeTextFirstLine"),
+                new Label("Codename One!", "HomeWelcomeTextSecondLine")));
+
+        topView.add(topViewLabelsCnt);
         add(topView);
 
         Container categoryRiceButton = createCategoryButton("Rice", "rice-icon.png", evt -> {
@@ -204,7 +253,6 @@ public class HomeView extends AbstractEntityView {
             }
         });
 
-
         Container categoryContainer = new Container(new GridLayout(2, 4));
         categoryContainer.setUIID("CategoryContainer");
         categoryContainer.addAll(categoryRiceButton,
@@ -244,8 +292,8 @@ public class HomeView extends AbstractEntityView {
             if (action != null) {
                 action.fireEvent(appEntity, HomeView.this);
             }
-
         });
+
         recommendCnt.add(BorderLayout.NORTH, BorderLayout.centerEastWest(null, recommendedExploreButton, recommendedLabel));
         recommendCnt.add(BorderLayout.CENTER, createRecommendedCnt(appEntity.getEntityList(restaurantsProp)));
         add(recommendCnt);
@@ -267,7 +315,14 @@ public class HomeView extends AbstractEntityView {
 
     @Override
     public void update() {
-
+        AccountModel account = (AccountModel) getEntity().getEntity(MainWindow.profile);
+        Entity defaultAddress = account.getDefaultAddress();
+        if(defaultAddress != null){
+            String city = defaultAddress.getText(Address.city);
+            String street = defaultAddress.getText(Address.street);
+            deliverToLabel.setText(city + ", " + street);
+            deliverToCnt.setVisible(true);
+        }
     }
 
     @Override

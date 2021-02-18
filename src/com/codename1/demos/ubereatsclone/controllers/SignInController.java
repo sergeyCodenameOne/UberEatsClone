@@ -35,6 +35,7 @@ public class SignInController extends FormController {
     public SignInController(Controller parent, Entity account, Node applicationControllerViewNode, Node accountViewNode) {
         super(parent);
         Form signInForm = new Form(new BorderLayout());
+        signInForm.setFormBottomPaddingEditingMode(true);
         signInForm.getToolbar().hideToolbar();
         signInForm.add(BorderLayout.CENTER, new SignInView(account, applicationControllerViewNode, accountViewNode));
 

@@ -1,3 +1,26 @@
+/*
+ * Copyright (c) 2012, Codename One and/or its affiliates. All rights reserved.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation.  Codename One designates this
+ * particular file as subject to the "Classpath" exception as provided
+ * by Oracle in the LICENSE file that accompanied this code.
+ *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ *
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * Please contact Codename One through http://www.codenameone.com/ if you
+ * need additional information or have any questions.
+ */
+
 package com.codename1.demos.ubereatsclone.views;
 
 import com.codename1.demos.ubereatsclone.models.CreditCardModel;
@@ -23,7 +46,9 @@ public class AddCreditCardView extends AbstractEntityView {
     public AddCreditCardView(Entity entity, Node viewNode) {
         super(entity);
         this.viewNode = viewNode;
-        setLayout(new BorderLayout());
+        Container wrapper = new Container(new BorderLayout());
+        setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+        setScrollableY(true);
         setUIID("AddCreditCardView");
 
         Button backButton = new Button(FontImage.MATERIAL_KEYBOARD_ARROW_LEFT);
@@ -36,7 +61,7 @@ public class AddCreditCardView extends AbstractEntityView {
         Label headerLabel = new Label("EDIT ADDRESS", "NewCreditCardHeaderLabel");
         Container headerCnt = BorderLayout.center(headerLabel).add(BorderLayout.WEST, backButton);
         headerCnt.setUIID("NewCreditCardHeaderCnt");
-        add(BorderLayout.NORTH, headerCnt);
+        wrapper.add(BorderLayout.NORTH, headerCnt);
 
         TextField name = new TextField("", "", 20, TextArea.ANY);
         name.setUIID("NewCardField");
@@ -144,7 +169,7 @@ public class AddCreditCardView extends AbstractEntityView {
         validator.addConstraint(num2, creditCardFieldConstraint);
         validator.addConstraint(num3, creditCardFieldConstraint);
         validator.addConstraint(num4, creditCardFieldConstraint);
-        add(BorderLayout.CENTER, BoxLayout.encloseY(
+        wrapper.add(BorderLayout.CENTER, BoxLayout.encloseY(
                 new Label("Cardholder Name", "AddNewCardExplanation"),
                 name,
                 new Label("Credit Card Number", "AddNewCardExplanation"),
@@ -165,8 +190,10 @@ public class AddCreditCardView extends AbstractEntityView {
             }
         });
 
-        add(BorderLayout.SOUTH, saveCard);
+        wrapper.add(BorderLayout.SOUTH, saveCard);
+        add(wrapper);
     }
+
 
     @Override
     public void update() {

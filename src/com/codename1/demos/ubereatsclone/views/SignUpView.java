@@ -44,15 +44,17 @@ public class SignUpView<T extends Entity> extends AbstractEntityView<T> {
 
     public SignUpView(T entity, Node applicationControllerViewNode, Node accountViewNode) {
         super(entity);
-        setLayout(new BorderLayout());
+        setLayout(new BoxLayout(BoxLayout.Y_AXIS));
         setUIID("SignUpCnt");
+        setScrollableY(true);
+        Container wrapper = new Container(new BorderLayout());
 
         Label signUpHeader = new Label("Create An Account", "SignUpHeader");
         Image grubLogo = getGlobalResources().getImage("grub-logo.png");
         ScaleImageLabel logoLabel = new ScaleImageLabel(grubLogo);
         Container signUpTopView = BoxLayout.encloseY(logoLabel, signUpHeader);
         signUpTopView.setUIID("SignUpTopView");
-        add(BorderLayout.NORTH, signUpTopView);
+        wrapper.add(BorderLayout.NORTH, signUpTopView);
 
 
         TextField firstName = new TextField("", "First Name", 20, TextArea.ANY);
@@ -74,7 +76,7 @@ public class SignUpView<T extends Entity> extends AbstractEntityView<T> {
         TextField phoneNumber = new TextField("", "Mobile Number", 20, TextArea.PHONENUMBER);
         phoneNumber.setUIID("SignUpField");
         phoneNumber.getHintLabel().setUIID("SignUpFieldHint");
-        add(BorderLayout.CENTER, BoxLayout.encloseY(firstName, lastName, emailAddress, password, phoneNumber));
+        wrapper.add(BorderLayout.CENTER, BoxLayout.encloseY(firstName, lastName, emailAddress, password, phoneNumber));
 
         Validator validator = new Validator();
         validator.addConstraint(firstName, new LengthConstraint(1));
@@ -127,9 +129,10 @@ public class SignUpView<T extends Entity> extends AbstractEntityView<T> {
                 continueWith,
                 FlowLayout.encloseCenter(faceBookIconButton, googleIconButton, appleIconButton),
                 forgotPassword);
-        signUpOptionsCnt.setUIID("SignOptionsCnt");
+        signUpOptionsCnt.setUIID("SignUpOptionsCnt");
 
-        add(BorderLayout.SOUTH, signUpOptionsCnt);
+        wrapper.add(BorderLayout.SOUTH, signUpOptionsCnt);
+        add(wrapper);
     }
 
     @Override

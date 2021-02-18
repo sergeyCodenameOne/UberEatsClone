@@ -29,13 +29,14 @@ public interface Restaurant {
     Tag name = new Tag("name");
     Tag description= new Tag("description");
     Tag picture = new Tag("picture");
+    Tag icon = new Tag("icon");
     Tag category = new Tag("category");
     Tag rating = new Tag("rating");
     Tag menu = new Tag("menu");
     Tag order = new Tag("order");
     Tag estimatedDeliveryTime = new Tag("estimatedDeliveryTime");
     Tag deliveryFee = new Tag("deliveryFee");
-    Tag coordinates = new Tag("coordinates");
+    Tag distance = new Tag("distance");
 
     public static final int CATEGORY_RICE = 0;
     public static final int CATEGORY_PIZZA = 1;

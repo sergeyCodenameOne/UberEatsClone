@@ -1,12 +1,47 @@
+/*
+ * Copyright (c) 2012, Codename One and/or its affiliates. All rights reserved.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation.  Codename One designates this
+ * particular file as subject to the "Classpath" exception as provided
+ * by Oracle in the LICENSE file that accompanied this code.
+ *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ *
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * Please contact Codename One through http://www.codenameone.com/ if you
+ * need additional information or have any questions.
+ */
+
 #Constants {
     includeNativeBool: true;
 }
 
 Images{
-    background-image:   url(images/dish-placeholder.png),
-                        url(images/rest.jpg),
+    background-image:   url(images/placeholder.png),
                         url(images/credit-card.png),
-                        url(images/round-rectangle.png),
+                        url(images/half-round-rectangle.png),
+                        url(images/ticket-icon.png),
+                        url(images/map-pin-icon.png),
+                        url(images/wallet-icon.png),
+
+                        url(images/apple-icon2.png),
+                        url(images/credit-card-icon.png),
+                        url(images/paypal-icon.png),
+                        url(images/cash-icon.png),
+                        url(images/account-place-holder.png),
+
+                        url(images/first-intro-image.png),
+                        url(images/second-intro-image.png),
+                        url(images/third-intro-image.png),
 
                         url(images/category-icons/rice-icon.png),
                         url(images/category-icons/pizza-icon.png),
@@ -43,6 +78,7 @@ Images{
                         url(images/filter-button.png),
                         url(images/delivery-time-icon.png),
                         url(images/rating-icon.png),
+                        url(images/distance-icon.png),
                         url(images/lobby-background.png);
     cn1-source-dpi: 0;
 }
@@ -156,8 +192,9 @@ RestTab.pressed{
 
 MainWindowTabsContainer{
     border: none;
-    background-image: url("images/main-window-tabs-container-background.png");
-    cn1-background-type: cn1-image-scaled;
+    background-color: rgba(0,0,0,0);
+/*    background-image: url("images/main-window-tabs-container-background.png");
+    cn1-background-type: cn1-image-scaled;*/
     padding: 0;
     margin: 0;
 }
@@ -598,6 +635,9 @@ AccountTopView{
 }
 
 SignUpCnt{
+    background-image:   url(images/register-background.png);
+    cn1-background-type: cn1-image-scaled;
+    cn1-source-dpi: 480;
     background-color: white;
     margin: 0;
     padding: 0;
@@ -666,6 +706,12 @@ SignUpLabel{
 
 SignOptionsCnt{
     padding: 0 0 2mm 0;
+    margin: 30mm 0 0 0;
+}
+
+SignUpOptionsCnt{
+    padding: 0 0 2mm 0;
+    margin: 0;
 }
 
 SignInLabel{
@@ -704,6 +750,9 @@ GoToSighUpButton.pressed{
 }
 
 SignInCnt{
+    background-image:   url(images/sign-in-background.png);
+    cn1-background-type: cn1-image-scaled;
+    cn1-source-dpi: 480;
     background-color: white;
     margin: 0;
     padding: 0;
@@ -1278,6 +1327,7 @@ RestaurantPreview{
 
 RestPreviewNameLabel{
     color: white;
+    text-align: center;
     font-family: "native:MainBold";
     font-size: 4mm;
     margin: 0;
@@ -1286,6 +1336,7 @@ RestPreviewNameLabel{
 
 RestPreviewCategoryLabel{
     color: white;
+    text-align: center;
     font-family: "native:MainRegular";
     font-size: 3mm;
     margin: 0;
@@ -1311,12 +1362,23 @@ RestPreviewRating{
     padding: 2mm;
 }
 
+RestPreviewDistance{
+    color: #989898;
+    font-family: "native:MainRegular";
+    font-size: 2mm;
+    padding: 2mm;
+}
+
 ExploreButton{
     color: #7AC943;
     font-family: "native:MainBold";
     font-size: 2.5mm;
     padding: 2mm;
     margin: 0;
+}
+
+ExploreButton.pressed{
+    color: #9bdf6c;
 }
 
 CategoryHeader{
@@ -1550,7 +1612,8 @@ CreditCardNumber{
 AddNewCardExplanation{
     color: black;
     font-family: "native:MainBold";
-    font-size: 4mm;
+    font-size: 3mm;
+    padding: 0 2mm 0 2mm;
 }
 
 CreditCardExpirationDate{
@@ -1575,6 +1638,7 @@ RestBackButton{
 
 RestTabContainer{
     background-color: #EFF0F0;
+    margin: 0;
 }
 
 AddDishBackButton{
@@ -1705,4 +1769,470 @@ DishesCountImage{
 ToggleButton{
     background-color: rgba(0,0,0,0);
     border: none;
+}
+
+MyOrdersHeaderLabel{
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    padding: 0;
+    margin: 0;
+}
+
+MyOrdersHeaderCnt{
+    background-color: white;
+    border-radius: 2mm;
+    padding: 2mm;
+    margin: 3mm 0 2mm 0;
+}
+
+MainWindowOrdersView{
+    margin: 0;
+    padding: 0;
+    background-color: #EFF0F0;
+}
+
+CompletedOrderView{
+    padding: 2mm 2mm 0 2mm;
+    margin: 1mm 0 1mm 0;
+    background-color: white;
+    border-radius: 2mm;
+}
+
+CompletedOrdersCnt{
+    padding: 2mm 0 2mm 0;
+    margin: 0;
+    background-color: rgba(0,0,0,0);
+}
+
+
+CompletedOrderRestName{
+    padding: 2mm 0 0 2mm;
+    margin:0;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    color: black;
+}
+
+CompletedOrderIdLabel{
+    padding: 1mm 0 0 2mm;
+    margin:0;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    color: #989898;
+
+}
+
+CompletedOrderDeliveredToHeaderLabel{
+    margin: 2mm 2mm 0 0;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    color: black;
+
+}
+
+CompletedOrderDeliveredToLabel{
+    margin: 0mm 1mm 1mm 1mm;
+    padding: 0;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    color: #989898;
+
+}
+
+CompletedOrderDateHeaderLabel{
+    margin: 3mm 1mm 0 1mm;
+    padding: 0;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    color: black;
+
+}
+
+CompletedOrderDateLabel{
+    margin: 1mm 1mm 1mm 1mm;
+    padding: 0;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    color: #989898;
+
+}
+
+CompletedOrderOrderAgainButton{
+    border-top: 0.3mm solid #EFF0F0;
+    border-right: 0.3mm solid #EFF0F0;
+    padding: 2mm;
+    margin-top: 1mm;
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    color: #7AC943;
+}
+
+CompletedOrderOrderAgainButton.pressed{
+    color: black;
+
+}
+
+CompletedOrderRateButton{
+    border-top: 0.3mm solid #EFF0F0;
+    text-align: center;
+    padding: 2mm;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    color: #989898;
+    margin-top: 1mm;
+}
+
+CompletedOrderIcon{
+    font-size: 4mm;
+    color: #7AC943;
+}
+
+ShadowContainer{
+    padding: 0;
+    margin: 0;
+    background-image:   url(images/top-shade.png);
+    cn1-background-type: cn1-image-scaled;
+    cn1-source-dpi: 480;
+}
+
+OrdersTabsContainer{
+    background-color: rgba(0,0,0,0);
+    margin: 0;
+    padding: 1mm;
+}
+
+OrdersTab{
+    text-align: center;
+    color: #989898;
+    border-bottom: 0.3mm solid #DBDFDF;
+    background-color: rgba(0,0,0,0);
+}
+
+OrdersTab.pressed{
+    color: black;
+    border-bottom: 0.3mm solid #7AC943;
+}
+
+BottomShadowContainer{
+        border: none;
+        padding: 0;
+        margin: 0;
+        background-image:   url(images/bottom-shade.png);
+        cn1-background-type: cn1-image-scaled;
+        cn1-source-dpi: 480;
+}
+
+HomeWelcomeTextFirstLine{
+    text-align: center;
+    padding: 0;
+    font-family: "native:MainRegular";
+    font-size: 4mm;
+    color: white;
+}
+
+HomeWelcomeTextSecondLine{
+    text-align: center;
+    padding: 0;
+    font-family: "native:MainBold";
+    font-size: 5mm;
+    color: white;
+}
+
+IntroductionView{
+    background-color: white;
+    padding: 4mm;
+    margin: 0;
+}
+
+IntroductionNextButton{
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    color: white;
+    border-radius: 4mm;
+    background-color: #7AC943;
+    padding: 2mm;
+    margin: 0 3mm 0 3mm;
+    text-align: center;
+}
+
+IntroductionNextButton.pressed{
+    background-color: #a0df74;
+}
+
+IntroductionHeader{
+    margin: 3mm;
+    padding: 2mm;
+    font-family: "native:MainBold";
+    font-size: 4mm;
+    color: black;
+    text-align: center;
+}
+
+IntroImage{
+    margin: 4mm 0 5mm 0;
+    padding: 0;
+}
+
+IntroEmptyLabelOn{
+    font-size: 4mm;
+    padding: 2mm;
+    margin: 1mm;
+    border-top: 0.7mm solid #7AC943;
+}
+
+IntroEmptyLabelOff{
+    font-size: 4mm;
+    padding: 2mm;
+    margin: 1mm;
+    border-top: 0.7mm solid #DBDFDF;
+}
+
+SetFirstLocationView{
+    background-image: url(images/set-first-location-background.png);
+    cn1-source-dpi: 0;
+    cn1-background-type: cn1-image-scaled;
+    margin: 0;
+    padding: 0;
+}
+
+SetFirstLocationWrapperView{
+    background-color: white;
+    padding: 2mm;;
+    margin: 3mm;
+    border-radius: 2mm;
+}
+
+
+SetFirstAddressHeader{
+    font-family: "native:MainBold";
+    font-size: 4mm;
+    color: black;
+    text-align: center;
+    padding: 2mm;
+}
+
+SetFirstLocationTextField{
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    color: black;
+    padding: 1mm;
+    border: 0.3mm solid #DBDFDF;
+    border-radius: 2mm;
+    margin: 1mm;
+}
+
+SetFirstLocationTextFieldHint{
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    color: #989898;
+    padding: 1mm;
+}
+
+SetFirstAddressNextButton{
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    padding: 2mm;
+    margin: 1mm;
+    border-radius: 4mm;
+    color: white;
+    background-color: #7AC943;
+    text-align: center;
+}
+
+SetFirstAddressNextButton.pressed{
+    background-color: #9bdf6c;
+}
+
+SetFirstAddressSkipButton{
+    padding: 2mm;
+    font-family: "native:MainRegular";
+    font-size: 2.5mm;
+    background-color: rgba(0,0,0,0);
+    text-align: center;
+    color: #989898;
+}
+
+
+SetFirstAddressSkipButton.pressed{
+    color: black;
+}
+
+IntroductionSkipButton{
+    color: #989898;
+    padding: 2mm;
+    background-color: rgba(0,0,0,0);
+    font-family: "native:MainBold";
+    font-size: 2.5mm;
+    text-align: center;
+}
+
+IntroductionSkipButton.pressed{
+    color: black;
+}
+
+HomeDeliverToCnt{
+    background-color: white;
+    border-radius: 2mm;
+    margin: 3mm;
+    padding: 2mm;
+}
+
+HomeDeliverToHeaderButton{
+    background-color: rgba(0,0,0,0);
+    color: black;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    padding: 1mm;
+    text-align: center;
+}
+
+HomeDeliverToLabel{
+    background-color: rgba(0,0,0,0);
+    color: #989898;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    padding: 0;
+    text-align: center;
+}
+
+AddPromoCodeButton{
+    background-color: white;
+    border-radius: 2mm;
+    font-size: 3mm;
+    padding: 1mm;
+}
+
+GoToIcon{
+    font-size: 3mm;
+    color: #989898;
+}
+
+AddPromoCodeButtonText{
+    color: black;
+    font-size: 2.8mm;
+    font-family: "native:MainBold";
+}
+
+ManageAddressButton{
+    margin-top: 2mm;
+    background-color: white;
+    border-radius: 2mm;
+    font-size: 3mm;
+    padding: 1mm;
+}
+
+ManageAddressButtonLine1{
+    padding: 1mm;
+    color: black;
+    font-size: 2.8mm;
+    font-family: "native:MainBold";
+}
+
+ManageAddressButtonLine2{
+    padding: 1mm;
+    color: black;
+    font-size: 2.8mm;
+    font-family: "native:MainRegular";
+}
+
+EditPaymentBackButton{
+    color: #989898;
+    font-size: 3mm;
+    padding: 0;
+    margin: 0;
+}
+
+EditPaymentHeaderLabel{
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    margin: 0;
+    padding: 0;
+}
+
+EditPaymentHeaderCnt{
+    background-color: white;
+    border-radius: 2mm;
+    padding: 2mm;
+    margin: 3mm 0 2mm 0;
+}
+
+PaymentMethodView{
+     margin-top: 2mm;
+    background-color: white;
+    border-radius: 2mm;
+    font-size: 3mm;
+    padding: 1mm;
+}
+
+PaymentMethodViewHeader{
+    padding: 1mm;
+    color: black;
+    font-size: 2.8mm;
+    font-family: "native:MainBold";
+}
+
+PaymentMethodViewText{
+    padding: 1mm;
+    color: black;
+    font-size: 2.8mm;
+    font-family: "native:MainRegular";
+}
+
+EditPaymentView{
+    background-color: #EFF0F0;
+    padding: 2mm;
+    margin: 0;
+}
+
+SavedCardsHeader{
+    margin: 0;
+    padding: 1mm;
+    color: black;
+    font-size: 4mm;
+    font-family: "native:MainBold";
+    text-align: center;
+}
+
+ChangePaymentMethodActionButton{
+    background-color: white;
+    border-radius: 2mm;
+    padding: 2mm;
+    margin: 2mm;
+}
+
+ChangePaymentMethodActionButton.pressed{
+    background-color: #DBDFDF;
+}
+
+ChangePaymentMethodActionButtonText{
+    color: black;
+    font-size: 2.5mm;
+    font-family: "native:MainRegular";
+    text-align: center;
+}
+
+AnotherMethodHeader{
+    color: black;
+    font-size: 3mm;
+    font-family: "native:MainBold";
+    text-align: center;
+}
+
+DeliveryInfoCnt{
+    padding: 0;
+    margin: 2mm;
+    background-image:   url(images/delivery-info.png);
+    cn1-source-dpi: 480;
+    cn1-background-type: cn1-image-scaled;
+}
+
+CreditCard{
+    padding: 2mm;
+    margin: 0;
+    background-image:   url(images/credit-card.png);
+    cn1-background-type: cn1-image-scaled;
+    cn1-source-dpi: 480;
 }

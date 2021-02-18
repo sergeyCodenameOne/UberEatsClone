@@ -38,7 +38,6 @@ public class Util {
             priceString = priceString.substring(0, priceString.indexOf('.') + 2);
         }
         return priceString + "0 " + L10NManager.getInstance().getCurrencySymbol();
-//        return String.format("%.2f", price) + " " + L10NManager.getInstance().getCurrencySymbol();
     }
 
     public static Object createRoundMask(int size){
@@ -55,9 +54,14 @@ public class Util {
     public static Object createRoundRectangleMask(int width, int height){
         if (roundRectImage == null){
             roundRectImage = getGlobalResources().getImage("round-rectangle.png");
-            if (roundRectImage == null){
-                System.out.println("fail");
-            }
+        }
+
+        return roundRectImage.scaled(width, height).createMask();
+    }
+
+    public static Object createHalfRoundRectangleMask(int width, int height){
+        if (roundRectImage == null){
+            roundRectImage = getGlobalResources().getImage("half-round-rectangle.png");
         }
 
         return roundRectImage.scaled(width, height).createMask();

@@ -23,12 +23,10 @@
 
 package com.codename1.demos.ubereatsclone;
 
-
-import com.codename1.demos.ubereatsclone.controllers.AccountController;
-import com.codename1.demos.ubereatsclone.controllers.MainWindowController;
+import com.codename1.demos.ubereatsclone.controllers.*;
 import com.codename1.demos.ubereatsclone.interfaces.Account;
 import com.codename1.demos.ubereatsclone.models.*;
-import com.codename1.demos.ubereatsclone.views.SignInView;
+import com.codename1.demos.ubereatsclone.views.*;
 import com.codename1.rad.controllers.ApplicationController;
 import com.codename1.rad.controllers.ControllerEvent;
 import com.codename1.rad.models.Entity;
@@ -42,7 +40,21 @@ import java.util.List;
 
 public class UberEatsClone extends ApplicationController {
 
+    Entity account;
+
     public static final ActionNode enterMainWindow = UI.action();
+    public static final ActionNode enterFirstIntroduction = UI.action();
+    public static final ActionNode enterSecondIntroduction = UI.action();
+    public static final ActionNode enterThirdIntroduction = UI.action();
+    public static final ActionNode enterSetLocation = UI.action();
+    public static final ActionNode logout = UI.action();
+
+    public static final ActionNode.Category SKIP_TO_MAIN_WINDOW = new ActionNode.Category();
+
+    public static final int DEBUG_MODE_WITHOUT_SIGNING = 0;
+    public static final int DEBUG_MODE_WITH_SIGNING = 1;
+
+    public static final int mode = DEBUG_MODE_WITHOUT_SIGNING;
 
     @Override
     public void actionPerformed(ControllerEvent evt) {
@@ -50,17 +62,54 @@ public class UberEatsClone extends ApplicationController {
             evt.consume();
 
             ViewNode viewNode = new ViewNode(
-                    UI.actions(SignInView.COMPLETE_SIGNING_IN, enterMainWindow)
+                    UI.actions(SignInView.COMPLETE_SIGNING_IN, enterFirstIntroduction),
+                    UI.actions(FirstIntroductionView.FINISHED_FIRST_INTRO, enterSecondIntroduction),
+                    UI.actions(SecondIntroductionView.FINISHED_SECOND_INTRO, enterThirdIntroduction),
+                    UI.actions(ThirdIntroductionView.FINISHED_THIRD_INTRO, enterSetLocation),
+                    UI.actions(SetFirstLocationView.COMPLETE_SETTING_ADDRESS, enterMainWindow),
+                    UI.actions(ProfileView.LOG_OUT, logout),
+                    UI.actions(SKIP_TO_MAIN_WINDOW, enterMainWindow)
             );
 
-            Entity account = new AccountModel();
-            new AccountController(this,  account, viewNode).getView().show();
+            if (mode == DEBUG_MODE_WITH_SIGNING){
 
-            addActionListener(enterMainWindow, event->{
-                event.consume();
-                new MainWindowController(this, createDemoMainWindowEntity(event.getEntity())).getView().show();
-            });
-//            new MainWindowController(this, createDemoMainWindowEntity(null)).getView().show();
+                account = new AccountModel();
+                new AccountController(this, account, viewNode).getView().show();
+
+                addActionListener(logout, event-> {
+                    account = new AccountModel();
+                    new AccountController(this, account, viewNode).getView().showBack();
+                });
+
+                addActionListener(enterFirstIntroduction, event->{
+                    event.consume();
+                    new FirstIntroductionController(this, account, viewNode).getView().show();
+                });
+
+                addActionListener(enterSecondIntroduction, event->{
+                    event.consume();
+                    new SecondIntroductionController(this, account, viewNode).getView().show();
+                });
+
+                addActionListener(enterThirdIntroduction, event->{
+                    event.consume();
+                    new ThirdIntroductionController(this, account, viewNode).getView().show();
+                });
+
+                addActionListener(enterSetLocation, event -> {
+                    event.consume();
+                    new SetFirstLocationController(this, account, viewNode).getView().show();
+                });
+
+                addActionListener(enterMainWindow, event->{
+                    event.consume();
+                    new MainWindowController(this, createDemoMainWindowEntity(account), viewNode).getView().show();
+                });
+
+
+            }else if (mode == DEBUG_MODE_WITHOUT_SIGNING){
+                new MainWindowController(this, createDemoMainWindowEntity(null), viewNode).getView().show();
+            }
         }
     }
 
@@ -72,7 +121,7 @@ public class UberEatsClone extends ApplicationController {
             account.set(Account.lastName, "One");
             account.set(Account.emailAddress, "sergey@gmail.com");
             account.set(Account.password, "sd12eqwf134qsd");
-            account.set(Account.mobileNumber, "0542468594");
+            account.set(Account.mobileNumber, "0544123415");
         }else{
             account = accountEntity;
         }
@@ -84,7 +133,7 @@ public class UberEatsClone extends ApplicationController {
     }
 
     private Entity createRestaurantDemoModel(){
-        RestaurantModel restaurant = new RestaurantModel("Sergio's Burgers", "https://sergeycodenameone.github.io/rest.jpg", "sea food", 6.7, 5, 30, createDemoMenu());
+        RestaurantModel restaurant = new RestaurantModel("Super Burgers", "https://sergeycodenameone.github.io/rest.jpg", "sea food", 4.7, 5, "https://sergeycodenameone.github.io/rest-icon.png",30, createDemoMenu());
         return restaurant;
     }
 
