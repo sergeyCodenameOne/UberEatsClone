@@ -1,0 +1,38 @@
+= Grub
+
+Grub is a full-featured delivery app in Java for https://www.codenameone.com/[Codename One]. It helps understanding how to build an elaborate cross-platform delivery app.
+
+image::https://github.com/sergeyCodenameOne/sergeyCodenameOne.github.io/blob/master/uber-eats-clone-banner.jpg
+
+
+
+This app designed as a proof of concept for the https://github.com/shannah/CodeRAD[CodeRAD library], which facilitates the development of rich, reusable UI components for Codename One.  It contains everything you should need to build a rich and reusable app with the Rapid application development principles.
+
+== License
+
+Apache 2.0
+
+
+== Demo
+
+* Try https://shannah.github.io/RADChatApp/demo[Javascript version] in your browser.
+* Download https://github.com/shannah/RADChatApp/releases/download/1.0/CN1Chat-debug.apk[Android demo app].
+
+
+NOTE: The app is not connected to any backend server and all the logic is just for the visual effect. Although The app can be easly connected to any server.
+
+See how to build this demo in the https://shannah.github.io/RADChatApp/getting-started-tutorial.html[Getting Started Tutorial]
+
+
+== Installation
+
+See https://github.com/sergeyCodenameOne/UberEatsClone[GitHub repository]
+
+== Further Reading
+
+. https://www.codenameone.com/[Codename One]
+. https://github.com/shannah/CodeRAD[CodeRAD library]
+
+== Credits
+
+. Created by Sergey Gerashenko,  https://www.codenameone.com[Codename One]
