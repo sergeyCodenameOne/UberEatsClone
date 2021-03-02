@@ -1,6 +1,6 @@
 = Grub
 
-Grub is a full-featured delivery app in Java for https://www.codenameone.com/[Codename One]. It helps to understand how to build an elaborate cross-platform app using the new CodeRad tools.
+Grub is a full-featured delivery app written in Java for https://www.codenameone.com/[Codename One]. It helps to understand how to build an elaborate cross-platform app using the new CodeRad tools.
 
 image::https://raw.githubusercontent.com/sergeyCodenameOne/sergeyCodenameOne.github.io/master/uber-eats-clone-banner.jpg[width=480]
 
@@ -15,7 +15,6 @@ Apache 2.0
 
 == Demo
 
-* Try https://shannah.github.io/RADChatApp/demo[Javascript version] in your browser.
 * Download https://raw.githubusercontent.com/sergeyCodenameOne/sergeyCodenameOne.github.io/master/UberEatsClone-debug.apk[Android demo app].
 
 
