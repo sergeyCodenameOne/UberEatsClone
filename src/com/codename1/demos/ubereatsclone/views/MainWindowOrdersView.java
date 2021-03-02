@@ -23,14 +23,18 @@
 
 package com.codename1.demos.ubereatsclone.views;
 
+import com.codename1.components.ScaleImageLabel;
+import com.codename1.demos.ubereatsclone.interfaces.CompletedOrder;
 import com.codename1.rad.models.Entity;
 import com.codename1.rad.nodes.Node;
 import com.codename1.rad.ui.AbstractEntityView;
 import com.codename1.ui.*;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
+import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.Style;
 
+import static com.codename1.ui.CN.convertToPixels;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
 public class MainWindowOrdersView extends AbstractEntityView {
@@ -78,12 +82,45 @@ public class MainWindowOrdersView extends AbstractEntityView {
         recentOrdersView.addRecentOrder(completedOrder);
         inProgressCnt.getAllStyles().setBgImage(getGlobalResources().getImage("set-first-location-background.png"));
         inProgressCnt.getAllStyles().setBackgroundType(Style.BACKGROUND_IMAGE_SCALED);
-        Container deliveryInfoCnt = new Container(){
+        Container deliveryInfoCnt = new Container(new BorderLayout());
+        Label trackingOrderLabel = new Label ("Tracking Order", "TrackingOrderLabel");
+        Label orderId = new Label ("Order #" + completedOrder.getInt(CompletedOrder.orderId), "OrderIdLabel");
+        deliveryInfoCnt.add(BorderLayout.NORTH, BoxLayout.encloseY(trackingOrderLabel, orderId));
+
+        Label preparingFoodLabel = new Label ("Preparing Food", "PreparingFoodLabel");
+        Label drivesAtTheRestaurantLabel = new Label ("Drives At The Restaurant", "DrivesAtTheRestaurantLabel");
+        Image deliveryProgressImage = getGlobalResources().getImage("delivery-progress.png");
+        ScaleImageLabel deliveryProgress = new ScaleImageLabel(deliveryProgressImage){
             @Override
             public Dimension getPreferredSize() {
-                return new Dimension(Display.getInstance().getDisplayWidth(), (int) (Display.getInstance().getDisplayHeight() / 2.5));
+                Dimension dim = super.getPreferredSize();
+                dim.setHeight(convertToPixels(8));
+                return dim;
             }
         };
+        deliveryProgress.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FIT);
+        deliveryInfoCnt.add(BorderLayout.CENTER, BoxLayout.encloseY(deliveryProgress, preparingFoodLabel, drivesAtTheRestaurantLabel));
+
+        Container driverInfoCnt = new Container(new BorderLayout());
+        Image iconMessage = getGlobalResources().getImage("icon-message-circle.png").scaled(convertToPixels(4), convertToPixels(4));
+        Image iconPhone = getGlobalResources().getImage("icon-phone.png").scaled(convertToPixels(4), convertToPixels(4));
+        Image iconRating = getGlobalResources().getImage("rating-icon.png").scaled(convertToPixels(4), convertToPixels(4));
+        Image iconDriver = getGlobalResources().getImage("account-place-holder.png");
+
+        Label driverName = new Label("James Smith", "DriverNameLabel");
+        Label driverRating = new Label(" 4.9/5", iconRating, "DriverRatingLabel");
+        ScaleImageLabel driverImageLabel = new ScaleImageLabel(iconDriver){
+            @Override
+            public Dimension getPreferredSize() {
+                return new Dimension(convertToPixels(10), convertToPixels(10));
+            }
+        };
+        driverInfoCnt.add(BorderLayout.WEST, driverImageLabel);
+        driverInfoCnt.add(BorderLayout.CENTER, BoxLayout.encloseY(driverName, driverRating));
+        driverInfoCnt.add(BorderLayout.EAST, BorderLayout.centerAbsolute(BoxLayout.encloseX(new Button(iconMessage, "MessageDriverButton"), new Button(iconPhone, "CallDriverButton"))));
+        driverInfoCnt.setUIID("DriverInfoCnt");
+        deliveryInfoCnt.add(BorderLayout.SOUTH, driverInfoCnt);
+
         deliveryInfoCnt.setUIID("DeliveryInfoCnt");
         inProgressCnt.add(BorderLayout.SOUTH, deliveryInfoCnt);
     }

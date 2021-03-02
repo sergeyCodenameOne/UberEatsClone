@@ -27,19 +27,13 @@ import com.codename1.demos.ubereatsclone.controllers.*;
 import com.codename1.demos.ubereatsclone.interfaces.Account;
 import com.codename1.demos.ubereatsclone.models.*;
 import com.codename1.demos.ubereatsclone.views.*;
-import com.codename1.io.Log;
 import com.codename1.rad.controllers.ApplicationController;
 import com.codename1.rad.controllers.ControllerEvent;
 import com.codename1.rad.models.Entity;
 import com.codename1.rad.nodes.ActionNode;
 import com.codename1.rad.nodes.ViewNode;
 import com.codename1.rad.ui.UI;
-import com.codename1.ui.Button;
-import com.codename1.ui.Display;
-import com.codename1.ui.plaf.UIManager;
-import com.codename1.ui.util.Resources;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +41,7 @@ import java.util.List;
 public class UberEatsClone extends ApplicationController {
 
     Entity account;
-    private static boolean isDarkMode = false;
+    private static boolean darkMode = false;
 
     public static final ActionNode enterMainWindow = UI.action();
     public static final ActionNode enterFirstIntroduction = UI.action();
@@ -55,14 +49,14 @@ public class UberEatsClone extends ApplicationController {
     public static final ActionNode enterThirdIntroduction = UI.action();
     public static final ActionNode enterSetLocation = UI.action();
     public static final ActionNode logout = UI.action();
-    public static final ActionNode darkMode = UI.action();
+//    public static final ActionNode darkMode = UI.action();
 
     public static final ActionNode.Category SKIP_TO_MAIN_WINDOW = new ActionNode.Category();
 
     public static final int DEBUG_MODE_WITHOUT_SIGNING = 0;
     public static final int DEBUG_MODE_WITH_SIGNING = 1;
 
-    public static final int mode = DEBUG_MODE_WITHOUT_SIGNING;
+    public static final int mode = DEBUG_MODE_WITH_SIGNING;
 
     @Override
     public void actionPerformed(ControllerEvent evt) {
@@ -76,7 +70,7 @@ public class UberEatsClone extends ApplicationController {
                     UI.actions(ThirdIntroductionView.FINISHED_THIRD_INTRO, enterSetLocation),
                     UI.actions(SetFirstLocationView.COMPLETE_SETTING_ADDRESS, enterMainWindow),
                     UI.actions(ProfileView.LOG_OUT, logout),
-                    UI.actions(ProfileView.LOG_OUT, darkMode),
+//                    UI.actions(ProfileView.LOG_OUT, darkMode),
                     UI.actions(SKIP_TO_MAIN_WINDOW, enterMainWindow)
             );
 
@@ -216,24 +210,24 @@ public class UberEatsClone extends ApplicationController {
         return addOns;
     }
 
-    private void initTheme() {
-        darkMode = !darkMode;
-        String themeFileName = darkMode ? "/dark-theme" : "/theme";
-        try {
-            Resources theme = Resources.openLayered(themeFileName);
-            UIManager.getInstance().addThemeProps(theme.getTheme(theme.getThemeResourceNames()[0]));
-        }catch(IOException e){
-            Log.e(e);
-        }
-        Button darkModeCmd = Display.getInstance().getCurrent().getToolbar().findCommandComponent(darkModeCommand);
-        if(darkMode){
-            darkModeCmd.setIcon(darkModeImageDark);
-        }else{
-            darkModeCmd.setIcon(darkModeImageLight);
-        }
-
-        ClockDemo.refreshClockColor();
-        Display.getInstance().getCurrent().refreshTheme();
-    }
+//    private void initTheme() {
+//        darkMode = !darkMode;
+//        String themeFileName = darkMode ? "/dark-theme" : "/theme";
+//        try {
+//            Resources theme = Resources.openLayered(themeFileName);
+//            UIManager.getInstance().addThemeProps(theme.getTheme(theme.getThemeResourceNames()[0]));
+//        }catch(IOException e){
+//            Log.e(e);
+//        }
+//        Button darkModeCmd = Display.getInstance().getCurrent().getToolbar().findCommandComponent(darkModeCommand);
+//        if(darkMode){
+//            darkModeCmd.setIcon(darkModeImageDark);
+//        }else{
+//            darkModeCmd.setIcon(darkModeImageLight);
+//        }
+//
+//        ClockDemo.refreshClockColor();
+//        Display.getInstance().getCurrent().refreshTheme();
+//    }
 }
 

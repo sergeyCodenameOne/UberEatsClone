@@ -43,6 +43,7 @@ import com.codename1.ui.*;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.layouts.GridLayout;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -128,15 +129,17 @@ public class DishView extends AbstractEntityView{
         dishRemarksCnt.add(BorderLayout.CENTER, dishRemarks);
 
         Container addOnsCnt = new Container(new BorderLayout(), "AddOnsCnt");
-        Container addOns = new Container(new BoxLayout(BoxLayout.X_AXIS));
+        Container addOns = new Container();
         addOns.setScrollableX(true);
         if (getEntity().get(addOnsProp) instanceof EntityList) {
             EntityList<Entity> addOnsList = (EntityList) (getEntity().get(addOnsProp));
+            addOns.setLayout(new GridLayout(addOnsList.size()));
             for (Entity addOnEntity : addOnsList) {
                 DishAddOnView addOn = new DishAddOnView(addOnEntity, addOnNode);
                 addOns.add(addOn);
             }
         }
+
         addOnsCnt.add(BorderLayout.NORTH, new Label("Add ons", "AddOnHeader")).
                 add(BorderLayout.CENTER, addOns);
 

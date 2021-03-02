@@ -43,6 +43,10 @@ Images{
                         url(images/second-intro-image.png),
                         url(images/third-intro-image.png),
 
+                        url(images/icon-message-circle.png),
+                        url(images/icon-phone.png),
+                        url(images/delivery-progress.png),
+
                         url(images/category-icons/rice-icon.png),
                         url(images/category-icons/pizza-icon.png),
                         url(images/category-icons/donut-icon.png),
@@ -290,7 +294,7 @@ DishAddToCartText{
     color: white;
     padding: 0;
     margin: 1mm;
-    font-family: "native:MainRegular";
+    font-family: "native:MainBold";
     font-size: 3mm;
 
 }
@@ -369,7 +373,7 @@ DishQuantityContainer{
 }
 
 DishAddToCartCnt{
-    padding: 1mm;
+    padding: 2mm;
     margin: 0 4mm 3mm 4mm;
     background-color: #7AC943;
     border-radius: 4mm;
@@ -996,7 +1000,7 @@ ProfileHeader{
 ProfileHeaderCnt{
     background-color: #EFF0F0;
     margin: 0;
-    padding: 2mm;
+    padding: 0;
 }
 
 ProfileInfoCnt{
@@ -1695,17 +1699,17 @@ DishImageLabel{
 
 FavoriteHeaderLabel{
     text-align: center;
-    font-family: "native:MainRegular";
+    font-family: "native:MainBold";
     font-size: 3mm;
     margin: 0;
-    padding: 0;
+    padding: 2mm;
 }
 
 FavoriteHeaderCnt{
     background-color: white;
     border-radius: 2mm;
-    padding: 2mm;
-    margin: 3mm 0 2mm 0;
+    padding: 0;
+    margin: 0;
 }
 
 FavoriteRestaurantsView{
@@ -1782,22 +1786,22 @@ ToggleButton{
 
 MyOrdersHeaderLabel{
     text-align: center;
-    font-family: "native:MainRegular";
+    font-family: "native:MainBold";
     font-size: 3mm;
-    padding: 0;
+    padding: 2mm;
     margin: 0;
 }
 
 MyOrdersHeaderCnt{
     background-color: white;
     border-radius: 2mm;
-    padding: 2mm;
-    margin: 3mm 0 2mm 0;
+    padding: 0;
+    margin: 0;
 }
 
 MainWindowOrdersView{
     margin: 0;
-    padding: 0;
+    padding: 2mm;
     background-color: #EFF0F0;
 }
 
@@ -2233,9 +2237,8 @@ AnotherMethodHeader{
 DeliveryInfoCnt{
     padding: 0;
     margin: 2mm;
-    background-image:   url(images/delivery-info.png);
-    cn1-source-dpi: 480;
-    cn1-background-type: cn1-image-scaled;
+    background-color: white;
+    border-radius: 2mm;
 }
 
 CreditCard{
@@ -2244,4 +2247,74 @@ CreditCard{
     background-image:   url(images/credit-card.png);
     cn1-background-type: cn1-image-scaled;
     cn1-source-dpi: 480;
+}
+
+TrackingOrderLabel{
+    padding-top: 3mm;
+    color: black;
+    font-size: 3.5mm;
+    font-family: "native:MainBold";
+    text-align: center;
+}
+
+OrderIdLabel{
+    padding-top: 1mm;
+    padding-bottom: 2mm;
+    color: #989898;
+    font-size: 3mm;
+    font-family: "native:MainRegular";
+    text-align: center;
+}
+
+PreparingFoodLabel{
+    padding-top: 3mm;
+    color: black;
+    font-size: 3mm;
+    font-family: "native:MainBold";
+    text-align: center;
+}
+
+DrivesAtTheRestaurantLabel{
+    padding-top: 1mm;
+    padding-bottom: 2mm;
+    color: #989898;
+    font-size: 3mm;
+    font-family: "native:MainRegular";
+    text-align: center;
+}
+
+
+DriverNameLabel{
+    padding: 1mm;
+    color: black;
+    font-size: 3mm;
+    font-family: "native:MainBold";
+    text-align: left;
+}
+
+DriverRatingLabel{
+    padding: 1mm;
+    color: #989898;
+    font-size: 3mm;
+    font-family: "native:MainRegular";
+    text-align: left;
+}
+
+CallDriverButton{
+    margin: 1mm;
+    padding: 2mm;
+    border: 0.2mm solid #DBDFDF;
+    border-radius: 2mm;
+}
+
+MessageDriverButton{
+    margin: 1mm;
+    padding: 2mm;
+    border: 0.2mm solid #DBDFDF;
+    border-radius: 2mm;
+}
+
+DriverInfoCnt{
+    padding: 2mm;
+    border-top: 0.2mm solid #DBDFDF;
 }
