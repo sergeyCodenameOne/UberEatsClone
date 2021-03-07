@@ -641,6 +641,12 @@
             <arg file="css/theme.css"/>
             <arg file="src/theme.res"/>
         </java>
+        <java jar="${user.home}/.codenameone/designer_1.jar" fork="true" failonerror="true">
+            <jvmarg value="-Dcli=true"/>
+            <arg value="-css"/>
+            <arg file="css/dark-theme.css"/>
+            <arg file="src/dark-theme.res"/>
+        </java>
     </target>
 
     <target name="pre-javadoc">

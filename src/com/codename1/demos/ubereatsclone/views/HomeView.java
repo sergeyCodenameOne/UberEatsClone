@@ -299,7 +299,7 @@ public class HomeView extends AbstractEntityView {
         add(recommendCnt);
 
         Container allRestaurantsCnt = new Container(new BorderLayout());
-        recommendCnt.setUIID("RecommendCnt");
+        allRestaurantsCnt.setUIID("AllRestaurantsCnt");
         Label allRestaurantsLabel = new Label("All Restaurants", "CategoryHeader");
         allRestaurantsCnt.add(BorderLayout.NORTH, allRestaurantsLabel);
         allRestaurantsCnt.add(BorderLayout.CENTER, createAllRestaurantsCnt(appEntity.getEntityList(restaurantsProp)));

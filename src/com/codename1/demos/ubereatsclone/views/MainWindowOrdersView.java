@@ -24,6 +24,7 @@
 package com.codename1.demos.ubereatsclone.views;
 
 import com.codename1.components.ScaleImageLabel;
+import com.codename1.demos.ubereatsclone.UberEatsClone;
 import com.codename1.demos.ubereatsclone.interfaces.CompletedOrder;
 import com.codename1.rad.models.Entity;
 import com.codename1.rad.nodes.Node;
@@ -80,7 +81,8 @@ public class MainWindowOrdersView extends AbstractEntityView {
 
     public void addCompletedOrder(Entity completedOrder){
         recentOrdersView.addRecentOrder(completedOrder);
-        inProgressCnt.getAllStyles().setBgImage(getGlobalResources().getImage("set-first-location-background.png"));
+        String backgroundImageName = UberEatsClone.isDarkMode() ? "set-first-location-background-dark.png" : "set-first-location-background.png";
+        inProgressCnt.getAllStyles().setBgImage(getGlobalResources().getImage(backgroundImageName));
         inProgressCnt.getAllStyles().setBackgroundType(Style.BACKGROUND_IMAGE_SCALED);
         Container deliveryInfoCnt = new Container(new BorderLayout());
         Label trackingOrderLabel = new Label ("Tracking Order", "TrackingOrderLabel");
@@ -89,7 +91,8 @@ public class MainWindowOrdersView extends AbstractEntityView {
 
         Label preparingFoodLabel = new Label ("Preparing Food", "PreparingFoodLabel");
         Label drivesAtTheRestaurantLabel = new Label ("Drives At The Restaurant", "DrivesAtTheRestaurantLabel");
-        Image deliveryProgressImage = getGlobalResources().getImage("delivery-progress.png");
+        String progressImageName = UberEatsClone.isDarkMode() ? "delivery-progress-dark.png" : "delivery-progress.png";
+        Image deliveryProgressImage = getGlobalResources().getImage(progressImageName);
         ScaleImageLabel deliveryProgress = new ScaleImageLabel(deliveryProgressImage){
             @Override
             public Dimension getPreferredSize() {

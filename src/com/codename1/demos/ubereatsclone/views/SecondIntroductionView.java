@@ -50,7 +50,9 @@ public class SecondIntroductionView extends AbstractEntityView {
         setUIID("IntroductionView");
 
         Label header = new Label("Order Your Favorite", "IntroductionHeader");
-        ScaleImageLabel introImage = new ScaleImageLabel(getGlobalResources().getImage("second-intro-image.png")){
+
+        String imageName = UberEatsClone.isDarkMode() ? "second-intro-image-dark.png" : "second-intro-image.png";
+        ScaleImageLabel introImage = new ScaleImageLabel(getGlobalResources().getImage(imageName)){
             @Override
             public Dimension getPreferredSize() {
                 Dimension dim = super.getPreferredSize();

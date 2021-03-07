@@ -86,7 +86,7 @@ public class OrderView extends AbstractEntityView {
             ActionSupport.dispatchEvent(new FormController.FormBackEvent(backButton));
         });
         Label headerLabel = new Label("MY ORDERS", "AddDishHeaderLabel");
-        Container headerCnt = BorderLayout.center(headerLabel).add(BorderLayout.WEST, backButton);
+        Container headerCnt = BorderLayout.centerCenter(headerLabel).add(BorderLayout.WEST, backButton);
         headerCnt.setUIID("AddDishHeaderCnt");
         add(headerCnt);
 

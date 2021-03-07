@@ -181,7 +181,6 @@ public class MainWindowController extends FormController {
     }
 
     public void updateDefaultAddressView(){
-        System.out.println("reached");
         mainWindowView.updateDefaultAddressView();
     }
 

@@ -27,21 +27,29 @@ import com.codename1.demos.ubereatsclone.controllers.*;
 import com.codename1.demos.ubereatsclone.interfaces.Account;
 import com.codename1.demos.ubereatsclone.models.*;
 import com.codename1.demos.ubereatsclone.views.*;
+import com.codename1.io.Log;
 import com.codename1.rad.controllers.ApplicationController;
 import com.codename1.rad.controllers.ControllerEvent;
 import com.codename1.rad.models.Entity;
 import com.codename1.rad.nodes.ActionNode;
 import com.codename1.rad.nodes.ViewNode;
 import com.codename1.rad.ui.UI;
+import com.codename1.ui.*;
+import com.codename1.ui.plaf.UIManager;
+import com.codename1.ui.util.Resources;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.codename1.ui.CN.addNetworkErrorListener;
+import static com.codename1.ui.CN.updateNetworkThreadCount;
+
 
 public class UberEatsClone extends ApplicationController {
-
     Entity account;
     private static boolean darkMode = false;
+    private Resources theme;
 
     public static final ActionNode enterMainWindow = UI.action();
     public static final ActionNode enterFirstIntroduction = UI.action();
@@ -49,14 +57,16 @@ public class UberEatsClone extends ApplicationController {
     public static final ActionNode enterThirdIntroduction = UI.action();
     public static final ActionNode enterSetLocation = UI.action();
     public static final ActionNode logout = UI.action();
-//    public static final ActionNode darkMode = UI.action();
+    public static final ActionNode darkModeActionNode = UI.action();
 
     public static final ActionNode.Category SKIP_TO_MAIN_WINDOW = new ActionNode.Category();
 
-    public static final int DEBUG_MODE_WITHOUT_SIGNING = 0;
-    public static final int DEBUG_MODE_WITH_SIGNING = 1;
+    public static final int DEBUG_MODE_WITH_SIGNING = 0;
+    public static final int DEBUG_MODE_WITHOUT_SIGNING = 1;
+    public static final int DEBUG_MODE_WITH_SIGNING_DARK_MODE = 2;
+    public static final int DEBUG_MODE_WITHOUT_SIGNING_DARK_MODE = 3;
 
-    public static final int mode = DEBUG_MODE_WITH_SIGNING;
+    public static final int mode = DEBUG_MODE_WITHOUT_SIGNING_DARK_MODE;
 
     @Override
     public void actionPerformed(ControllerEvent evt) {
@@ -70,11 +80,16 @@ public class UberEatsClone extends ApplicationController {
                     UI.actions(ThirdIntroductionView.FINISHED_THIRD_INTRO, enterSetLocation),
                     UI.actions(SetFirstLocationView.COMPLETE_SETTING_ADDRESS, enterMainWindow),
                     UI.actions(ProfileView.LOG_OUT, logout),
-//                    UI.actions(ProfileView.LOG_OUT, darkMode),
+                    UI.actions(AccountView.DARK_MODE, darkModeActionNode),
                     UI.actions(SKIP_TO_MAIN_WINDOW, enterMainWindow)
             );
 
-            if (mode == DEBUG_MODE_WITH_SIGNING){
+            if (mode == DEBUG_MODE_WITH_SIGNING || mode == DEBUG_MODE_WITH_SIGNING_DARK_MODE){
+
+                if (mode == DEBUG_MODE_WITH_SIGNING_DARK_MODE){
+                    darkMode = true;
+                    initTheme();
+                }
 
                 account = new AccountModel();
                 new AccountController(this, account, viewNode).getView().show();
@@ -109,8 +124,17 @@ public class UberEatsClone extends ApplicationController {
                     new MainWindowController(this, createDemoMainWindowEntity(account), viewNode).getView().show();
                 });
 
-
+                addActionListener(darkModeActionNode, event->{
+                    event.consume();
+                    darkMode = !darkMode;
+                    initTheme();
+                });
             }else if (mode == DEBUG_MODE_WITHOUT_SIGNING){
+                new MainWindowController(this, createDemoMainWindowEntity(null), viewNode).getView().show();
+
+            }else if(mode == DEBUG_MODE_WITHOUT_SIGNING_DARK_MODE){
+                darkMode = true;
+                initTheme();
                 new MainWindowController(this, createDemoMainWindowEntity(null), viewNode).getView().show();
             }
         }
@@ -210,24 +234,53 @@ public class UberEatsClone extends ApplicationController {
         return addOns;
     }
 
-//    private void initTheme() {
-//        darkMode = !darkMode;
-//        String themeFileName = darkMode ? "/dark-theme" : "/theme";
-//        try {
-//            Resources theme = Resources.openLayered(themeFileName);
-//            UIManager.getInstance().addThemeProps(theme.getTheme(theme.getThemeResourceNames()[0]));
-//        }catch(IOException e){
-//            Log.e(e);
-//        }
-//        Button darkModeCmd = Display.getInstance().getCurrent().getToolbar().findCommandComponent(darkModeCommand);
-//        if(darkMode){
-//            darkModeCmd.setIcon(darkModeImageDark);
-//        }else{
-//            darkModeCmd.setIcon(darkModeImageLight);
-//        }
-//
-//        ClockDemo.refreshClockColor();
-//        Display.getInstance().getCurrent().refreshTheme();
-//    }
+    private void initTheme() {
+        String themeFileName = darkMode ? "/dark-theme" : "/theme";
+        try {
+            Resources theme = Resources.openLayered(themeFileName);
+            UIManager.getInstance().addThemeProps(theme.getTheme(theme.getThemeResourceNames()[0]));
+        }catch(IOException e){
+            Log.e(e);
+        }
+        Form currForm = Display.getInstance().getCurrent();
+        if (currForm != null){
+            currForm.refreshTheme();
+        }
+    }
+
+    @Override
+    public void init(Object context) {
+        CN.setProperty("Component.revalidateOnStyleChange", "false");
+        updateNetworkThreadCount(2);
+
+        try {
+            theme = Resources.openLayered("/theme");
+            UIManager.getInstance().setThemeProps(theme.getTheme(theme.getThemeResourceNames()[0]));
+            Resources.setGlobalResources(theme);
+        }catch(IOException e){
+            Log.e(e);
+        }
+
+        // Enable Toolbar on all Forms by default
+        Toolbar.setGlobalToolbar(true);
+
+        // Pro only feature
+        Log.bindCrashProtection(true);
+
+        addNetworkErrorListener(err -> {
+            // prevent the event from propagating
+            err.consume();
+            if(err.getError() != null) {
+                Log.e(err.getError());
+            }
+            Log.sendLogAsync();
+            Dialog.show("Connection Error", "There was a networking error in the connection to " + err.getConnectionRequest().getUrl(), "OK", null);
+        });
+        dispatchEvent(new InitEvent(context));
+    }
+
+    public static boolean isDarkMode(){
+        return darkMode;
+    }
 }
 

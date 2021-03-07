@@ -50,7 +50,7 @@ public class AccountController extends FormController {
                 UI.actions(AccountView.SIGN_IN, singIn)
         );
 
-        AccountView accountView = new AccountView(accountEntity, accountViewNode);
+        AccountView accountView = new AccountView(accountEntity, accountViewNode, viewNode);
         accountForm.add(BorderLayout.CENTER, accountView);
         setView(accountForm);
 

@@ -24,6 +24,7 @@
 package com.codename1.demos.ubereatsclone.views;
 
 import com.codename1.components.ScaleImageLabel;
+import com.codename1.demos.ubereatsclone.UberEatsClone;
 import com.codename1.rad.models.Entity;
 import com.codename1.rad.nodes.ActionNode;
 import com.codename1.rad.nodes.Node;
@@ -49,7 +50,8 @@ public class ThirdIntroductionView extends AbstractEntityView {
         setUIID("IntroductionView");
 
         Label header = new Label("Deliver at your Home", "IntroductionHeader");
-        ScaleImageLabel introImage = new ScaleImageLabel(getGlobalResources().getImage("third-intro-image.png")){
+        String imageName = UberEatsClone.isDarkMode() ? "third-intro-image-dark.png" : "third-intro-image.png";
+        ScaleImageLabel introImage = new ScaleImageLabel(getGlobalResources().getImage(imageName)){
             @Override
             public Dimension getPreferredSize() {
                 Dimension dim = super.getPreferredSize();

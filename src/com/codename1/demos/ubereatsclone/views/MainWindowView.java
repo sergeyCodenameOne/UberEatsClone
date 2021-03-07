@@ -40,8 +40,8 @@ public class MainWindowView extends AbstractEntityView {
     MainWindowOrdersView ordersView;
     HomeView homeView;
     Tabs mainWindowContainer;
-    private static final int TABS_ICON_SIZE = convertToPixels(5);
-    private static final int TABS_ICON_SELECTED_SIZE = convertToPixels(9);
+    private static final int TABS_ICON_SIZE = convertToPixels(4);
+    private static final int TABS_ICON_SELECTED_SIZE = convertToPixels(6);
 
     public MainWindowView(Entity mainWindowEntity, Node profileNode, Node homeViewNode, Node appNode) {
         super(mainWindowEntity);

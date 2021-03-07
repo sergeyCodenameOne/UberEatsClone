@@ -43,9 +43,15 @@ Images{
                         url(images/second-intro-image.png),
                         url(images/third-intro-image.png),
 
+                        url(images/first-intro-image-dark.png),
+                        url(images/second-intro-image-dark.png),
+                        url(images/third-intro-image-dark.png),
+
                         url(images/icon-message-circle.png),
                         url(images/icon-phone.png),
                         url(images/delivery-progress.png),
+                        url(images/delivery-progress-dark.png),
+                        url(images/set-first-location-background-dark.png),
 
                         url(images/category-icons/rice-icon.png),
                         url(images/category-icons/pizza-icon.png),
@@ -337,7 +343,7 @@ DishRemarksTextArea{
     font-family: "native:MainRegular";
     font-size: 2.5mm;
     border: 0.1mm solid #DBDFDF;
-
+    border-radius: 2mm;
     padding: 2mm;
 }
 
@@ -408,7 +414,15 @@ DishAddOnName{
     text-align: center;
     font-family: "native:MainRegular";
     font-size: 3mm;
+}
 
+DishAddOnNamePressed{
+    color: black;
+    padding: 1mm 0 1mm 0;
+    margin: 0;
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
 }
 
 DishAddOnPrice{
@@ -945,7 +959,7 @@ MainWindowTab{
     font-family: "native:MainRegular";
     font-size: 2.5mm;
     text-align: center;
-    margin: 0mm;
+    margin: 2mm;
     padding: 0mm 0mm 0mm 0mm;
 }
 
@@ -1422,6 +1436,8 @@ FilterHeaderLabel{
     text-align: center;
     font-family: "native:MainRegular";
     font-size: 3mm;
+    padding: 0;
+    margin: 0;
 }
 
 FilterHeaderCnt{
@@ -1537,12 +1553,16 @@ SearchFilterCnt{
 SearchBackButton{
     color: #989898;
     font-size: 3mm;
+    padding: 0;
+    margin: 0;
 }
 
 SearchHeaderLabel{
     text-align: center;
     font-family: "native:MainRegular";
     font-size: 3mm;
+    padding: 0;
+    margin: 0;
 }
 
 SearchHeaderCnt{
@@ -1913,7 +1933,7 @@ ShadowContainer{
 OrdersTabsContainer{
     background-color: rgba(0,0,0,0);
     margin: 0;
-    padding: 1mm;
+    padding: 2mm;
 }
 
 OrdersTab{
@@ -2317,4 +2337,17 @@ MessageDriverButton{
 DriverInfoCnt{
     padding: 2mm;
     border-top: 0.2mm solid #DBDFDF;
+}
+
+DarkModeButton{
+    padding: 1mm;
+    color: #A5A5A5;
+    font-size: 2.5mm;
+    font-family: "native:MainBold";
+    border: 0.2mm solid #A5A5A5;
+    border-radius: 3mm;
+}
+
+DarkModeButtonIcon{
+    color: #7AC943;
 }

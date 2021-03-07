@@ -28,13 +28,11 @@ import com.codename1.rad.models.Entity;
 import com.codename1.rad.nodes.ActionNode;
 import com.codename1.rad.nodes.Node;
 import com.codename1.rad.ui.AbstractEntityView;
-import com.codename1.ui.Button;
-import com.codename1.ui.Container;
-import com.codename1.ui.Image;
-import com.codename1.ui.Label;
+import com.codename1.ui.*;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.plaf.UIManager;
 
 import static com.codename1.ui.CN.getDisplayWidth;
 import static com.codename1.ui.util.Resources.getGlobalResources;
@@ -48,12 +46,23 @@ public class AccountView<T extends Entity> extends AbstractEntityView<T> {
     public static final ActionNode.Category DARK_MODE = new ActionNode.Category();
 
 
-    public AccountView(T entity, Node viewNode) {
+    public AccountView(T entity, Node viewNode, Node grubNode) {
         super(entity);
         this.viewNode = viewNode;
 
         setLayout(new BorderLayout());
         setUIID("AccountCnt");
+
+        Button darkModeButton = new Button("LIGHT", "DarkModeButton");
+        darkModeButton.setIcon(FontImage.createMaterial(FontImage.MATERIAL_FIBER_MANUAL_RECORD, UIManager.getInstance().getComponentStyle("DarkModeButtonIcon")));
+        darkModeButton.addActionListener(evt->{
+            evt.consume();
+            ActionNode action = grubNode.getInheritedAction(DARK_MODE);
+            if (action != null) {
+                action.fireEvent(entity, AccountView.this);
+            }
+        });
+
 
         Button signIn = new Button("Sign In", "SignInButton");
         signIn.addActionListener(evt -> {
@@ -83,7 +92,7 @@ public class AccountView<T extends Entity> extends AbstractEntityView<T> {
         };
         Label welcomeText = new Label("WELCOME TO GRUB APP", "AccountWelcomeText");
 
-        Container topView = BoxLayout.encloseY(logoLabel, welcomeText);
+        Container topView = BoxLayout.encloseY(logoLabel, welcomeText, BorderLayout.centerAbsolute(darkModeButton));
         topView.setUIID("AccountTopView");
         add(BorderLayout.NORTH, topView);
         add(BorderLayout.SOUTH, BoxLayout.encloseY(signUp, signIn));

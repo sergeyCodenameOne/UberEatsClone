@@ -93,9 +93,11 @@ public class DishAddOnView extends AbstractEntityView {
         boolean isSelected = getEntity().getBoolean(isSelectedProp);
         if (isSelected){
             setUIID("DishAddOnPressed");
+            nameLabel.setUIID("DishAddOnNamePressed");
             priceLabel.setUIID("DishAddOnPricePressed");
         }else{
             setUIID("DishAddOn");
+            nameLabel.setUIID("DishAddOnName");
             priceLabel.setUIID("DishAddOnPrice");
         }
         revalidateWithAnimationSafety();
