@@ -5,8 +5,8 @@
     To learn more about Codename One go to https://www.codenameone.com/
     -->
         
-    <project name="UberEatsClone" default="default" basedir=".">
-    <description>Builds, tests, and runs the project UberEatsClone.</description>
+    <project name="Grub" default="default" basedir=".">
+    <description>Builds, tests, and runs the project Grub.</description>
     <property file="codenameone_kotlin.properties"/><typedef resource="org/jetbrains/kotlin/ant/antlib.xml" classpath="${kotlin.lib}/kotlin-ant.jar"/><import file="nbproject/build-impl.xml"/>
     <property file="codenameone_settings.properties"/>
     <property name="automated" value="false" />
