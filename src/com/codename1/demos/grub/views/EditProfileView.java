@@ -47,9 +47,10 @@ public class EditProfileView extends AbstractEntityView {
     public EditProfileView(Entity entity, Node viewNode) {
         super(entity);
         this.viewNode = viewNode;
-        setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-        setScrollableY(true);
-        Container wrapper = new Container(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER_ABSOLUTE));
+        setLayout(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER_ABSOLUTE));
+        Container wrapper = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+        wrapper.setScrollVisible(false);
+        wrapper.setScrollableY(true);
         setUIID("EditProfile");
 
         firstNameProp = entity.findProperty(Account.firstName);
@@ -67,7 +68,7 @@ public class EditProfileView extends AbstractEntityView {
         Label headerLabel = new Label("EDIT PROFILE", "EditProfileHeaderLabel");
         Container headerCnt = BorderLayout.center(headerLabel).add(BorderLayout.WEST, backButton);
         headerCnt.setUIID("EditProfileHeaderCnt");
-        wrapper.add(BorderLayout.NORTH, headerCnt);
+        add(BorderLayout.NORTH, headerCnt);
 
         TextField firstName = new TextField("", "First Name", 20, TextArea.ANY);
         firstName.setUIID("EditProfileField");
@@ -88,7 +89,11 @@ public class EditProfileView extends AbstractEntityView {
         TextField phoneNumber = new TextField("", "Mobile Number", 20, TextArea.PHONENUMBER);
         phoneNumber.setUIID("EditProfileField");
         phoneNumber.getHintLabel().setUIID("SignUpFieldHint");
-        wrapper.add(BorderLayout.CENTER, BoxLayout.encloseY(firstName, lastName, emailAddress, password, phoneNumber));
+        Container textFields = BoxLayout.encloseY(firstName, lastName, emailAddress, password, phoneNumber);
+        textFields.setScrollVisible(false);
+        textFields.setScrollableY(false);
+
+        wrapper.add(textFields);
 
         Validator validator = new Validator();
         validator.setValidationFailedEmblem(FontImage.createMaterial(FontImage.MATERIAL_ERROR, UIManager.getInstance().getComponentStyle("TextErrorIcon")));
@@ -110,9 +115,8 @@ public class EditProfileView extends AbstractEntityView {
             entity.set(Account.mobileNumber, phoneNumber.getText());
             ActionSupport.dispatchEvent(new FormController.FormBackEvent(saveButton));
         });
-        wrapper.add(BorderLayout.SOUTH, BoxLayout.encloseY(saveButton));
-
-        add(wrapper);
+        wrapper.add(BoxLayout.encloseY(saveButton));
+        add(BorderLayout.CENTER, wrapper);
     }
 
     @Override

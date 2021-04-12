@@ -50,6 +50,8 @@ public class EditPaymentView extends AbstractEntityView {
     public EditPaymentView(Entity paymentModel, Entity account, Node viewNode) {
         super(paymentModel);
         setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+        setScrollableY(true);
+        setScrollVisible(false);
         setUIID("EditPaymentView");
 
         Button backButton = new Button(FontImage.MATERIAL_KEYBOARD_ARROW_LEFT);

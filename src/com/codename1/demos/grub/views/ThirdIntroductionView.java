@@ -29,10 +29,7 @@ import com.codename1.rad.models.Entity;
 import com.codename1.rad.nodes.ActionNode;
 import com.codename1.rad.nodes.Node;
 import com.codename1.rad.ui.AbstractEntityView;
-import com.codename1.ui.Button;
-import com.codename1.ui.Container;
-import com.codename1.ui.Display;
-import com.codename1.ui.Label;
+import com.codename1.ui.*;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
@@ -44,9 +41,10 @@ public class ThirdIntroductionView extends AbstractEntityView {
 
     public static final ActionNode.Category FINISHED_THIRD_INTRO = new ActionNode.Category();
 
-    public ThirdIntroductionView(Entity entity, Node viewNode) {
+    public ThirdIntroductionView(Entity entity, Node grubNode, Node introNode) {
         super(entity);
         setLayout(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER));
+        Container wrapper = new Container(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER_ABSOLUTE));
         setUIID("IntroductionView");
 
         Label header = new Label("Deliver at your Home", "IntroductionHeader");
@@ -55,8 +53,13 @@ public class ThirdIntroductionView extends AbstractEntityView {
             @Override
             public Dimension getPreferredSize() {
                 Dimension dim = super.getPreferredSize();
-                dim.setWidth(Display.getInstance().getDisplayWidth());
-                dim.setHeight((int) (Display.getInstance().getDisplayWidth() / 1.5));
+                if (CN.isTablet()){
+                    dim.setWidth(Display.getInstance().getDisplayWidth() / 2);
+                    dim.setHeight((int) (Display.getInstance().getDisplayWidth() / 3));
+                }else{
+                    dim.setWidth(Display.getInstance().getDisplayWidth());
+                    dim.setHeight((int) (Display.getInstance().getDisplayWidth() / 1.5));
+                }
                 return dim;
             }
         };
@@ -71,15 +74,16 @@ public class ThirdIntroductionView extends AbstractEntityView {
         Button next = new Button("GET STARTED", "IntroductionNextButton");
         next.addActionListener(evt->{
             evt.consume();
-            ActionNode action = viewNode.getInheritedAction(FINISHED_THIRD_INTRO);
+            ActionNode action = grubNode.getInheritedAction(FINISHED_THIRD_INTRO);
             if (action != null) {
                 action.fireEvent(entity, ThirdIntroductionView.this);
             }
         });
 
-        add(BorderLayout.CENTER, BoxLayout.encloseY(header, introImage));
-        add(BorderLayout.SOUTH, BoxLayout.encloseY(progressCnt, next));
+        wrapper.add(BorderLayout.CENTER, BoxLayout.encloseY(header, introImage));
+        wrapper.add(BorderLayout.SOUTH, BoxLayout.encloseY(progressCnt, next));
 
+        add(BorderLayout.CENTER, wrapper);
     }
 
     @Override

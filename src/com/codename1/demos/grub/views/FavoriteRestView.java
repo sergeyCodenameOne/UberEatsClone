@@ -109,7 +109,9 @@ public class FavoriteRestView extends AbstractEntityView {
                 Container dishesSampleCnt = new Container(new GridLayout(1)){
                     @Override
                     public Dimension getPreferredSize() {
-                        return new Dimension(Display.getInstance().getDisplayWidth() / 4, Display.getInstance().getDisplayHeight() / 4);
+                        Dimension dim =  super.getPreferredSize();
+                        dim.setHeight(Display.getInstance().getDisplayHeight() / 4);
+                        return dim;
                     }
                 };
                 dishesSampleCnt.setUIID("DishesSampleCnt");

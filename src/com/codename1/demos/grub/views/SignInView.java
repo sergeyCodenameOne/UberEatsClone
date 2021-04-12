@@ -120,7 +120,12 @@ public class SignInView<T extends Entity> extends AbstractEntityView<T> {
         signInOptionsCnt.setUIID("SignOptionsCnt");
         wrapper.add(BorderLayout.SOUTH, signInOptionsCnt);
 
-        add(wrapper);
+        if (CN.isTablet()){
+            setLayout(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER_ABSOLUTE));
+            add(BorderLayout.CENTER, wrapper);
+        }else{
+            add(wrapper);
+        }
     }
 
     @Override

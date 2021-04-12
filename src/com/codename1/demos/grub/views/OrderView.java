@@ -44,6 +44,7 @@ import com.codename1.rad.ui.AbstractEntityView;
 import com.codename1.ui.*;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.plaf.UIManager;
 
 import java.util.ArrayList;
@@ -51,6 +52,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import static com.codename1.ui.CN.convertToPixels;
+import static com.codename1.ui.CN.isTablet;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
 public class OrderView extends AbstractEntityView {
@@ -74,7 +76,9 @@ public class OrderView extends AbstractEntityView {
         account = (AccountModel) profileEntity;
         setLayout(BoxLayout.y());
         setUIID("OrderCnt");
+        Container orderDetails = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         setScrollableY(true);
+        setScrollVisible(false);
 
         this.viewNode = viewNode;
         orderProp = restEntity.findProperty(Restaurant.order);
@@ -90,12 +94,13 @@ public class OrderView extends AbstractEntityView {
         headerCnt.setUIID("AddDishHeaderCnt");
         add(headerCnt);
 
+        Container dishesCnt = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         if (restEntity.get(orderProp) instanceof EntityList) {
             EntityList<Entity> dishList = (EntityList) (restEntity.get(Restaurant.order));
             for(Entity dishOrderEntity : dishList){
                 DishOrderPreview dish = new DishOrderPreview(dishOrderEntity, viewNode);
                 dishes.add(dish);
-                add(dish);
+                dishesCnt.add(dish);
             }
         }
         MultiButton addPromoCodeButton = new MultiButton("ADD PROMO CODE");
@@ -106,7 +111,7 @@ public class OrderView extends AbstractEntityView {
         Image gotoIcon = FontImage.createMaterial(FontImage.MATERIAL_KEYBOARD_ARROW_RIGHT, UIManager.getInstance().getComponentStyle("GoToIcon"));
         addPromoCodeButton.setEmblem(gotoIcon);
         addPromoCodeButton.setEmblemPosition("East");
-        add(addPromoCodeButton);
+        orderDetails.add(addPromoCodeButton);
 
         EntityList<Entity> cards = (EntityList<Entity>) account.getCreditCards();
         if (cards.size() == 0){
@@ -116,7 +121,7 @@ public class OrderView extends AbstractEntityView {
         }
 
         paymentView = new PaymentMethodView(paymentMethod, viewNode);
-        add(paymentView);
+        orderDetails.add(paymentView);
 
         deliverToButton = new MultiButton("DELIVER TO");
         deliverToButton.setUIID("ManageAddressButton");
@@ -137,7 +142,7 @@ public class OrderView extends AbstractEntityView {
                 action.fireEvent(null, OrderView.this);
             }
         });
-        add(deliverToButton);
+        orderDetails.add(deliverToButton);
 
         Label deliveryFeeHeaderLabel = new Label("Delivery Fee", "OrderDeliveryFeeHeader");
         Label deliveryFeeLabel = new Label(restEntity.getDouble(Restaurant.deliveryFee) + " " + L10NManager.getInstance().getCurrencySymbol(), "OrderDeliveryFee");
@@ -171,8 +176,16 @@ public class OrderView extends AbstractEntityView {
         summaryCnt.add(BorderLayout.NORTH, BoxLayout.encloseY(deliveryFeeCnt, itemTotalCostCnt));
         summaryCnt.add(BorderLayout.CENTER, totalPriceCnt);
 
-        add(summaryCnt);
-        add(confirmOrder);
+        orderDetails.add(summaryCnt);
+        orderDetails.add(confirmOrder);
+        if (isTablet()){
+            Container wrapper = new Container(new GridLayout(2));
+            wrapper.addAll(dishesCnt, orderDetails);
+            add(wrapper);
+        }else{
+            add(dishesCnt);
+            add(orderDetails);
+        }
         update();
     }
 

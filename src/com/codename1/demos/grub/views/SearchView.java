@@ -38,6 +38,7 @@ import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.layouts.GridLayout;
 
 import static com.codename1.ui.CN.convertToPixels;
 import static com.codename1.ui.util.Resources.getGlobalResources;
@@ -124,8 +125,13 @@ public class SearchView extends AbstractEntityView {
         add(filterCnt);
         Label categoryHeaderLabel = new Label("All Restaurants", "CategoryHeader");
         add(categoryHeaderLabel);
-
-        rests = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+        final int restsCount = ((EntityList)appEntity.get(restsProp)).size();
+        final int landscapeRows = restsCount % 2 == 0 ? restsCount / 2 : restsCount / 2 + 1;
+        if(CN.isTablet()){
+            rests = new Container(new GridLayout(landscapeRows, 2));
+        }else{
+            rests = new Container(new GridLayout(restsCount, 1, landscapeRows, 2));
+        }
         add(rests);
         update();
     }

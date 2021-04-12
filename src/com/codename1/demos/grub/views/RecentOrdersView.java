@@ -43,6 +43,7 @@ public class RecentOrdersView extends AbstractEntityView {
         setLayout(new BorderLayout());
         completedOrdersCnt = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         completedOrdersCnt.setScrollableY(true);
+        completedOrdersCnt.setScrollVisible(false);
         completedOrdersCnt.setUIID("CompletedOrdersCnt");
         add(BorderLayout.CENTER, completedOrdersCnt);
         update();

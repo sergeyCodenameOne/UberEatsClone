@@ -60,7 +60,9 @@ public class ProfileView<T extends Entity> extends AbstractEntityView<T> {
     public ProfileView(T account, Node mainWindowNode, Node appNode) {
         super(account);
         this.viewNode = mainWindowNode;
-        setLayout(new BorderLayout());
+        setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+        setScrollableY(true);
+        setScrollVisible(false);
         setUIID("ProfileCnt");
 
         firstNameProp = account.findProperty(Account.firstName);
@@ -160,7 +162,9 @@ public class ProfileView<T extends Entity> extends AbstractEntityView<T> {
         profileActions.addAll(editProfile, myAddressButton, paymentButton, logoutButton);
         profileActions.setUIID("ProfileActionsCnt");
 
-        add(BorderLayout.NORTH, headerCnt).add(BorderLayout.CENTER, profileCnt).add(BorderLayout.SOUTH, profileActions);
+        add(headerCnt).
+        add(profileCnt).
+        add(profileActions);
     }
 
     @Override

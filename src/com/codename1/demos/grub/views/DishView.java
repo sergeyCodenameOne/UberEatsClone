@@ -65,7 +65,9 @@ public class DishView extends AbstractEntityView{
     public DishView(Entity entity, Node viewNode, Node addOnNode) {
         super(entity);
         setUIID("Dish");
-        setLayout(new BorderLayout());
+        setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+        setScrollableY(true);
+        setScrollVisible(false);
 
         this.viewNode = viewNode;
         nameProp = entity.findProperty(Dish.name);
@@ -84,7 +86,6 @@ public class DishView extends AbstractEntityView{
         Container headerCnt = BorderLayout.centerAbsolute(headerLabel).add(BorderLayout.WEST, backButton);
         headerCnt.setUIID("DishHeaderCnt");
 
-
         PropertySelector imagePropertySelector = new PropertySelector(entity, pictureUrlProp);
         RoundRectImageRenderer renderer = new RoundRectImageRenderer(400, 400, 2);
 
@@ -92,7 +93,7 @@ public class DishView extends AbstractEntityView{
         ScaleImageLabel dishImageLabel= new ScaleImageLabel(dishImage);
         dishImageLabel.setUIID("DishImageLabel");
 
-        add(BorderLayout.NORTH, BoxLayout.encloseY(headerCnt, dishImageLabel));
+        add(BoxLayout.encloseY(headerCnt, dishImageLabel));
 
         Label dishName = new Label(entity.getText(nameProp), "DishName");
         SpanLabel dishDescription = new SpanLabel(entity.getText(descriptionProp), "DishDescription");
@@ -147,7 +148,7 @@ public class DishView extends AbstractEntityView{
         dishBody.add(descriptionCnt);
         dishBody.add(addOnsCnt);
         dishBody.add(dishRemarksCnt);
-        add(BorderLayout.CENTER, dishBody);
+        add(dishBody);
 
         Button addToCartButton = new Button("Add To Cart", "DishAddToCartText");
         totalPriceLabel = new Label(Util.getPriceAsString(entity.getDouble(Dish.price)), "DishAddToCartPrice");
@@ -165,7 +166,7 @@ public class DishView extends AbstractEntityView{
                 ActionSupport.dispatchEvent(new FormController.FormBackEvent(backButton));
             }
         });
-        add(BorderLayout.SOUTH, BorderLayout.center(addToCartCnt));
+        add(BorderLayout.center(addToCartCnt));
     }
 
     @Override

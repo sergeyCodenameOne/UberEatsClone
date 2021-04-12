@@ -24,6 +24,7 @@
 package com.codename1.demos.grub;
 
 import com.codename1.l10n.L10NManager;
+import com.codename1.ui.CN;
 import com.codename1.ui.Graphics;
 import com.codename1.ui.Image;
 
@@ -65,6 +66,11 @@ public class Util {
         }
 
         return roundRectImage.scaled(width, height).createMask();
+    }
+
+    public static float convertToDips(int pixels){
+        final int pixelsPerDip = CN.convertToPixels(1);
+        return pixels / pixelsPerDip;
     }
 
 }

@@ -40,9 +40,9 @@ import com.codename1.ui.validation.Validator;
 import static com.codename1.ui.CN.convertToPixels;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
-public class SignUpView<T extends Entity> extends AbstractEntityView<T> {
+public class SignUpView extends AbstractEntityView {
 
-    public SignUpView(T entity, Node applicationControllerViewNode, Node accountViewNode) {
+    public SignUpView(Entity entity, Node applicationControllerViewNode, Node accountViewNode) {
         super(entity);
         setLayout(new BoxLayout(BoxLayout.Y_AXIS));
         setUIID("SignUpCnt");
@@ -132,7 +132,12 @@ public class SignUpView<T extends Entity> extends AbstractEntityView<T> {
         signUpOptionsCnt.setUIID("SignUpOptionsCnt");
 
         wrapper.add(BorderLayout.SOUTH, signUpOptionsCnt);
-        add(wrapper);
+        if (CN.isTablet()){
+            setLayout(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER_ABSOLUTE));
+            add(BorderLayout.CENTER, wrapper);
+        }else{
+            add(wrapper);
+        }
     }
 
     @Override

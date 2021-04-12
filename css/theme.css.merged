@@ -1,5 +1,5 @@
 
-/* C:\Users\serge\Desktop\Work\UberEatsClone\lib\impl\css\CodeRAD\theme.css */
+/* C:\Users\serge\Desktop\Work\Grub\lib\impl\css\CodeRAD\theme.css */
 :root {
     --rad-main-font: 'native:MainRegular';
     --rad-main-font-light: 'native:MainLight';
@@ -142,9 +142,9 @@ FieldDescriptionText {
     font-family: var(--rad-main-font);
     color: #666666;
 }
-/* end C:\Users\serge\Desktop\Work\UberEatsClone\lib\impl\css\CodeRAD\theme.css*/
+/* end C:\Users\serge\Desktop\Work\Grub\lib\impl\css\CodeRAD\theme.css*/
 
-/* C:\Users\serge\Desktop\Work\UberEatsClone\css\theme.css */
+/* C:\Users\serge\Desktop\Work\Grub\css\theme.css */
 /*
  * Copyright (c) 2012, Codename One and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
@@ -249,14 +249,11 @@ ImagesHighRes{
     cn1-source-dpi: 480;
 }
 
-
-
 BackButton{
     color: white;
     padding: 2mm;
     margin: 5mm 0 0 1mm;
 }
-
 
 TextErrorIcon{
     font-size: 3mm;
@@ -754,8 +751,6 @@ OrderConfirmButton.pressed{
     background-color: #9bdf6c;
 }
 
-
-
 AccountCnt{
     background-image: url(images/lobby-background.png);
     cn1-background-type: cn1-image-scaled-fill;
@@ -763,6 +758,8 @@ AccountCnt{
     margin: 0;
     padding: 2mm;
 }
+
+
 
 SignInButton{
     background-color: rgba(0,0,0,0);
@@ -801,6 +798,7 @@ AccountWelcomeText{
     text-align: center;
     margin : 2mm;
 }
+
 
 AccountTopView{
     margin-top: 10mm;
@@ -1921,7 +1919,8 @@ FavoriteRestImageCnt{
 }
 
 FavoriteRestView{
-
+    padding: 0;
+    margin: 0 0 2mm 0;
 }
 
 DishesSampleCnt{
@@ -2498,4 +2497,4 @@ DarkModeButton{
 DarkModeButtonIcon{
     color: #7AC943;
 }
-/* End C:\Users\serge\Desktop\Work\UberEatsClone\css\theme.css */
+/* End C:\Users\serge\Desktop\Work\Grub\css\theme.css */

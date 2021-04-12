@@ -46,6 +46,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import static com.codename1.ui.CN.convertToPixels;
+import static com.codename1.ui.CN.isTablet;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
 public class HomeView extends AbstractEntityView {
@@ -102,14 +103,18 @@ public class HomeView extends AbstractEntityView {
             }
         };
         topViewLabel.setUIID("HomeTopViewImage");
-        topViewLabel.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+        topViewLabel.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED);
 
         topViewImage.add(BorderLayout.CENTER, topViewLabel);
 
         Container emptyGreyContainer = new Container() {
             @Override
             public Dimension getPreferredSize() {
-                return new Dimension(Display.getInstance().getDisplayWidth(), Display.getInstance().getDisplayHeight() / 20);
+                if (isTablet()){
+                    return new Dimension(Display.getInstance().getDisplayWidth(), Display.getInstance().getDisplayHeight() / 35);
+                }else{
+                    return new Dimension(Display.getInstance().getDisplayWidth(), Display.getInstance().getDisplayHeight() / 15);
+                }
             }
         };
         emptyGreyContainer.setUIID("EmptyGreyContainer");
@@ -252,8 +257,12 @@ public class HomeView extends AbstractEntityView {
                 action.fireEvent(appEntity, HomeView.this);
             }
         });
-
-        Container categoryContainer = new Container(new GridLayout(2, 4));
+        Container categoryContainer;
+        if (isTablet()){
+            categoryContainer = new Container(new GridLayout(1, 8));
+        }else{
+            categoryContainer = new Container(new GridLayout(2, 4));
+        }
         categoryContainer.setUIID("CategoryContainer");
         categoryContainer.addAll(categoryRiceButton,
                 categoryRiceButton1,
@@ -343,7 +352,11 @@ public class HomeView extends AbstractEntityView {
         ScaleImageLabel categoryIcon = new ScaleImageLabel(categoryButtonImage) {
             @Override
             public Dimension getPreferredSize() {
-                return new Dimension(convertToPixels(6), convertToPixels(6));
+                if(CN.isTablet()){
+                    return new Dimension(convertToPixels(8), convertToPixels(8));
+                }else{
+                    return new Dimension(convertToPixels(6), convertToPixels(6));
+                }
             }
         };
         categoryIcon.setUIID("CategoryIconLabel");
@@ -368,21 +381,30 @@ public class HomeView extends AbstractEntityView {
     }
 
     private Container createRecommendedCnt(EntityList<Entity> restaurants) {
-        Container popularCnt = new Container(new BoxLayout(BoxLayout.X_AXIS));
-        popularCnt.setScrollableX(true);
+        Container recommendedCnt = new Container(new BoxLayout(BoxLayout.X_AXIS));
+        recommendedCnt.setScrollableX(true);
         for (Entity rest : restaurants) {
-            popularCnt.add(new RestaurantPreview(rest, viewNode));
+            recommendedCnt.add(new RestaurantPreview(rest, viewNode));
         }
-        return popularCnt;
+        return recommendedCnt;
     }
 
     private Container createAllRestaurantsCnt(EntityList<Entity> restaurants) {
-        Container popularCnt = new Container(new BoxLayout(BoxLayout.Y_AXIS));
-        popularCnt.setScrollableX(true);
-        for (Entity rest : restaurants) {
-            popularCnt.add(new RestaurantPreview(rest, viewNode));
+        final int restsCount = restaurants.size();
+        final int landscapeRows = restsCount % 2 == 0 ? restsCount / 2 : restsCount / 2 + 1;
+        Container allRestsCnt;
+        if (isTablet()){
+            allRestsCnt = new Container(new GridLayout(landscapeRows, 2));
+        }else{
+            allRestsCnt = new Container(new GridLayout(restsCount, 1, landscapeRows, 2));
         }
-        return popularCnt;
+
+        for (Entity rest : restaurants) {
+            allRestsCnt.add(new RestaurantPreview(rest, viewNode));
+        }
+
+        return allRestsCnt;
+
     }
 
     private void updateFilter(int category){

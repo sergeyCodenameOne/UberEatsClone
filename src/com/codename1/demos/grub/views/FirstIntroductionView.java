@@ -29,10 +29,7 @@ import com.codename1.rad.models.Entity;
 import com.codename1.rad.nodes.ActionNode;
 import com.codename1.rad.nodes.Node;
 import com.codename1.rad.ui.AbstractEntityView;
-import com.codename1.ui.Button;
-import com.codename1.ui.Container;
-import com.codename1.ui.Display;
-import com.codename1.ui.Label;
+import com.codename1.ui.*;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
@@ -45,9 +42,10 @@ public class FirstIntroductionView extends AbstractEntityView {
     public static final ActionNode.Category FINISHED_FIRST_INTRO = new ActionNode.Category();
 
 
-    public FirstIntroductionView(Entity entity, Node viewNode) {
+    public FirstIntroductionView(Entity entity, Node grubNode, Node introNode) {
         super(entity);
         setLayout(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER));
+        Container wrapper = new Container(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER_ABSOLUTE));
         setUIID("IntroductionView");
 
         Label header = new Label("Discover Restaurants", "IntroductionHeader");
@@ -57,8 +55,13 @@ public class FirstIntroductionView extends AbstractEntityView {
             @Override
             public Dimension getPreferredSize() {
                 Dimension dim = super.getPreferredSize();
-                dim.setWidth(Display.getInstance().getDisplayWidth());
-                dim.setHeight((int) (Display.getInstance().getDisplayWidth() / 1.5));
+                if (CN.isTablet()){
+                    dim.setWidth(Display.getInstance().getDisplayWidth() / 2);
+                    dim.setHeight((int) (Display.getInstance().getDisplayWidth() / 3));
+                }else{
+                    dim.setWidth(Display.getInstance().getDisplayWidth());
+                    dim.setHeight((int) (Display.getInstance().getDisplayWidth() / 1.5));
+                }
                 return dim;
             }
         };
@@ -73,7 +76,7 @@ public class FirstIntroductionView extends AbstractEntityView {
         Button next = new Button("NEXT", "IntroductionNextButton");
         next.addActionListener(evt->{
             evt.consume();
-            ActionNode action = viewNode.getInheritedAction(FINISHED_FIRST_INTRO);
+            ActionNode action = introNode.getInheritedAction(FINISHED_FIRST_INTRO);
             if (action != null) {
                 action.fireEvent(entity, FirstIntroductionView.this);
             }
@@ -82,14 +85,16 @@ public class FirstIntroductionView extends AbstractEntityView {
         Button skip = new Button("SKIP", "IntroductionSkipButton");
         skip.addActionListener(evt -> {
             evt.consume();
-            ActionNode action = viewNode.getInheritedAction(Grub.SKIP_TO_MAIN_WINDOW);
+            ActionNode action = grubNode.getInheritedAction(Grub.SKIP_TO_MAIN_WINDOW);
             if (action != null) {
                 action.fireEvent(null, FirstIntroductionView.this);
             }
         });
 
-        add(BorderLayout.CENTER, BoxLayout.encloseY(header, introImage));
-        add(BorderLayout.SOUTH, BoxLayout.encloseY(progressCnt, next, skip));
+        wrapper.add(BorderLayout.CENTER, BoxLayout.encloseY(header, introImage));
+        wrapper.add(BorderLayout.SOUTH, BoxLayout.encloseY(progressCnt, next, skip));
+
+        add(BorderLayout.CENTER, wrapper);
     }
 
     @Override

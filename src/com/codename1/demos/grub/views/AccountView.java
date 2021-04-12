@@ -37,7 +37,7 @@ import com.codename1.ui.plaf.UIManager;
 import static com.codename1.ui.CN.getDisplayWidth;
 import static com.codename1.ui.util.Resources.getGlobalResources;
 
-public class AccountView<T extends Entity> extends AbstractEntityView<T> {
+public class AccountView extends AbstractEntityView {
 
     Node viewNode;
 
@@ -46,11 +46,11 @@ public class AccountView<T extends Entity> extends AbstractEntityView<T> {
     public static final ActionNode.Category DARK_MODE = new ActionNode.Category();
 
 
-    public AccountView(T entity, Node viewNode, Node grubNode) {
+    public AccountView(Entity entity, Node viewNode, Node grubNode) {
         super(entity);
         this.viewNode = viewNode;
 
-        setLayout(new BorderLayout());
+        Container wrapper = new Container(new BorderLayout());
         setUIID("AccountCnt");
 
         Button darkModeButton = new Button("LIGHT", "DarkModeButton");
@@ -86,7 +86,8 @@ public class AccountView<T extends Entity> extends AbstractEntityView<T> {
         ScaleImageLabel logoLabel = new ScaleImageLabel(grubLogo){
             @Override
             public Dimension getPreferredSize() {
-                int width = getDisplayWidth() / 2;
+
+                int width = CN.isTablet() ? getDisplayWidth() / 4 : getDisplayWidth() / 2;
                 return new Dimension(getDisplayWidth() / 2 , (int)(width / 1.4));
             }
         };
@@ -94,9 +95,14 @@ public class AccountView<T extends Entity> extends AbstractEntityView<T> {
 
         Container topView = BoxLayout.encloseY(logoLabel, welcomeText, BorderLayout.centerAbsolute(darkModeButton));
         topView.setUIID("AccountTopView");
-        add(BorderLayout.NORTH, topView);
-        add(BorderLayout.SOUTH, BoxLayout.encloseY(signUp, signIn));
-
+        wrapper.add(BorderLayout.NORTH, topView);
+        wrapper.add(BorderLayout.SOUTH, BoxLayout.encloseY(signUp, signIn));
+        if (CN.isTablet()){
+            setLayout(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER_ABSOLUTE));
+        } else{
+            setLayout(new BorderLayout());
+        }
+        add(BorderLayout.CENTER, wrapper);
     }
 
     @Override
@@ -111,6 +117,6 @@ public class AccountView<T extends Entity> extends AbstractEntityView<T> {
 
     @Override
     public Node getViewNode() {
-        return null;
+        return viewNode;
     }
 }

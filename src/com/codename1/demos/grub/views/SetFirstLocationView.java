@@ -24,6 +24,7 @@
 package com.codename1.demos.grub.views;
 
 import com.codename1.demos.grub.Grub;
+import com.codename1.demos.grub.Util;
 import com.codename1.demos.grub.interfaces.Address;
 import com.codename1.demos.grub.models.AccountModel;
 import com.codename1.demos.grub.models.AddressModel;
@@ -81,6 +82,12 @@ public class SetFirstLocationView extends AbstractEntityView {
         validator.addSubmitButtons(continueButton);
         newLocationCnt.addAll(enterLocationHeader, city, street, continueButton, skipForNowButton);
         add(BorderLayout.SOUTH, newLocationCnt);
+
+        if(CN.isTablet()) {
+            final int sideMargin = (int) (Display.getInstance().getDisplayWidth() / 3.5);
+            newLocationCnt.getAllStyles().setMargin(Component.LEFT, Util.convertToDips(sideMargin));
+            newLocationCnt.getAllStyles().setMargin(Component.RIGHT, Util.convertToDips(sideMargin));
+        }
     }
 
     @Override

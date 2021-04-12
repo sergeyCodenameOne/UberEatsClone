@@ -42,19 +42,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.codename1.ui.CN.addNetworkErrorListener;
-import static com.codename1.ui.CN.updateNetworkThreadCount;
+import static com.codename1.ui.CN.*;
 
 
 public class Grub extends ApplicationController {
     Entity account;
+    private static Form currForm = null;
     private static boolean darkMode = false;
     private Resources theme;
 
     public static final ActionNode enterMainWindow = UI.action();
-    public static final ActionNode enterFirstIntroduction = UI.action();
-    public static final ActionNode enterSecondIntroduction = UI.action();
-    public static final ActionNode enterThirdIntroduction = UI.action();
+    public static final ActionNode enterIntroduction = UI.action();
     public static final ActionNode enterSetLocation = UI.action();
     public static final ActionNode logout = UI.action();
     public static final ActionNode darkModeActionNode = UI.action();
@@ -66,7 +64,7 @@ public class Grub extends ApplicationController {
     public static final int DEBUG_MODE_WITH_SIGNING_DARK_MODE = 2;
     public static final int DEBUG_MODE_WITHOUT_SIGNING_DARK_MODE = 3;
 
-    public static final int mode = DEBUG_MODE_WITH_SIGNING;
+    public static final int mode = DEBUG_MODE_WITHOUT_SIGNING;
 
     @Override
     public void actionPerformed(ControllerEvent evt) {
@@ -74,9 +72,7 @@ public class Grub extends ApplicationController {
             evt.consume();
 
             ViewNode viewNode = new ViewNode(
-                    UI.actions(SignInView.COMPLETE_SIGNING_IN, enterFirstIntroduction),
-                    UI.actions(FirstIntroductionView.FINISHED_FIRST_INTRO, enterSecondIntroduction),
-                    UI.actions(SecondIntroductionView.FINISHED_SECOND_INTRO, enterThirdIntroduction),
+                    UI.actions(SignInView.COMPLETE_SIGNING_IN, enterIntroduction),
                     UI.actions(ThirdIntroductionView.FINISHED_THIRD_INTRO, enterSetLocation),
                     UI.actions(SetFirstLocationView.COMPLETE_SETTING_ADDRESS, enterMainWindow),
                     UI.actions(ProfileView.LOG_OUT, logout),
@@ -99,20 +95,11 @@ public class Grub extends ApplicationController {
                     new AccountController(this, account, viewNode).getView().showBack();
                 });
 
-                addActionListener(enterFirstIntroduction, event->{
+                addActionListener(enterIntroduction, event->{
                     event.consume();
-                    new FirstIntroductionController(this, account, viewNode).getView().show();
+                    new IntroductionController(this, account, viewNode).getView().show();
                 });
 
-                addActionListener(enterSecondIntroduction, event->{
-                    event.consume();
-                    new SecondIntroductionController(this, account, viewNode).getView().show();
-                });
-
-                addActionListener(enterThirdIntroduction, event->{
-                    event.consume();
-                    new ThirdIntroductionController(this, account, viewNode).getView().show();
-                });
 
                 addActionListener(enterSetLocation, event -> {
                     event.consume();
@@ -243,7 +230,7 @@ public class Grub extends ApplicationController {
             Log.e(e);
         }
         Form currForm = Display.getInstance().getCurrent();
-        if (currForm != null){
+        if (currForm != null) {
             currForm.refreshTheme();
         }
     }
@@ -282,5 +269,32 @@ public class Grub extends ApplicationController {
     public static boolean isDarkMode(){
         return darkMode;
     }
+
+    @Override
+    public void stop() {
+        current = getCurrentForm();
+        dispatchEvent(new StopEvent());
+        System.out.println(current);
+        if(current instanceof Dialog) {
+            ((Dialog)current).dispose();
+            current = getCurrentForm();
+        }
+    }
+
+    @Override
+    public void start() {
+        showCurrentForm();
+        if (current == null){
+            dispatchEvent(new StartEvent());
+        }
+    }
+
+    @Override
+    protected void showCurrentForm() {
+        if (current != null) {
+            current.show();
+        }
+    }
+    
 }
 

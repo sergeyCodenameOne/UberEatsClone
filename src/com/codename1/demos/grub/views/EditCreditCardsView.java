@@ -51,6 +51,7 @@ public class EditCreditCardsView extends AbstractEntityView {
         this.viewNode = viewNode;
         setUIID("EditCreditCardsView");
         setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+        setScrollVisible(false);
         setScrollableY(true);
 
         Button backButton = new Button(FontImage.MATERIAL_KEYBOARD_ARROW_LEFT);

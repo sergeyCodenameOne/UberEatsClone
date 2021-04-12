@@ -82,6 +82,7 @@ public class EditAddressesView extends AbstractEntityView {
         add(BorderLayout.NORTH, BoxLayout.encloseY(headerCnt, savedAddresses, addAddressButton));
 
         addressesCnt = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+        addressesCnt.setScrollVisible(false);
         addressesCnt.setScrollableY(true);
         add(BorderLayout.CENTER, addressesCnt);
         update();

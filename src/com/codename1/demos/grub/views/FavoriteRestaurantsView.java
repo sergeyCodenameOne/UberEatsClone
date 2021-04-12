@@ -34,6 +34,7 @@ import com.codename1.ui.Container;
 import com.codename1.ui.Label;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.GridLayout;
 
 import java.util.List;
 
@@ -52,8 +53,10 @@ public class FavoriteRestaurantsView extends AbstractEntityView {
         Container headerCnt = BorderLayout.center(headerLabel);
         headerCnt.setUIID("FavoriteHeaderCnt");
         add(headerCnt);
-        restsCnt = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+        restsCnt = new Container();
+//        ((GridLayout)restsCnt.getLayout()).
         restsCnt.setScrollableY(true);
+        restsCnt.setScrollVisible(false);
         add(restsCnt);
 
         update();
@@ -64,8 +67,16 @@ public class FavoriteRestaurantsView extends AbstractEntityView {
         restsCnt.removeAll();
         if (getEntity().get(Account.favoriteRestaurants) instanceof EntityList){
             EntityList<Entity> restList = (EntityList<Entity>)getEntity().get(Account.favoriteRestaurants);
-            for(Entity rest : restList){
-                restsCnt.add(new FavoriteRestView((RestaurantModel) rest, viewNode));
+            final int restListSize = restList.size();
+            if (restListSize > 0){
+                int landScapeRows = restListSize / 2;
+                if (restListSize % 2 != 0){
+                    landScapeRows++;
+                }
+                restsCnt.setLayout(new GridLayout(restListSize, 1, landScapeRows, 2));
+                for(Entity rest : restList){
+                    restsCnt.add(new FavoriteRestView((RestaurantModel) rest, viewNode));
+                }
             }
         }
     }
@@ -82,7 +93,7 @@ public class FavoriteRestaurantsView extends AbstractEntityView {
 
     public void addFavorite(Entity rest){
         restsCnt.add(new FavoriteRestView((RestaurantModel) rest, viewNode));
-        restsCnt.revalidateWithAnimationSafety();
+        update();
     }
 
     public void removeFavorite(Entity rest){
@@ -94,6 +105,6 @@ public class FavoriteRestaurantsView extends AbstractEntityView {
                 }
             }
         }
-        restsCnt.revalidateWithAnimationSafety();
+        update();
     }
 }

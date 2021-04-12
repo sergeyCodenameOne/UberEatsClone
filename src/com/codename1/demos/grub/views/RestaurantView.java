@@ -195,7 +195,12 @@ public class RestaurantView extends AbstractEntityView{
 
         int numOdDishes = dishes.size();
         int rows = (numOdDishes % 2 == 0) ? numOdDishes / 2 : numOdDishes / 2 + 1;
-        dishesContainer.setLayout(new GridLayout(rows, 2));
+        int landscapeRows = (numOdDishes % 4 == 0) ? numOdDishes / 4 : numOdDishes / 4 + 1;
+        if (CN.isTablet()){
+            dishesContainer.setLayout(new GridLayout(landscapeRows, 4));
+        }else{
+            dishesContainer.setLayout(new GridLayout(rows, 2, landscapeRows, 4));
+        }
         for (Entity dishEntity : dishes) {
             DishPreview dish = new DishPreview(dishEntity, viewNode);
             dishesContainer.add(dish);

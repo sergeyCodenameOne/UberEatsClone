@@ -102,14 +102,11 @@ ImagesHighRes{
     cn1-source-dpi: 480;
 }
 
-
-
 BackButton{
     color: white;
     padding: 2mm;
     margin: 5mm 0 0 1mm;
 }
-
 
 TextErrorIcon{
     font-size: 3mm;
@@ -607,8 +604,6 @@ OrderConfirmButton.pressed{
     background-color: #9bdf6c;
 }
 
-
-
 AccountCnt{
     background-image: url(images/lobby-background.png);
     cn1-background-type: cn1-image-scaled-fill;
@@ -616,6 +611,8 @@ AccountCnt{
     margin: 0;
     padding: 2mm;
 }
+
+
 
 SignInButton{
     background-color: rgba(0,0,0,0);
@@ -654,6 +651,7 @@ AccountWelcomeText{
     text-align: center;
     margin : 2mm;
 }
+
 
 AccountTopView{
     margin-top: 10mm;
@@ -1774,7 +1772,8 @@ FavoriteRestImageCnt{
 }
 
 FavoriteRestView{
-
+    padding: 0;
+    margin: 0 0 2mm 0;
 }
 
 DishesSampleCnt{
