@@ -1,6 +1,6 @@
 = Grub - UberEats Clone
 
-Grub is a full-featured UberEats clone app template in Java/Kotlin for Codename One. It helps to understand how to build an elaborate cross-platform food delivery app such as UberEats, Foodpanda, GrubHub etc using the new CodeRad tools.
+Grub is a full-featured UberEats clone app template in Java/Kotlin for Android, iOS, Desktop & Web. It helps to build an elaborate cross-platform food delivery app such as UberEats, Foodpanda, GrubHub etc using the new CodeRad tools.
 
 image::https://sergeycodenameone.github.io/uber-eats-clone-banner.jpg[width=480]
 
