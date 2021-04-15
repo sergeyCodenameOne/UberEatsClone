@@ -15,13 +15,10 @@ Apache 2.0
 
 == Demo
 
-* Try https://shannah.github.io/RADChatApp/demo[Javascript version] in your browser.
-* Download https://github.com/shannah/RADChatApp/releases/download/1.0/CN1Chat-debug.apk[Android demo app].
+* Download https://github.com/sergeyCodenameOne/UberEatsClone/releases/download/v1.0/Grub.apk[Android demo app].
 
 
 NOTE: The app is not connected to any backend server and all the logic is just for the visual effect. Although The app can be easly connected to any server.
-
-See how to build this demo in the https://shannah.github.io/RADChatApp/getting-started-tutorial.html[Getting Started Tutorial]
 
 
 == Installation
