@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.codenameone:codenameone-core:7.0.23">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/codenameone/codenameone-core/7.0.23/codenameone-core-7.0.23.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/codenameone/codenameone-core/7.0.23/codenameone-core-7.0.23-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/codenameone/codenameone-core/7.0.23/codenameone-core-7.0.23-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

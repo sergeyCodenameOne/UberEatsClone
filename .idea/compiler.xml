@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="grub-common" />
+        <module name="grub-javase" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="grub" target="1.8" />
+      <module name="grub-cn1libs" target="1.8" />
+      <module name="grub-CodeRAD" target="1.8" />
+      <module name="grub-common" target="1.8" />
+      <module name="grub-javase" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
