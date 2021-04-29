@@ -4,9 +4,26 @@ Grub is a full-featured UberEats clone app template in Java/Kotlin for Android, 
 
 image::https://sergeycodenameone.github.io/uber-eats-clone-banner.jpg[width=480]
 
-
-
 This app designed as a proof of concept for the https://github.com/shannah/CodeRAD[CodeRAD library], which facilitates the development of rich, reusable UI components for Codename One.  It contains everything you should need to build a rich and reusable app with the Rapid application development principles.
+
+== Features
+
+- Light/Dark mode
+- Onboarding screens
+- Register & Sign In
+- Location
+- Search
+- Filters
+- Restaurant Categories
+- Cart - Add to Cart
+- Promo Code
+- Payments - Credit Cards Management
+- Favourites
+- Order Tracking
+- Profile
+- Optimized for both iOS and Android
+- Fully customizable codebase
+- Highly-modularized code
 
 == License
 
@@ -18,7 +35,7 @@ Apache 2.0
 * Download https://github.com/sergeyCodenameOne/UberEatsClone/releases/download/v1.0/Grub.apk[Android demo app].
 
 
-NOTE: The app is not connected to any backend server and all the logic is just for the visual effect. Although The app can be easly connected to any server.
+NOTE: The app is not connected to any backend server and all the logic is just for the visual effect. Although the app can be easly connected to any server.
 
 
 == Installation
