@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Maven: ATTACHED-JAR: com.codename1.demos.grub:grub-CodeRAD:common:1.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/cn1libs/CodeRAD/jars/main.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

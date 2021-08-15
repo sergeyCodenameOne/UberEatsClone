@@ -11,7 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="grub" target="1.8" />
+      <module name="Grub" target="1.8" />
       <module name="grub-cn1libs" target="1.8" />
       <module name="grub-CodeRAD" target="1.8" />
       <module name="grub-common" target="1.8" />

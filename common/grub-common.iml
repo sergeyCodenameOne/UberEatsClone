@@ -14,5 +14,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.codenameone:codenameone-core:7.0.23" level="project" />
     <orderEntry type="module" module-name="grub-CodeRAD" />
+    <orderEntry type="library" name="Maven: ATTACHED-JAR: com.codename1.demos.grub:grub-CodeRAD:common:1.0-SNAPSHOT" level="project" />
   </component>
 </module>
