@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Grub.iml" filepath="$PROJECT_DIR$/Grub.iml" />
+      <module fileurl="file://$PROJECT_DIR$/grub.iml" filepath="$PROJECT_DIR$/grub.iml" />
       <module fileurl="file://$PROJECT_DIR$/cn1libs/CodeRAD/grub-CodeRAD.iml" filepath="$PROJECT_DIR$/cn1libs/CodeRAD/grub-CodeRAD.iml" />
       <module fileurl="file://$PROJECT_DIR$/cn1libs/grub-cn1libs.iml" filepath="$PROJECT_DIR$/cn1libs/grub-cn1libs.iml" />
       <module fileurl="file://$PROJECT_DIR$/common/grub-common.iml" filepath="$PROJECT_DIR$/common/grub-common.iml" />

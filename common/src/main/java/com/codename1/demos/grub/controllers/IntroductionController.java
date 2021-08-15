@@ -19,7 +19,9 @@
 
 package com.codename1.demos.grub.controllers;
 
-import com.codename1.demos.grub.views.*;
+import com.codename1.demos.grub.views.FirstIntroductionView;
+import com.codename1.demos.grub.views.IntroductionView;
+import com.codename1.demos.grub.views.SecondIntroductionView;
 import com.codename1.rad.controllers.Controller;
 import com.codename1.rad.controllers.FormController;
 import com.codename1.rad.models.Entity;

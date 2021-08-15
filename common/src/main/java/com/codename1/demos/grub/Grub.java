@@ -20,7 +20,10 @@
 
 package com.codename1.demos.grub;
 
-import com.codename1.demos.grub.controllers.*;
+import com.codename1.demos.grub.controllers.AccountController;
+import com.codename1.demos.grub.controllers.IntroductionController;
+import com.codename1.demos.grub.controllers.MainWindowController;
+import com.codename1.demos.grub.controllers.SetFirstLocationController;
 import com.codename1.demos.grub.interfaces.Account;
 import com.codename1.demos.grub.models.*;
 import com.codename1.demos.grub.views.*;

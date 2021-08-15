@@ -59,8 +59,18 @@
       </dependency>
       <dependency>
           <groupId>com.codenameone</groupId>
+          <artifactId>codenameone-core</artifactId>
+          <scope>provided</scope>
+      </dependency>
+      <dependency>
+          <groupId>com.codenameone</groupId>
           <artifactId>codenameone-javase</artifactId>
           <scope>test</scope>
+      </dependency>
+      <dependency>
+          <groupId>com.codenameone</groupId>
+          <artifactId>codenameone-javase</artifactId>
+          <scope>provided</scope>
       </dependency>
 
   </dependencies>

@@ -1,5 +1,5 @@
 
-/* C:\Users\serge\Desktop\grub\common\src\main\css\theme.css */
+/* C:\Users\serge\Desktop\new Proj\javase\..\common\src\main\css\theme.css */
 /*
  * Copyright (c) 2012, Codename One and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
@@ -28,78 +28,78 @@
 }
 
 Images{
-    background-image:   url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/placeholder.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/credit-card.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/half-round-rectangle.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/ticket-icon.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/map-pin-icon.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/wallet-icon.png"),
+    background-image:   url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/placeholder.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/credit-card.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/half-round-rectangle.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/ticket-icon.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/map-pin-icon.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/wallet-icon.png"),
 
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/apple-icon2.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/credit-card-icon.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/paypal-icon.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/cash-icon.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/account-place-holder.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/apple-icon2.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/credit-card-icon.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/paypal-icon.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/cash-icon.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/account-place-holder.png"),
 
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/first-intro-image.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/second-intro-image.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/third-intro-image.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/first-intro-image.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/second-intro-image.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/third-intro-image.png"),
 
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/first-intro-image-dark.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/second-intro-image-dark.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/third-intro-image-dark.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/first-intro-image-dark.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/second-intro-image-dark.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/third-intro-image-dark.png"),
 
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/icon-message-circle.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/icon-phone.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/delivery-progress.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/delivery-progress-dark.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/set-first-location-background-dark.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/icon-message-circle.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/icon-phone.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/delivery-progress.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/delivery-progress-dark.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/set-first-location-background-dark.png"),
 
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/category-icons/rice-icon.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/category-icons/pizza-icon.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/category-icons/donut-icon.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/category-icons/chicken-icon.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/category-icons/steak-icon.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/category-icons/meal-icon.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/category-icons/kebab-icon.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/category-icons/all-icon.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/category-icons/rice-icon.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/category-icons/pizza-icon.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/category-icons/donut-icon.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/category-icons/chicken-icon.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/category-icons/steak-icon.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/category-icons/meal-icon.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/category-icons/kebab-icon.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/category-icons/all-icon.png"),
 
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/category-icons/rice-icon-selected.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/category-icons/pizza-icon-selected.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/category-icons/donut-icon-selected.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/category-icons/chicken-icon-selected.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/category-icons/steak-icon-selected.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/category-icons/meal-icon-selected.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/category-icons/kebab-icon-selected.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/category-icons/all-icon-selected.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/category-icons/rice-icon-selected.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/category-icons/pizza-icon-selected.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/category-icons/donut-icon-selected.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/category-icons/chicken-icon-selected.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/category-icons/steak-icon-selected.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/category-icons/meal-icon-selected.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/category-icons/kebab-icon-selected.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/category-icons/all-icon-selected.png"),
 
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/main-window-options/main-window-favorite.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/main-window-options/main-window-favorite-selected.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/main-window-options/main-window-home.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/main-window-options/main-window-home-selected.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/main-window-options/main-window-orders.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/main-window-options/main-window-orders-selected.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/main-window-options/main-window-profile.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/main-window-options/main-window-profile-selected.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/main-window-options/main-window-favorite.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/main-window-options/main-window-favorite-selected.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/main-window-options/main-window-home.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/main-window-options/main-window-home-selected.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/main-window-options/main-window-orders.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/main-window-options/main-window-orders-selected.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/main-window-options/main-window-profile.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/main-window-options/main-window-profile-selected.png"),
 
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/grub-logo-full.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/grub-logo.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/facebook-icon.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/google-icon.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/apple-icon.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/filter-button.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/delivery-time-icon.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/rating-icon.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/distance-icon.png"),
-                        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/lobby-background.png");
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/grub-logo-full.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/grub-logo.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/facebook-icon.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/google-icon.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/apple-icon.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/filter-button.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/delivery-time-icon.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/rating-icon.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/distance-icon.png"),
+                        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/lobby-background.png");
     cn1-source-dpi: 0;
 }
 
 ImagesHighRes{
     background-image:
-        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/afternoon.png"),
-        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/evening.png"),
-        url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/morning.png");
+        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/afternoon.png"),
+        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/evening.png"),
+        url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/morning.png");
 
     cn1-source-dpi: 480;
 }
@@ -202,7 +202,7 @@ RestTab.pressed{
 MainWindowTabsContainer{
     border: none;
     background-color: rgba(0,0,0,0);
-/*    background-image: url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/main-window-tabs-container-background.png");
+/*    background-image: url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/main-window-tabs-container-background.png");
     cn1-background-type: cn1-image-scaled;*/
     padding: 0;
     margin: 0;
@@ -611,7 +611,7 @@ OrderConfirmButton.pressed{
 }
 
 AccountCnt{
-    background-image: url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/lobby-background.png");
+    background-image: url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/lobby-background.png");
     cn1-background-type: cn1-image-scaled-fill;
     cn1-source-dpi: 320;
     margin: 0;
@@ -664,7 +664,7 @@ AccountTopView{
 }
 
 SignUpCnt{
-    background-image:   url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/register-background.png");
+    background-image:   url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/register-background.png");
     cn1-background-type: cn1-image-scaled;
     cn1-source-dpi: 480;
     background-color: white;
@@ -779,7 +779,7 @@ GoToSighUpButton.pressed{
 }
 
 SignInCnt{
-    background-image:   url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/sign-in-background.png");
+    background-image:   url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/sign-in-background.png");
     cn1-background-type: cn1-image-scaled;
     cn1-source-dpi: 480;
     background-color: white;
@@ -1699,7 +1699,7 @@ AddDishHeaderCnt{
 }
 
 OrderSummaryCnt{
-    background-image:   url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/order-total-background.png");
+    background-image:   url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/order-total-background.png");
     cn1-source-dpi: 480;
     cn1-background-type: cn1-image-scaled;
     padding: 2mm;
@@ -1956,7 +1956,7 @@ CompletedOrderIcon{
 ShadowContainer{
     padding: 0;
     margin: 0;
-    background-image:   url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/top-shade.png");
+    background-image:   url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/top-shade.png");
     cn1-background-type: cn1-image-scaled;
     cn1-source-dpi: 480;
 }
@@ -1984,7 +1984,7 @@ BottomShadowContainer{
         border: none;
         padding: 0;
         margin: 0;
-        background-image:   url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/bottom-shade.png");
+        background-image:   url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/bottom-shade.png");
         cn1-background-type: cn1-image-scaled;
         cn1-source-dpi: 480;
 }
@@ -2055,7 +2055,7 @@ IntroEmptyLabelOff{
 }
 
 SetFirstLocationView{
-    background-image: url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/set-first-location-background.png");
+    background-image: url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/set-first-location-background.png");
     cn1-source-dpi: 0;
     cn1-background-type: cn1-image-scaled;
     margin: 0;
@@ -2304,7 +2304,7 @@ DeliveryInfoCnt{
 CreditCard{
     padding: 2mm;
     margin: 0;
-    background-image:   url("cn1-merged-files/956cf78a95aa2a510c812bc22ae9c5bc/images/credit-card.png");
+    background-image:   url("cn1-merged-files/39d4abcf1ba51daa6ca4d3619950914c/images/credit-card.png");
     cn1-background-type: cn1-image-scaled;
     cn1-source-dpi: 480;
 }
@@ -2391,4 +2391,4 @@ DarkModeButton{
 DarkModeButtonIcon{
     color: #7AC943;
 }
-/* end C:\Users\serge\Desktop\grub\common\src\main\css\theme.css*/
+/* end C:\Users\serge\Desktop\new Proj\javase\..\common\src\main\css\theme.css*/

@@ -7,15 +7,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="grub-common" />
-        <module name="grub-javase" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Grub" target="1.8" />
+      <module name="grub" target="1.8" />
       <module name="grub-cn1libs" target="1.8" />
       <module name="grub-CodeRAD" target="1.8" />
       <module name="grub-common" target="1.8" />
       <module name="grub-javase" target="1.8" />
+      <module name="new Proj" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,0 +1,2391 @@
+/*
+ * Copyright (c) 2012, Codename One and/or its affiliates. All rights reserved.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation.  Codename One designates this
+ * particular file as subject to the "Classpath" exception as provided
+ * by Oracle in the LICENSE file that accompanied this code.
+ *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ *
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * Please contact Codename One through http://www.codenameone.com/ if you
+ * need additional information or have any questions.
+ */
+
+#Constants {
+    includeNativeBool: true;
+}
+
+Images{
+    background-image:   url(images/placeholder.png),
+                        url(images/credit-card.png),
+                        url(images/half-round-rectangle.png),
+                        url(images/ticket-icon.png),
+                        url(images/map-pin-icon.png),
+                        url(images/wallet-icon.png),
+
+                        url(images/apple-icon2.png),
+                        url(images/credit-card-icon.png),
+                        url(images/paypal-icon.png),
+                        url(images/cash-icon.png),
+                        url(images/account-place-holder.png),
+
+                        url(images/first-intro-image.png),
+                        url(images/second-intro-image.png),
+                        url(images/third-intro-image.png),
+
+                        url(images/first-intro-image-dark.png),
+                        url(images/second-intro-image-dark.png),
+                        url(images/third-intro-image-dark.png),
+
+                        url(images/icon-message-circle.png),
+                        url(images/icon-phone.png),
+                        url(images/delivery-progress.png),
+                        url(images/delivery-progress-dark.png),
+                        url(images/set-first-location-background-dark.png),
+
+                        url(images/category-icons/rice-icon.png),
+                        url(images/category-icons/pizza-icon.png),
+                        url(images/category-icons/donut-icon.png),
+                        url(images/category-icons/chicken-icon.png),
+                        url(images/category-icons/steak-icon.png),
+                        url(images/category-icons/meal-icon.png),
+                        url(images/category-icons/kebab-icon.png),
+                        url(images/category-icons/all-icon.png),
+
+                        url(images/category-icons/rice-icon-selected.png),
+                        url(images/category-icons/pizza-icon-selected.png),
+                        url(images/category-icons/donut-icon-selected.png),
+                        url(images/category-icons/chicken-icon-selected.png),
+                        url(images/category-icons/steak-icon-selected.png),
+                        url(images/category-icons/meal-icon-selected.png),
+                        url(images/category-icons/kebab-icon-selected.png),
+                        url(images/category-icons/all-icon-selected.png),
+
+                        url(images/main-window-options/main-window-favorite.png),
+                        url(images/main-window-options/main-window-favorite-selected.png),
+                        url(images/main-window-options/main-window-home.png),
+                        url(images/main-window-options/main-window-home-selected.png),
+                        url(images/main-window-options/main-window-orders.png),
+                        url(images/main-window-options/main-window-orders-selected.png),
+                        url(images/main-window-options/main-window-profile.png),
+                        url(images/main-window-options/main-window-profile-selected.png),
+
+                        url(images/grub-logo-full.png),
+                        url(images/grub-logo.png),
+                        url(images/facebook-icon.png),
+                        url(images/google-icon.png),
+                        url(images/apple-icon.png),
+                        url(images/filter-button.png),
+                        url(images/delivery-time-icon.png),
+                        url(images/rating-icon.png),
+                        url(images/distance-icon.png),
+                        url(images/lobby-background.png);
+    cn1-source-dpi: 0;
+}
+
+ImagesHighRes{
+    background-image:
+        url(images/afternoon.png),
+        url(images/evening.png),
+        url(images/morning.png);
+
+    cn1-source-dpi: 480;
+}
+
+BackButton{
+    color: white;
+    padding: 2mm;
+    margin: 5mm 0 0 1mm;
+}
+
+TextErrorIcon{
+    font-size: 3mm;
+    color: red;
+    background-color: rgba(0,0,0,0);
+}
+
+RestaurantNameHeader{
+    font-family: "native:MainBold";
+    font-size: 4mm;
+    text-align: center;
+    color: black;
+    background-color: rgba(0,0,0,0);
+    padding: 0;
+    margin: 0;
+}
+
+RestaurantCategory{
+    font-size: 3mm;
+    text-align: center;
+    color: #989898;
+    padding: 0;
+    margin: 0;
+}
+
+RestImage{
+    padding: 0;
+    margin: 0;
+}
+
+emptyRestaurantCnt{
+    background-color: #EFF0F0;
+    padding: 0;
+    margin: 0;
+}
+
+RestDetails{
+    background-color: white;
+    margin: 2mm 2mm 2mm 2mm;
+    padding: 3mm;
+    border-radius: 2mm;
+}
+
+RestTimeRatingCnt{
+    background-color: rgba(0,0,0,0);
+    margin: 2mm 0mm 0mm 0mm;;
+
+    padding: 0;
+}
+
+RestaurantRating{
+    font-size: 3mm;
+    color: #2680eb;
+    background-color: rgba(0,0,0,0);
+    font-family: "native:MainRegular";
+    margin: 0 2mm 0 2mm;
+}
+
+RestDeliveryTime{
+    font-size: 3mm;
+    color: #2680eb;
+    background-color: rgba(0,0,0,0);
+    margin: 0 2mm 0 2mm;
+}
+
+MenuContainer{
+    background-color: #EFF0F0;
+    padding: 0;
+    margin: 0;
+}
+
+RestTab{
+    border: 0.1mm solid #BDBDBD;
+    color: #BDBDBD;
+    background-color: rgba(0,0,0,0);
+    border-radius: 2mm;
+    padding: 1mm;
+    margin: 1mm;
+    font-family: "native:MainRegular";
+    font-size: 2mm;
+    text-align: center;
+}
+
+RestTab.pressed{
+    background-color: #7AC943;
+    color: white;
+    border: none;
+
+}
+
+MainWindowTabsContainer{
+    border: none;
+    background-color: rgba(0,0,0,0);
+/*    background-image: url("images/main-window-tabs-container-background.png");
+    cn1-background-type: cn1-image-scaled;*/
+    padding: 0;
+    margin: 0;
+}
+
+DishPreview{
+    background-color: white;
+    margin: 2mm;
+    border-radius: 2mm;
+}
+
+DialogButtonCommand{
+    color: black;
+}
+
+DishPreviewInfo{
+    background-color: rgba(0,0,0,0);
+}
+
+DishPreviewName{
+    background-color: rgba(0,0,0,0);
+    color: black;
+    text-align: center;
+    font-family: "native:MainBold";
+    font-size: 2.5mm;
+    margin: 0;
+    padding: 0.1mm;
+
+}
+
+DishPreviewDescription{
+    background-color: rgba(0,0,0,0);
+    color: #BDBDBD;
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 2mm;
+}
+
+DishPreviewPrice{
+    background-color: rgba(0,0,0,0);
+    color: #7AC943;
+    text-align: center;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    margin: 0;
+    padding: 0;
+}
+
+Dish{
+    margin: 0;
+    padding: 0;
+    border-radius: 4mm;
+    background-color: #EFF0F0;
+}
+
+DishEmptyWhite{
+    background-color: white;
+    padding: 0;
+    margin: 0;
+}
+
+DishEmptyBlue{
+    background-color: #134075;
+    padding: 0;
+    margin: 0;
+}
+
+DishName{
+    padding: 0;
+    margin: 0;
+    color: black;
+    background-color: rgba(0,0,0,0);
+    text-align: center;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+}
+
+DishDescription{
+    color: #989898;
+    background-color: rgba(0,0,0,0);
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 2mm;
+}
+
+DishPrice{
+    color: #7AC943;
+    background-color: rgba(0,0,0,0);
+    text-align: center;
+    font-family: "native:MainBold";
+    font-size: 4mm;
+    padding: 0.5mm;
+    margin: 0;
+}
+
+DishAddToCartText{
+    background-color: rgba(0,0,0,0);
+    color: white;
+    padding: 0;
+    margin: 1mm;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+
+}
+
+DishAddToCartPrice{
+    background-color: rgba(0,0,0,0);
+    color: white;
+    padding: 0;
+    margin: 1mm;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+}
+
+DishImage{
+    border-radius: 2mm;
+}
+
+DishBody{
+    background-color: rgba(0,0,0,0);
+    padding: 1mm;
+    margin: 0;
+}
+
+DishRemarksCnt{
+    margin: 0;
+    padding: 2mm;
+}
+
+DishRemarksHeader{
+    color: black;
+    background-color: rgba(0,0,0,0);
+    text-align: left;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+}
+
+DishRemarksTextArea{
+    color: black;
+    background-color: rgba(0,0,0,0);
+    font-family: "native:MainRegular";
+    font-size: 2.5mm;
+    border: 0.1mm solid #DBDFDF;
+    border-radius: 2mm;
+    padding: 2mm;
+}
+
+AddOnsCnt{
+    margin: 0;
+    padding: 2mm;
+}
+
+DishDecreaseButton{
+    color: white;
+    background-color: #2680eb;
+    font-size: 3mm;
+    padding: 0mm;
+}
+
+DishIncreaseButton{
+    color: white;
+    font-size: 3mm;
+    background-color: #2680eb;
+    padding: 0mm;
+}
+
+DishQuantityLabel{
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    color: #2680eb;
+    padding: 0;
+    margin : 0 1mm 0 1mm;
+}
+
+DishQuantityContainer{
+    margin: 0mm 6mm 0mm 0mm;
+}
+
+DishAddToCartCnt{
+    padding: 2mm;
+    margin: 0 4mm 3mm 4mm;
+    background-color: #7AC943;
+    border-radius: 4mm;
+}
+
+AddOnHeader{
+    color: black;
+    background-color: rgba(0,0,0,0);
+    text-align: left;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+}
+
+DishAddOn{
+    border-radius: 2mm;
+    background-color: rgba(0,0,0,0);
+    padding: 1mm;
+    margin: 2mm;
+}
+
+DishAddOnPressed{
+    border-radius: 2mm;
+    background-color: #7AC943;
+    padding: 1mm;
+    margin: 2mm;
+}
+
+DishAddOnName{
+    color: black;
+    padding: 1mm 0 1mm 0;
+    margin: 0;
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+}
+
+DishAddOnNamePressed{
+    color: black;
+    padding: 1mm 0 1mm 0;
+    margin: 0;
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+}
+
+DishAddOnPrice{
+    color: #7AC943;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    font-family: "native:MainBold";
+    font-size: 2.5mm;
+}
+
+DishAddOnPricePressed{
+    color: white;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    font-family: "native:MainBold";
+    font-size: 2.5mm;
+}
+
+
+OrderCnt{
+    background-color: #EFF0F0;
+    padding: 2mm;
+    margin: 0;
+}
+
+OrderHeader{
+    background-color: rgba(0,0,0,0);
+    color: #cde2fb;
+    text-align: center;
+    font-family: "native:MainBold";
+    font-size: 4mm;
+    margin: 2mm;
+}
+
+OrderToolbar{
+    background-color: #5099ef;
+    margin: 0;
+    padding: 0;
+}
+
+OrderDishQuantityLabel{
+    color: black;
+    background-color: rgba(0,0,0,0);
+    padding: 0;
+    margin: 0 1mm 0 1mm;
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+}
+
+OrderDishIncreaseButton{
+    border: 0.1mm #DBDFDF  cn1-round-border;
+    color: #989898;
+    padding: 0;
+    margin: 0;
+}
+
+OrderDishDecreaseButton{
+    border: 0.1mm #DBDFDF  cn1-round-border;
+    color: #989898;
+    padding: 0;
+    margin: 0;
+}
+
+OrderDish{
+    border-radius: 2mm;
+    background-color: white;
+    margin: 2mm;
+}
+
+OrderDishPrice{
+    color: #7AC943;
+    background-color: rgba(0,0,0,0);
+    text-align: center;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+}
+
+OrderDishName{
+    color: black;
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    padding: 0;
+    margin: 1mm;
+}
+
+OrderDishImage{
+    margin: 1mm;
+}
+
+TitleCommand{
+    color: white;
+    background-color: rgba(0,0,0,0);
+    padding: 2mm;
+    font-size: 3mm;
+}
+
+OrderDeliveryFeeHeader{
+    font-family: "native:MainRegular";
+    font-size: 2.5mm;
+    color: #BDBDBD;
+    background-color: rgba(0,0,0,0);
+    padding: 0;
+    margin: 0;
+}
+
+OrderDeliveryFee{
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    color: #BDBDBD;
+    background-color: rgba(0,0,0,0);
+    padding: 0;
+    margin: 0;
+}
+
+DeliveryFeeCnt{
+    margin : 0;
+    padding: 0.5mm;
+}
+
+ItemTotalCostCnt{
+    margin : 0;
+    padding: 0.5mm;
+}
+
+ItemTotalHeader{
+    font-family: "native:MainRegular";
+    font-size: 2.5mm;
+    color: #BDBDBD;
+    background-color: rgba(0,0,0,0);
+    padding: 0;
+    margin: 0;
+}
+
+ItemTotalCost{
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    color: #BDBDBD;
+    background-color: rgba(0,0,0,0);
+    padding: 0;
+    margin: 0;
+}
+
+TotalCostCnt{
+    margin: 4mm 0 0 0;
+    padding: 0;
+}
+
+TotalCostHeader{
+    font-family: "native:MainBold";
+    font-size: 4mm;
+    background-color: rgba(0,0,0,0);
+    text-align: center;
+    color: #7AC943;
+    padding: 0;
+    margin: 0;
+}
+
+TotalCost{
+    font-family: "native:MainBold";
+    font-size: 4mm;
+    background-color: rgba(0,0,0,0);
+    text-align: center;
+    color: #7AC943;
+    padding: 0;
+    margin: 0;
+}
+
+OrderConfirmButton{
+    background-color: #7AC943;
+    color: white;
+    border-radius: 4mm;
+    text-align: center;
+    padding: 2mm;
+    margin: 2mm;
+}
+
+OrderConfirmButton.pressed{
+    background-color: #9bdf6c;
+}
+
+AccountCnt{
+    background-image: url(images/lobby-background.png);
+    cn1-background-type: cn1-image-scaled-fill;
+    cn1-source-dpi: 320;
+    margin: 0;
+    padding: 2mm;
+}
+
+
+
+SignInButton{
+    background-color: rgba(0,0,0,0);
+    color: white;
+    font-family: "native:MainBold";
+    border: 0.1mm solid white;
+    border-radius: 4mm;
+    font-size: 3mm;
+    text-align: center;
+    margin: 1mm;
+    padding: 2mm;
+}
+
+SignInButton.pressed{
+    color: #7ac943;
+}
+
+SignUpButton{
+    background-color: white;
+    border-radius: 4mm;
+    color: #7AC943;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    text-align: center;
+    margin: 1mm;
+    padding: 2mm 5mm 2mm 5mm;
+}
+
+SignUpButton.pressed{
+    color: #9bdf6c;
+}
+
+AccountWelcomeText{
+    font-family: "native:MainBold";
+    font-size: 4mm;
+    text-align: center;
+    margin : 2mm;
+}
+
+
+AccountTopView{
+    margin-top: 10mm;
+}
+
+SignUpCnt{
+    background-image:   url(images/register-background.png);
+    cn1-background-type: cn1-image-scaled;
+    cn1-source-dpi: 480;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+}
+
+SignUpTopView{
+    padding: 10mm 2mm 1mm 2mm;
+    margin: 0;
+}
+
+SignInTopView{
+    padding: 10mm 2mm 2mm 2mm;
+}
+
+SignUpHeader{
+    font-family: "native:MainBold";
+    font-size: 5mm;
+    text-align: center;
+    color: black;
+    padding: 4mm;
+    margin: 0;
+}
+
+SignUpField{
+    color: black;
+    background-color: rgba(0,0,0,0);
+    border-radius: 1mm;
+    margin: 2mm;
+    padding: 2mm;
+    border: 0.3mm solid #e4e7e7;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+}
+
+SignUpFieldHint{
+    color: black;
+    background-color: rgba(0,0,0,0);
+    margin: 2mm;
+    padding: 2mm;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+}
+
+SignUpConfirmButton{
+    background-color: #7AC943;
+    color: white;
+    border-radius: 4mm;
+    text-align: center;
+    padding: 2mm;
+    margin: 2mm;
+}
+
+SignUpConfirmButton.pressed{
+    background-color: #9bdf6c;
+}
+
+SignUpLabel{
+
+    color: #989898;
+    font-family: "native:MainRegular";
+    font-size: 2mm;
+    text-align: center;
+    margin: 1mm;
+    padding: 0;
+}
+
+SignOptionsCnt{
+    padding: 0 0 2mm 0;
+    margin: 30mm 0 0 0;
+}
+
+SignUpOptionsCnt{
+    padding: 0 0 2mm 0;
+    margin: 0;
+}
+
+SignInLabel{
+    color: #989898;
+    font-family: "native:MainRegular";
+    font-size: 2mm;
+    text-align: center;
+    margin: 1mm;
+    padding: 0;
+}
+
+GoToSighInButton{
+    color: #7AC943;
+    font-family: "native:MainRegular";
+    font-size: 2mm;
+    border-bottom: 0.2mm solid #7AC943;
+    margin: 1mm 2mm 4mm 2mm;
+    padding: 0;
+}
+
+GoToSighInButton.pressed{
+    color: #9bdf6c;
+}
+
+GoToSighUpButton{
+    color: #7AC943;
+    font-family: "native:MainRegular";
+    font-size: 2mm;
+    border-bottom: 0.2mm solid #7AC943;
+    margin: 1mm 2mm 4mm 2mm;
+    padding: 0;
+}
+
+GoToSighUpButton.pressed{
+    color: #9bdf6c;
+}
+
+SignInCnt{
+    background-image:   url(images/sign-in-background.png);
+    cn1-background-type: cn1-image-scaled;
+    cn1-source-dpi: 480;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+}
+
+SignInHeader{
+    font-family: "native:MainBold";
+    font-size: 5mm;
+    text-align: center;
+    color: black;
+    padding: 4mm;
+    margin: 0;
+}
+
+SignInField{
+    color: black;
+    background-color: rgba(0,0,0,0);
+    border-radius: 1mm;
+    margin: 2mm;
+    padding: 2mm;
+    border: 0.3mm solid #e4e7e7;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+}
+
+SignInFieldHint{
+    color: black;
+    background-color: rgba(0,0,0,0);
+    margin: 2mm;
+    padding: 2mm;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+}
+
+SignInConfirmButton{
+    background-color: #7AC943;
+        color: white;
+        border-radius: 4mm;
+        text-align: center;
+        padding: 2mm;
+        margin: 2mm;
+}
+
+SignInConfirmButton.pressed{
+    background-color: #9bdf6c;
+}
+
+GoToSignUpLabel{
+    color: white;
+    font-family: "native:MainRegular";
+    font-size: 2mm;
+    margin: 1mm 2mm 4mm 2mm;
+    padding: 0;
+}
+
+AddressTypeStyle{
+    color: #7AC943;
+    background-color: rgba(0,0,0,0);
+
+}
+
+AddressTypeSelectedStyle{
+    color: white;
+    background-color: rgba(0,0,0,0);
+    margin: 0;
+    padding: 0;
+}
+
+AddressTypeButton{
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    background-color: white;
+    color: #989898;
+    padding: 2mm;
+    margin: 3mm 1mm 3mm 1mm;
+    border-radius: 2mm;
+}
+
+AddressTypeButton.pressed{
+    background-color: #7AC943;
+    color: white;
+}
+
+DefaultAddressCheckBox{
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    color: black;
+    padding: 2mm;;
+    margin: 2mm;
+    border: 0.3mm solid #e4e7e7;
+}
+
+EditProfile{
+    background-color: #EFF0F0;
+    border: none;
+    padding: 3mm;
+    margin: 0;
+}
+
+EditProfileSaveButton{
+    background-color: #7AC943;
+    color: white;
+    border-radius: 4mm;
+    text-align: center;
+    padding: 2mm;
+    margin: 2mm;
+}
+
+EditProfileSaveButton.pressed{
+    background-color: #9bdf6c;
+}
+
+EditProfileHeaderLabel{
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    margin: 0;
+    padding: 0;
+}
+
+EditProfileHeaderCnt{
+    background-color: white;
+    border-radius: 2mm;
+    padding: 2mm;
+    margin: 3mm 0 2mm 0;
+}
+
+EditProfileBackButton{
+    color: #989898;
+    font-size: 3mm;
+    padding: 0;
+    margin: 0;
+}
+
+EditAddressesHeaderCnt{
+    background-color: white;
+    border-radius: 2mm;
+    padding: 2mm;
+    margin: 3mm 0 2mm 0;
+}
+
+EditAddressesBackButton{
+    color: #989898;
+    font-size: 3mm;
+    padding: 0;
+    margin: 0;
+}
+
+EditAddressesHeaderLabel{
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    margin: 0;
+    padding: 0;
+}
+
+EditProfileField{
+    color: black;
+    background-color: rgba(0,0,0,0);
+    border-radius: 1mm;
+    margin: 2mm;
+    padding: 2mm;
+    border: 0.3mm solid #e4e7e7;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+}
+
+EditAddresses{
+    padding: 2mm;
+    margin: 0;
+    background-color: #EFF0F0;
+}
+
+
+MainWindowTab{
+    background-color: rgba(0,0,0,0);
+    color: #BDBDBD;
+    font-family: "native:MainRegular";
+    font-size: 2.5mm;
+    text-align: center;
+    margin: 2mm;
+    padding: 0mm 0mm 0mm 0mm;
+}
+
+MainWindowTab.pressed{
+    color: #7AC943;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    text-align: center;
+    margin: 0mm;
+    padding: 0mm 0mm 0mm 0mm;
+}
+
+MainWindowTabsCnt{
+    background-color: rgba(0,0,0,0);
+    margin: 0;
+    padding: 0;
+}
+
+MainWindowTabIcon{
+    color: #BDBDBD;
+    font-size: 4mm;
+    margin: 0;
+    padding: 1mm;
+}
+
+MainWindowTabIconSelected{
+    background: cn1-round-border;
+    color: white;
+    background-color: #7AC943;
+    font-size: 4mm;
+    margin: 0;
+    padding: 1mm;
+}
+
+ProfileCnt{
+    background-color: #EFF0F0;
+    margin: 0;
+    padding: 2mm;
+}
+
+ProfileHeader{
+    background-color: white;
+    border-radius: 2mm;
+    margin: 0;
+    padding: 2mm;
+    color: black;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    text-align: center;
+}
+
+ProfileHeaderCnt{
+    background-color: #EFF0F0;
+    margin: 0;
+    padding: 0;
+}
+
+ProfileInfoCnt{
+    background-color: rgba(0,0,0,0);
+    margin: 0;
+    padding: 1mm;
+
+}
+
+ProfileFirstNameLabel{
+    color: black;
+    font-family: "native:MainBold";
+    font-size: 4mm;
+    text-align: center;
+}
+
+ProfileLastNameLabel{
+    color: black;
+    font-family: "native:MainBold";
+    font-size: 4mm;
+    text-align: center;
+}
+
+ProfilePhoneLabel{
+    color: black;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    text-align: center;
+}
+
+ProfileImage{
+    color: #7AC943;
+    font-size: 10mm;
+    padding: 3mm;
+}
+
+ProfileImageLabel{
+    background-color: rgba(0,0,0,0);
+    text-align:center;
+    margin:2mm;
+    padding:3mm;
+}
+
+ProfileButtonsGoToIcon{
+    font-size: 3mm;
+    color: #989898;
+}
+
+ProfileButtonEmblemStyle{
+    padding: 0;
+    margin: 0;
+    font-size: 3mm;
+    background-color: rgba(0,0,0,0);
+    color: #7AC943;
+}
+
+ProfileActionButton{
+    background-color: white;
+    border-radius: 2mm;
+    margin: 2mm;
+    padding: 2mm;
+}
+
+ProfileActionButton.pressed{
+    background-color: #ececec;
+}
+
+ProfileActionButtonText{
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    color: black;
+}
+
+ProfileActionsCnt{
+    background-color: rgba(0,0,0,0);
+    margin: 0;
+}
+
+SavedAddressesHeader{
+    margin: 0;
+    padding: 2mm 0 2mm 0;
+    font-family: "native:MainBold";
+    font-size: 4mm;
+    color: black;
+}
+
+AddAddressButton{
+    padding: 1mm;
+    margin : 1mm;
+    border-radius: 3mm;
+    border: 0.2mm solid #989898;
+}
+
+AddAddressButton.pressed{
+    background-color: #7AC943;
+}
+
+AddAddressButtonText{
+    padding: 0;
+    margin: 0;
+    color: #989898;
+    font-size: 3mm;
+    font-family: "native:MainBold";
+    text-align: left;
+}
+
+AddressField{
+    color: black;
+    background-color: rgba(0,0,0,0);
+    border-radius: 1mm;
+    margin: 2mm;
+    padding: 2mm;
+    border: 0.3mm solid #e4e7e7;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+}
+
+AddressFieldHint{
+    color: black;
+    background-color: rgba(0,0,0,0);
+    margin: 2mm;
+    padding: 2mm;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+}
+
+SaveAddressConfirmButton{
+    background-color: #7AC943;
+    color: white;
+    border-radius: 4mm;
+    text-align: center;
+    padding: 2mm;
+    margin: 2mm;
+}
+
+SaveAddressConfirmButton.pressed{
+    background-color: #9bdf6c;
+}
+
+AddressViewImageSelectedStyle{
+    color: #7AC943;
+    background-color: rgba(0,0,0,0);
+    font-size: 3mm;
+}
+
+AddressViewImageStyle{
+    color: #989898;
+    background-color: rgba(0,0,0,0);
+    font-size: 3mm;
+}
+
+AddressViewSelectedStyle{
+    background-color: white;
+    border-radius: 2mm;
+    border: 0.5mm solid #7AC943;
+    padding: 3mm;
+    margin: 2mm;
+}
+
+AddressViewStyle{
+    background-color: white;
+    border-radius: 2mm;
+    padding: 3mm;
+    margin: 2mm;
+}
+
+AddressViewType{
+    padding: 0 2mm 0 2mm;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    color: black;
+}
+
+AddressViewLocation{
+    padding: 0 2mm 0 2mm;
+    font-family: "native:MainRegular";
+    font-size: 2.5mm;
+    color: #989898;
+}
+
+EditCreditCardsView{
+    background-color: #EFF0F0;
+    padding: 3mm;
+    margin: 0;
+}
+
+EditCreditCardsBackButton{
+    color: #989898;
+    font-size: 3mm;
+    padding: 0;
+    margin: 0;
+}
+
+EditCreditCardsHeaderLabel{
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    margin: 0;
+    padding: 0;
+}
+
+EditCreditCardsHeaderCnt{
+    background-color: white;
+    border-radius: 2mm;
+    padding: 2mm;
+    margin: 3mm 0 2mm 0;
+}
+
+SavedAddressesHeader{
+    margin: 0;
+    padding: 2mm 0 2mm 0;
+    font-family: "native:MainBold";
+    font-size: 4mm;
+    color: black;
+}
+
+AddCreditCardButton{
+    background-color: white;
+    padding: 5mm;
+    border-radius: 2mm;
+}
+
+AddCreditCardIcon{
+    font-size: 5mm;
+    color: black;
+    background-color: rgba(0,0,0,0);
+}
+
+AddCreditCardText{
+    color: black;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    text-align: center;
+}
+
+HomeTopViewImage{
+    margin: 0;
+    padding: 0;
+}
+
+EmptyGreyContainer{
+    background-color: #F4F5F5;
+    padding: 0;
+}
+
+BackToTopButton{
+    padding: 2mm;
+    margin: 2mm 6mm 2mm 6mm;
+    color: #9e9e9e;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    text-align: center;
+    border: 0.2mm solid #9e9e9e;
+    border-radius: 4mm;
+    background-color: rgba(0,0,0,0);
+}
+
+HomeSearchField{
+    background-color: white;
+    border-radius: 1mm;
+    padding: 2mm;
+    margin: 0 1mm 0 1mm;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    color: black;
+}
+
+HomeSearchFieldHint{
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    color: #989898;
+    padding: 2mm;
+    margin: 0 1mm 0 1mm;
+}
+
+HomeFilterButton{
+    background-color: white;
+    border-radius: 2mm;
+    padding: 2mm;
+    margin: 0 1mm 0 1mm;
+}
+
+HomeFilterButton.pressed{
+    background-color: #F1F1F1;
+}
+
+HomeSearchCnt{
+    margin: 0;
+    padding: 1mm 1mm 3mm 1mm;
+}
+
+CategoryContainer{
+    margin: 0;
+    background-color: #F4F5F5;
+}
+
+CategoryIconLabel{
+    background-color: rgba(0,0,0,0);
+    margin: 2mm;
+}
+CategoryIconWrapper{
+    background-color: #F9F9F9;
+    padding: 0;
+    margin: 0;
+
+}
+
+CategoryNameLabel{
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    color: black;
+    text-align: center;
+    padding: 1mm;
+    margin: 0;
+}
+
+PopularCnt{
+    padding: 2mm;
+    margin: 0;
+    background-color: #F4F5F5;
+}
+
+RecommendCnt{
+    padding: 2mm;
+    margin: 0;
+    background-color: #F4F5F5;
+}
+
+RestaurantPreview{
+    background-color: white;
+    padding: 0;
+    margin: 2mm;
+    border-radius: 2mm;
+}
+
+RestPreviewNameLabel{
+    color: white;
+    text-align: center;
+    font-family: "native:MainBold";
+    font-size: 4mm;
+    margin: 0;
+    padding: 0mm;
+}
+
+RestPreviewCategoryLabel{
+    color: white;
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    margin: 0;
+    padding: 0mm;
+}
+
+RestaurantPreviewDetailsCnt{
+    margin: 0;
+    padding: 2mm;
+}
+
+RestPreviewDeliveryTime{
+    color: #989898;
+    font-family: "native:MainRegular";
+    font-size: 2mm;
+    padding: 2mm;
+}
+
+RestPreviewRating{
+    color: #989898;
+    font-family: "native:MainRegular";
+    font-size: 2mm;
+    padding: 2mm;
+}
+
+RestPreviewDistance{
+    color: #989898;
+    font-family: "native:MainRegular";
+    font-size: 2mm;
+    padding: 2mm;
+}
+
+ExploreButton{
+    color: #7AC943;
+    font-family: "native:MainBold";
+    font-size: 2.5mm;
+    padding: 2mm;
+    margin: 0;
+}
+
+ExploreButton.pressed{
+    color: #9bdf6c;
+}
+
+CategoryHeader{
+    color: black;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    padding: 2mm;
+    margin: 0;
+}
+
+MainWindow{
+    background-color: #F4F5F5;
+    padding: 0;
+    margin: 0;
+}
+
+
+FilterCnt{
+    background-color: #F4F5F5;
+    padding: 2mm;
+    margin: 0;
+}
+
+FilterBackButton{
+    color: #989898;
+    font-size: 3mm;
+}
+
+FilterHeaderLabel{
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    padding: 0;
+    margin: 0;
+}
+
+FilterHeaderCnt{
+    background-color: white;
+    border-radius: 2mm;
+    padding: 2mm;
+    margin: 3mm 0 2mm 0;
+}
+
+SetFilterButton.pressed{
+    background-color: #7AC943;
+}
+
+FilterHeader{
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    padding: 0;
+    margin: 2mm 0 2mm 0;
+}
+
+FilterSortedByIconStyle{
+    color: #7AC943;
+    background-color: rgba(0,0,0,0);
+
+}
+
+FilterSortedByIconStyleSelected{
+    color: white;
+    background-color: rgba(0,0,0,0);
+    margin: 0;
+    padding: 0;
+}
+
+FilerSortByButton{
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    background-color: white;
+    color: #989898;
+    padding: 6mm 0mm 6mm 0mm;
+    margin: 1mm;
+    border-radius: 2mm;
+}
+
+FilerSortByButton.pressed{
+    background-color: #7AC943;
+    color: white;
+}
+
+FilterCategoryIconWrapper{
+    padding: 1mm;
+    margin: 0;
+    background-color: rgba(0,0,0,0);
+    border-radius: 2mm;
+}
+
+FilterCategoryIconSelectedWrapper{
+    padding: 1mm;
+    margin: 0;
+    background-color: #7AC943;
+    border-radius: 2mm;
+}
+
+FilterCategoryNameLabel{
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 2mm;
+    background-color: rgba(0,0,0,0);
+    color: black;
+    padding: 1mm;
+    margin: 0;
+}
+
+FilterCategoryNameSelectedLabel{
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 2mm;
+    background-color: rgba(0,0,0,0);
+    color: #7AC943;
+    padding: 1mm;
+    margin: 0;
+}
+
+FilterApplyButton{
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    background-color: #7AC943;
+    color: white;
+    padding: 2mm;
+    margin: 5mm 2mm 2mm 2mm;
+    border-radius: 4mm;
+}
+
+FilterApplyButton.pressed{
+    background-color: #a0df74;
+}
+
+
+SearchView{
+   background-color: #EFF0F0;
+   margin: 0;
+   padding: 2mm;
+}
+
+SearchFilterCnt{
+    margin : 3mm 0 3mm 0;
+    border: none;
+    padding: 0;
+    background-color: rgba(0,0,0,0);
+}
+
+SearchBackButton{
+    color: #989898;
+    font-size: 3mm;
+    padding: 0;
+    margin: 0;
+}
+
+SearchHeaderLabel{
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    padding: 0;
+    margin: 0;
+}
+
+SearchHeaderCnt{
+    background-color: white;
+    border-radius: 2mm;
+    padding: 2mm;
+    margin: 3mm 0 2mm 0;
+}
+
+AddCreditCardView{
+  margin: 0;
+  padding: 2mm;
+  background-color: #EFF0F0;
+
+}
+
+NewCreditCardBackButton{
+    color: #989898;
+    font-size: 3mm;
+    padding: 0;
+    margin: 0;
+}
+
+NewCreditCardHeaderLabel{
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    margin: 0;
+    padding: 0;
+}
+
+NewCreditCardHeaderCnt{
+    background-color: white;
+    border-radius: 2mm;
+    padding: 2mm;
+    margin: 3mm 0 2mm 0;
+}
+
+NewCardField{
+    color: black;
+    background-color: rgba(0,0,0,0);
+    border-radius: 1mm;
+    margin: 2mm;
+    padding: 2mm;
+    border: 0.3mm solid #e4e7e7;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+}
+
+NewCardFieldHint{
+    color: #989898;
+    background-color: rgba(0,0,0,0);
+    margin: 2mm;
+    padding: 2mm;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+}
+
+SaveCardConfirmButton{
+    background-color: #7AC943;
+    color: white;
+    border-radius: 4mm;
+    text-align: center;
+    padding: 2mm;
+    margin: 2mm;
+}
+
+CreditCardView{
+    padding: 0;
+    margin: 3mm 0 3mm 0;
+}
+
+CreditCardNumber{
+    color: white;
+    text-align: center;
+}
+
+AddNewCardExplanation{
+    color: black;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    padding: 0 2mm 0 2mm;
+}
+
+CreditCardExpirationDate{
+    padding : 0 2mm 2mm 2mm;
+    color: white;
+    text-align: right;
+}
+
+RestaurantActionButton{
+    background: cn1-round-border;
+    color: #7AC943;
+    background-color: white;
+    padding: 1mm;
+    margin: 4mm 1mm 2mm 1mm;
+}
+
+RestBackButton{
+    background-color: rgba(0,0,0,0);
+    color: white;
+    margin: 4mm 0 4mm 2mm;
+}
+
+RestTabContainer{
+    background-color: #EFF0F0;
+    margin: 0;
+}
+
+AddDishBackButton{
+    color: #989898;
+    font-size: 3mm;
+    padding: 0;
+    margin: 0;
+}
+
+AddDishHeaderLabel{
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    margin: 0;
+    padding: 0;
+}
+
+AddDishHeaderCnt{
+    background-color: white;
+    border-radius: 2mm;
+    padding: 2mm;
+    margin: 3mm 0 2mm 0;
+}
+
+OrderSummaryCnt{
+    background-image:   url(images/order-total-background.png);
+    cn1-source-dpi: 480;
+    cn1-background-type: cn1-image-scaled;
+    padding: 2mm;
+    margin: 2mm 0 2mm 0;
+}
+
+DishView{
+    border: none;
+    background-color: rgba(0,0,0,0);
+    margin: 5mm;
+}
+
+Dialog{
+    background-color: white;
+    border-radius: 2mm;
+    margin: 1mm;
+    border: none;
+}
+
+DialogTitle{
+    text-align: center;
+    font-family: "native:MainBold";
+    font-size: 5mm;
+    color: #7AC943;
+    padding: 2mm;
+    border-bottom: 0.3mm solid #7AC943;
+}
+
+DishImageLabel{
+    margin-top: 1mm;
+}
+
+PromoCodeTextField{
+    padding: 2mm;
+    margin: 0;
+    background-color: white;
+    border: 0.3mm solid #e4e7e7;
+    border-radius: 1mm;
+}
+
+PromoCodeTextFieldHint{
+    padding: 2mm;
+    margin: 0;
+    background-color: white;
+    color: grey;
+}
+
+FavoriteHeaderLabel{
+    text-align: center;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    margin: 0;
+    padding: 2mm;
+}
+
+FavoriteHeaderCnt{
+    background-color: white;
+    border-radius: 2mm;
+    padding: 0;
+    margin: 0;
+}
+
+FavoriteRestaurantsView{
+    margin: 0;
+    padding: 2mm;
+    background-color: #EFF0F0;
+}
+
+HomeView{
+    margin: 0;
+    padding: 0;
+    background-color: #EFF0F0;
+}
+
+DishBackButton{
+    color: #989898;
+    font-size: 3mm;
+    padding: 0;
+    margin: 0;
+}
+
+DishHeaderLabel{
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    margin: 0;
+    padding: 0;
+}
+
+DishHeaderCnt{
+    background-color: white;
+    border-radius: 2mm;
+    padding: 2mm;
+    margin: 3mm 2mm 2mm 2mm;
+}
+
+FavoriteRestImageCnt{
+    padding: 0;
+    margin: 0;
+    background-color: white;
+    border-radius: 2mm;
+}
+
+FavoriteRestView{
+    padding: 0;
+    margin: 0 0 2mm 0;
+}
+
+DishesSampleCnt{
+    margin: 0;
+    padding: 0;
+}
+
+FavoriteDishExample{
+    padding: 0;
+    margin: 1mm;
+}
+
+DishesCount{
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    color: #989898;
+}
+
+DishesCountImage{
+        font-size: 3mm;
+        color: #7AC943;
+}
+
+ToggleButton{
+    background-color: rgba(0,0,0,0);
+    border: none;
+}
+
+MyOrdersHeaderLabel{
+    text-align: center;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    padding: 2mm;
+    margin: 0;
+}
+
+MyOrdersHeaderCnt{
+    background-color: white;
+    border-radius: 2mm;
+    padding: 0;
+    margin: 0;
+}
+
+MainWindowOrdersView{
+    margin: 0;
+    padding: 2mm;
+    background-color: #EFF0F0;
+}
+
+CompletedOrderView{
+    padding: 2mm 2mm 0 2mm;
+    margin: 1mm 0 1mm 0;
+    background-color: white;
+    border-radius: 2mm;
+}
+
+CompletedOrdersCnt{
+    padding: 2mm 0 2mm 0;
+    margin: 0;
+    background-color: rgba(0,0,0,0);
+}
+
+
+CompletedOrderRestName{
+    padding: 2mm 0 0 2mm;
+    margin:0;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    color: black;
+}
+
+CompletedOrderIdLabel{
+    padding: 1mm 0 0 2mm;
+    margin:0;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    color: #989898;
+
+}
+
+CompletedOrderDeliveredToHeaderLabel{
+    margin: 2mm 2mm 0 0;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    color: black;
+
+}
+
+CompletedOrderDeliveredToLabel{
+    margin: 0mm 1mm 1mm 1mm;
+    padding: 0;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    color: #989898;
+
+}
+
+CompletedOrderDateHeaderLabel{
+    margin: 3mm 1mm 0 1mm;
+    padding: 0;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    color: black;
+
+}
+
+CompletedOrderDateLabel{
+    margin: 1mm 1mm 1mm 1mm;
+    padding: 0;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    color: #989898;
+
+}
+
+CompletedOrderOrderAgainButton{
+    border-top: 0.3mm solid #EFF0F0;
+    border-right: 0.3mm solid #EFF0F0;
+    padding: 2mm;
+    margin-top: 1mm;
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    color: #7AC943;
+}
+
+CompletedOrderOrderAgainButton.pressed{
+    color: black;
+
+}
+
+CompletedOrderRateButton{
+    border-top: 0.3mm solid #EFF0F0;
+    text-align: center;
+    padding: 2mm;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    color: #989898;
+    margin-top: 1mm;
+}
+
+CompletedOrderIcon{
+    font-size: 4mm;
+    color: #7AC943;
+}
+
+ShadowContainer{
+    padding: 0;
+    margin: 0;
+    background-image:   url(images/top-shade.png);
+    cn1-background-type: cn1-image-scaled;
+    cn1-source-dpi: 480;
+}
+
+OrdersTabsContainer{
+    background-color: rgba(0,0,0,0);
+    margin: 0;
+    padding: 2mm;
+}
+
+OrdersTab{
+    text-align: center;
+    color: #989898;
+    border-bottom: 0.3mm solid #DBDFDF;
+    background-color: rgba(0,0,0,0);
+    padding: 1mm;
+}
+
+OrdersTab.pressed{
+    color: black;
+    border-bottom: 0.3mm solid #7AC943;
+}
+
+BottomShadowContainer{
+        border: none;
+        padding: 0;
+        margin: 0;
+        background-image:   url(images/bottom-shade.png);
+        cn1-background-type: cn1-image-scaled;
+        cn1-source-dpi: 480;
+}
+
+HomeWelcomeTextFirstLine{
+    text-align: center;
+    padding: 0;
+    font-family: "native:MainRegular";
+    font-size: 4mm;
+    color: white;
+}
+
+HomeWelcomeTextSecondLine{
+    text-align: center;
+    padding: 0;
+    font-family: "native:MainBold";
+    font-size: 5mm;
+    color: white;
+}
+
+IntroductionView{
+    background-color: white;
+    padding: 4mm;
+    margin: 0;
+}
+
+IntroductionNextButton{
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    color: white;
+    border-radius: 4mm;
+    background-color: #7AC943;
+    padding: 2mm;
+    margin: 0 3mm 0 3mm;
+    text-align: center;
+}
+
+IntroductionNextButton.pressed{
+    background-color: #a0df74;
+}
+
+IntroductionHeader{
+    margin: 3mm;
+    padding: 2mm;
+    font-family: "native:MainBold";
+    font-size: 4mm;
+    color: black;
+    text-align: center;
+}
+
+IntroImage{
+    margin: 4mm 0 5mm 0;
+    padding: 0;
+}
+
+IntroEmptyLabelOn{
+    font-size: 4mm;
+    padding: 2mm;
+    margin: 1mm;
+    border-top: 0.7mm solid #7AC943;
+}
+
+IntroEmptyLabelOff{
+    font-size: 4mm;
+    padding: 2mm;
+    margin: 1mm;
+    border-top: 0.7mm solid #DBDFDF;
+}
+
+SetFirstLocationView{
+    background-image: url(images/set-first-location-background.png);
+    cn1-source-dpi: 0;
+    cn1-background-type: cn1-image-scaled;
+    margin: 0;
+    padding: 0;
+}
+
+SetFirstLocationWrapperView{
+    background-color: white;
+    padding: 2mm;;
+    margin: 3mm;
+    border-radius: 2mm;
+}
+
+
+SetFirstAddressHeader{
+    font-family: "native:MainBold";
+    font-size: 4mm;
+    color: black;
+    text-align: center;
+    padding: 2mm;
+}
+
+SetFirstLocationTextField{
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    color: black;
+    padding: 1mm;
+    border: 0.3mm solid #DBDFDF;
+    border-radius: 2mm;
+    margin: 1mm;
+}
+
+SetFirstLocationTextFieldHint{
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    color: #989898;
+    padding: 1mm;
+}
+
+SetFirstAddressNextButton{
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    padding: 2mm;
+    margin: 1mm;
+    border-radius: 4mm;
+    color: white;
+    background-color: #7AC943;
+    text-align: center;
+}
+
+SetFirstAddressNextButton.pressed{
+    background-color: #9bdf6c;
+}
+
+SetFirstAddressSkipButton{
+    padding: 2mm;
+    font-family: "native:MainRegular";
+    font-size: 2.5mm;
+    background-color: rgba(0,0,0,0);
+    text-align: center;
+    color: #989898;
+}
+
+
+SetFirstAddressSkipButton.pressed{
+    color: black;
+}
+
+IntroductionSkipButton{
+    color: #989898;
+    padding: 2mm;
+    background-color: rgba(0,0,0,0);
+    font-family: "native:MainBold";
+    font-size: 2.5mm;
+    text-align: center;
+}
+
+IntroductionSkipButton.pressed{
+    color: black;
+}
+
+HomeDeliverToCnt{
+    background-color: white;
+    border-radius: 2mm;
+    margin: 3mm;
+    padding: 2mm;
+}
+
+HomeDeliverToHeaderButton{
+    background-color: rgba(0,0,0,0);
+    color: black;
+    font-family: "native:MainBold";
+    font-size: 3mm;
+    padding: 1mm;
+    text-align: center;
+}
+
+HomeDeliverToLabel{
+    background-color: rgba(0,0,0,0);
+    color: #989898;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    padding: 0;
+    text-align: center;
+}
+
+AddPromoCodeButton{
+    background-color: white;
+    border-radius: 2mm;
+    font-size: 3mm;
+    padding: 1mm;
+}
+
+GoToIcon{
+    font-size: 3mm;
+    color: #989898;
+}
+
+AddPromoCodeButtonTextLine1{
+    padding: 1mm;
+    color: black;
+    font-size: 2.8mm;
+    font-family: "native:MainBold";
+}
+
+AddPromoCodeButtonTextLine2{
+    padding: 1mm;
+    color: black;
+    font-size: 2.8mm;
+    font-family: "native:MainRegular";
+}
+
+ManageAddressButton{
+    margin-top: 2mm;
+    background-color: white;
+    border-radius: 2mm;
+    font-size: 3mm;
+    padding: 1mm;
+}
+
+ManageAddressButtonLine1{
+    padding: 1mm;
+    color: black;
+    font-size: 2.8mm;
+    font-family: "native:MainBold";
+}
+
+ManageAddressButtonLine2{
+    padding: 1mm;
+    color: black;
+    font-size: 2.8mm;
+    font-family: "native:MainRegular";
+}
+
+EditPaymentBackButton{
+    color: #989898;
+    font-size: 3mm;
+    padding: 0;
+    margin: 0;
+}
+
+EditPaymentHeaderLabel{
+    text-align: center;
+    font-family: "native:MainRegular";
+    font-size: 3mm;
+    margin: 0;
+    padding: 0;
+}
+
+EditPaymentHeaderCnt{
+    background-color: white;
+    border-radius: 2mm;
+    padding: 2mm;
+    margin: 3mm 0 2mm 0;
+}
+
+PaymentMethodView{
+     margin-top: 2mm;
+    background-color: white;
+    border-radius: 2mm;
+    font-size: 3mm;
+    padding: 1mm;
+}
+
+PaymentMethodViewHeader{
+    padding: 1mm;
+    color: black;
+    font-size: 2.8mm;
+    font-family: "native:MainBold";
+}
+
+PaymentMethodViewText{
+    padding: 1mm;
+    color: black;
+    font-size: 2.8mm;
+    font-family: "native:MainRegular";
+}
+
+EditPaymentView{
+    background-color: #EFF0F0;
+    padding: 2mm;
+    margin: 0;
+}
+
+SavedCardsHeader{
+    margin: 0;
+    padding: 1mm;
+    color: black;
+    font-size: 4mm;
+    font-family: "native:MainBold";
+    text-align: center;
+}
+
+ChangePaymentMethodActionButton{
+    background-color: white;
+    border-radius: 2mm;
+    padding: 2mm;
+    margin: 2mm;
+}
+
+ChangePaymentMethodActionButton.pressed{
+    background-color: #DBDFDF;
+}
+
+ChangePaymentMethodActionButtonText{
+    color: black;
+    font-size: 2.5mm;
+    font-family: "native:MainRegular";
+    text-align: center;
+}
+
+AnotherMethodHeader{
+    color: black;
+    font-size: 3mm;
+    font-family: "native:MainBold";
+    text-align: center;
+}
+
+DeliveryInfoCnt{
+    padding: 0;
+    margin: 2mm;
+    background-color: white;
+    border-radius: 2mm;
+}
+
+CreditCard{
+    padding: 2mm;
+    margin: 0;
+    background-image:   url(images/credit-card.png);
+    cn1-background-type: cn1-image-scaled;
+    cn1-source-dpi: 480;
+}
+
+TrackingOrderLabel{
+    padding-top: 3mm;
+    color: black;
+    font-size: 3.5mm;
+    font-family: "native:MainBold";
+    text-align: center;
+}
+
+OrderIdLabel{
+    padding-top: 1mm;
+    padding-bottom: 2mm;
+    color: #989898;
+    font-size: 3mm;
+    font-family: "native:MainRegular";
+    text-align: center;
+}
+
+PreparingFoodLabel{
+    padding-top: 3mm;
+    color: black;
+    font-size: 3mm;
+    font-family: "native:MainBold";
+    text-align: center;
+}
+
+DrivesAtTheRestaurantLabel{
+    padding-top: 1mm;
+    padding-bottom: 2mm;
+    color: #989898;
+    font-size: 3mm;
+    font-family: "native:MainRegular";
+    text-align: center;
+}
+
+
+DriverNameLabel{
+    padding: 1mm;
+    color: black;
+    font-size: 3mm;
+    font-family: "native:MainBold";
+    text-align: left;
+}
+
+DriverRatingLabel{
+    padding: 1mm;
+    color: #989898;
+    font-size: 3mm;
+    font-family: "native:MainRegular";
+    text-align: left;
+}
+
+CallDriverButton{
+    margin: 1mm;
+    padding: 2mm;
+    border: 0.2mm solid #DBDFDF;
+    border-radius: 2mm;
+}
+
+MessageDriverButton{
+    margin: 1mm;
+    padding: 2mm;
+    border: 0.2mm solid #DBDFDF;
+    border-radius: 2mm;
+}
+
+DriverInfoCnt{
+    padding: 2mm;
+    border-top: 0.2mm solid #DBDFDF;
+}
+
+DarkModeButton{
+    padding: 1mm;
+    color: #A5A5A5;
+    font-size: 2.5mm;
+    font-family: "native:MainBold";
+    border: 0.2mm solid #A5A5A5;
+    border-radius: 3mm;
+}
+
+DarkModeButtonIcon{
+    color: #7AC943;
+}
